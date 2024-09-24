@@ -1,0 +1,245 @@
+body {
+  font-family: 'Lato', sans-serif;
+  scroll-behavior: smooth;
+  margin-bottom: 50px;
+
+
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.0);
+  overflow: scroll;
+  transition-property: display;
+  transition-duration: 2ms;
+}
+
+
+.overlay-content {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  overflow: scroll;
+  display: flex;
+  flex-flow: row nowrap;
+
+}
+
+
+
+
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 500;
+  font-size: 20px;
+  /* background-color: red; */
+}
+
+.overlay-project {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  /* background-color: green; */
+}
+
+
+
+
+.project {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+}
+
+
+.projectimage {
+  z-index: 300;
+  width: 80%;
+  max-height: 100%;
+  height: auto;
+  opacity: 0.94;
+}
+
+
+
+.overlay-menu-link {
+  text-align: left;
+  background-color: black;
+  width: fit-content;
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+  margin: 3px;
+  display: inline;
+}
+
+
+
+.projecttext {
+  background-color: black;
+  color: white;
+}
+
+
+.overlay a {
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+  color: #0000ff;
+}
+
+.overlay .closebtn {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  z-index: 1000;
+  transition: 2ms;
+  padding: 5px 5px 0px 5px;
+
+
+  text-decoration: none;
+  font-size: 15px;
+  color: #fff;
+  background-color: #000;
+}
+
+.accordion-projects {
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover {
+  /* background-color: #0000ff; */
+  color: #0000ff
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  width: 100%;
+  padding: 0;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+
+}
+
+
+.panelinside {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 15px;
+}
+
+.panelheader {
+  font-size: 20px;
+  font-style: italic;
+  text-align: center;
+}
+
+.panelinsideproject {
+  width: 400px;
+  margin: 10px;
+  text-align: justify;
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 100%;
+}
+
+.panelinsidetext {
+  width: 200px;
+  color: black;
+  padding: 10px;
+  text-align: justify;
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 100%;
+}
+
+
+.panelinsidemenu {
+  width: 200px;
+  color: black;
+  padding: 10px;
+  text-align: justify;
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 100%;
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .panelinsideproject {
+    width: 90%;
+
+  }
+
+  .panelinsidetext {
+    width: 90%;
+
+  }
+
+  .panelinsidemenu {
+    width: 100px;
+    padding: 3px;
+    line-height: 100%;
+  }
+
+
+
+}
+
+
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px
+  }
+
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
