@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emporium</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @font-face {
+            font-family: 'HAL Timezone';
+            src: url('font/HALTimezone-Regular.woff2') format('woff2'),
+                 url('font/HALTimezone-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'HAL Timezone';
+            src: url('font/HALTimezone-RegularItalic.woff2') format('woff2'),
+                 url('font/HALTimezone-RegularItalic.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'HAL Timezone Mono';
+            src: url('font/HALTimezone-Mono.woff2') format('woff2'),
+                 url('font/HALTimezone-Mono.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @keyframes highlightFade {
+            0% {
+                background-color: #00ff00;
+            }
+            60% {
+                background-color: #00ff00;
+            }
+            100% {
+                background-color: #fff;
+            }
+        }
+
+        .column.highlight {
+            animation: highlightFade 1.5s ease-out forwards;
+        }
+
+        @keyframes slideInModal {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutModal {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-size: 23px;
+            line-height: 1.22;
+            font-family: 'HAL Timezone', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 3%;
+            height: 100vh;
+            background-color: #fff;
+            border-left: 1px solid #000;
+            z-index: 1000;
+            overflow: hidden;
+            transition: width 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .sidebar.open {
+            width: 20%;
+            cursor: default;
+        }
+
+        .sidebar-content {
+            padding: 32px;
+            line-height: 1.6;
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .box {
+            width: 100%;
+            height: 33.33%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            flex-wrap: nowrap;
+            cursor: grab;
+        }
+
+        .box:active {
+            cursor: grabbing;
+        }
+
+        #top {
+            height: 60%;   
+        }
+
+        #bottom {
+            height: 20%;   
+            font-size: 12px;
+            font-family: 'HAL Timezone Mono', monospace;
+        }
+            
+        .column {
+            width: 600px;
+            margin: 10px;
+            flex-shrink: 0;
+            padding: 10px;
+            overflow-y: auto;
+            white-space: normal;
+            word-wrap: break-word;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .column:hover {
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+
+        a {
+            transition: opacity 0.2s ease;
+            cursor: pointer;
+        }
+
+        a:hover {
+            opacity: 0.6;
+        }
+
+        a[href^="#"] {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .column.c200 {
+            width: 200px;
+        }
+        .column.c250 {
+            width: 250px;
+        }
+
+        .column.c300 {
+            width: 300px;
+        }
+
+        .column.c400 {
+            width: 400px;
+        }
+
+        .column.c500 {
+            width: 500px;
+        }
+
+        .column.c600 {
+            width: 600px;
+        }
+        .column.c700 {
+            width: 700px;
+        }
+        .column.c750 {
+            width: 750px;
+        }
+        .column.c800 {
+            width: 800px;
+        }
+
+        .column.c900 {
+            width: 900px;
+        }
+        .column.c950 {
+            width: 950px;
+        }
+        .column.c1000 {
+            width: 1000px;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            transition: opacity 0.2s ease;
+        }
+
+        sup a:hover {
+            opacity: 0.6;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: relative;
+            width: 2%;
+            height: 100vh;
+            background-color: #fff;
+            border-left: 1px solid #000;
+            z-index: 1000;
+            overflow: hidden;
+            transition: width 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .sidebar.open {
+            width: 20%;
+            cursor: default;
+        }
+
+        .sidebar-content {
+            padding: 32px;
+     
+        }
+
+    </style>
+</head>
+<body>
+   
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            Other places to go: <br><br>
+            Here<br>
+             Here<br>
+              Here<br>
+               Here<br>
+                Here<br>
+                 Here<br>
+
+            
+        </div>
+    </div>
+
+    <main>
+
+        <div class="box" id="bottom">
+            <div class="column c400" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas", and has been translated in at least as many ways as: "that from a long way off look like flies,"<sup><a href="#I">I</a></sup> "from a distance look like flies,"<sup><a href="#II">II</a></sup> "those that resemble flies from a distance,"<sup><a href="#III">III</a></sup> "those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup> </div>
+            <div class="column c200" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
+            <div class="column c400" id="3">3&emsp;Like Roland Barthes wrote about in The Neutral; "Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity. In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10] → Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
+            <div class="column c400" id="4">4&emsp;Jean Baudrillard, The System of Objects, trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
+        </div>
+
+        <div class="box" id="top">
+            <div class="column c300">Oversaturation is: devoid of surface tension  (ephemeral) → devoid of distance → it is a previously intact membrane  (lacking interest) → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the  miniature → too much of a good thing.</div>
+            <div class="column c200">I</div>
+
+            <div class="column c600">I am trying to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a  shopping center, a buying palace, a castle of commodities. This should  maybe also be a statement on the nature of lists – or on classification  at large or small. → Borges' apocryphal essay on definitions and  categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
+            <div class="column c400">Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup></div>
+            <div class="column c500">The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection, that contained items like books, a copper bowl, a glass butterfly, a meme, a grayspeckled pen, a story about holes, and a photo of a clear plastic bottle through which you could see an active volcano. I also wrote a different kind of list, about a year ago, sorting through a shelf of knickknacks, like the imagined ontological potential of a photograph of soup (the spectacle and performance of the image-soup) on a restaurant menu. I sort everything that I have and try to catalogue it, and I would never (I should) throw anything away that is of theoretical or practical use.</div>
+            <div class="column c750">But the door, the door, it won't shut! My grandparents had a garage and the garage had a door. Inside (it was a typical garage) a painting of a green landscape hung at the end, various containers with things useful and not littered the shelves, a workbench, a heavy odor of gasoline in the air. But the door, the door, I could not stop thinking about the door. It was made of long horizontal planks of wood, on small nearly invisible hinges, so that they could rise from lying vertically to resting horizontally, under the ceiling. I knew it was wood, from looking up at the resting door and seeing its character, the aged porous softness – on the other side it was painted brown. Why brown? I would ask myself endlessly and every time I came to the same conclusion: it was painted brown to look like wood, but it was wood and why did it need to look like what it was, when it already was it? A challenge presents itself, or a challenger, a confrontation and trivial it seems. Inessential even → the membrane that contributes nothing to the meaning of things – of its use, means or end. Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.</div>
+            <div class="column c500">Lamps with metal stands are coated in a chrome-emulating silver, with flecks of metallic glitter like a cart on a rollercoaster; or, to go even further, my grandfather bought me a lamp of plastic, colored silver – the lamp was no longer metal but the metaphor of it was (I later painted it black and deeply regretted it). The color is arbitrary, but for its performance → "[It turns]out to be nothing but an impossible echo of the state of nature, which explains why [it's] so aggressive, why [it's] so naïve."<sup><a href="#4">4</a></sup> None of these things are, strictly, what they are, as people keep adding layers onto them of what they are not but pretend to be → the hallucinogenic properties of added color</div>
+        </div>
+        
+        <div class="box" id="bottom">
+            <div class="column c200" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i> (Pantheon Books: New York, 1971), p. xv. Itself a translation from Spanish to French to English.</div>
+            <div class="column c250" id="II">II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins</i> / The Analytical Language of John Wilkins in PDF form, attributing various translations, but identical to none.</div>
+            <div class="column c950" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins" in Other Inquisitions 1937–1952, trans. Ruth L. C. Simms (University of Texas Press: Austin, 1975), p. 103, and also in "Borgesian Joke" in Linguist List (7.1446), published on Tue Oct 15 1996, found on Wikipedia, where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned in the text was in fact real, coming to the conclusion of: "I believe that one cannot prove the non-existence of a book conclusively." On the same website, curious browsers can find this sentence: "The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO) from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."</div>
+            <div class="column c300" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language" in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger (Viking Penguin: New York, 1999), p. 231.</div>
+        </div>
+    </main>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+
+        sidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Handle footnote link highlighting
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Remove highlight class if it exists
+                    targetElement.classList.remove('highlight');
+                    
+                    // Trigger reflow to restart animation
+                    void targetElement.offsetWidth;
+                    
+                    // Add highlight class to trigger animation
+                    targetElement.classList.add('highlight');
+                    
+                    // Scroll into view
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+        });
+
+        function makeDraggable(box) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            box.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - box.offsetLeft;
+                scrollLeft = box.scrollLeft;
+            });
+
+            box.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+
+            box.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+
+            box.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - box.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                box.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        document.querySelectorAll('.box').forEach(makeDraggable);
+    </script>
+    
+</body>
+</html>
