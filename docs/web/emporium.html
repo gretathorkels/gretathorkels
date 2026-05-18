@@ -107,6 +107,7 @@
 
         .sidebar-content {
             padding: 32px;
+            font-size: 14px;
             line-height: 1.6;
         }
         
@@ -223,6 +224,31 @@
             opacity: 0.6;
         }
 
+        /* Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #000;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-color: #000 #f5f5f5;
+            scrollbar-width: thin;
+        }
+
         /* Sidebar Styles */
         .sidebar {
             position: relative;
@@ -244,7 +270,8 @@
 
         .sidebar-content {
             padding: 32px;
-     
+            font-size: 14px;
+            line-height: 1.6;
         }
 
     </style>
@@ -253,15 +280,10 @@
    
     <div class="sidebar" id="sidebar">
         <div class="sidebar-content">
-            Other places to go: <br><br>
-            Here<br>
-             Here<br>
-              Here<br>
-               Here<br>
-                Here<br>
-                 Here<br>
-
-            
+            <h2>EMPORIUM</h2>
+            <p>A spatial index of thoughts on oversaturation, classification, and the arbitrary nature of meaning.</p>
+            <p>This project explores the boundaries between order and chaos, between what things are and what we pretend them to be. It is an attempt at an impossible catalogue—useful and useless simultaneously.</p>
+            <p>Navigate the boxes horizontally. Click footnote references to explore the theoretical foundations. Nothing here is complete; everything is in process.</p>
         </div>
     </div>
 
