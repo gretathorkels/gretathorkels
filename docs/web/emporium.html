@@ -56,11 +56,11 @@
             overflow-y: hidden;
             display: flex;
             flex-wrap: nowrap;
-            cursor: grab;
+            cursor: auto;
         }
 
         .box:active {
-            cursor: grabbing;
+            cursor: auto;
         }
 
         #top {
@@ -373,11 +373,11 @@
             overflow-y: auto;
             white-space: normal;
             word-wrap: break-word;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            transition: background-color 0.2s ease;
         }
 
         .column:hover {
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+            /* hover effect removed */
         }
 
         .column.c50   { width: 50px; }
@@ -985,7 +985,7 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
                 videoModalOverlay.classList.add('open');
                 
                 // Add to history
-                addHistoryColumn('Video', 'How do you know anything for sure?');
+                addHistoryColumn('Video', 'Clockwatchers scene');
             });
         });
 
@@ -1004,35 +1004,8 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
             }
         });
 
-        function makeDraggable(box) {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            box.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - box.offsetLeft;
-                scrollLeft = box.scrollLeft;
-            });
-
-            box.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            box.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            box.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - box.offsetLeft;
-                const walk = (x - startX) * 1.5;
-                box.scrollLeft = scrollLeft - walk;
-            });
-        }
-
-        document.querySelectorAll('.box').forEach(makeDraggable);
+        // Scroll functionality removed - boxes now use native scrolling only
+        
     </script>
 
 </body>
