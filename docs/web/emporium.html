@@ -6,67 +6,14 @@
     <title>Emporium</title>
     <style>
 
+        /* ── Reset ── */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        @font-face {
-            font-family: 'HAL Timezone';
-            src: url('font/HALTimezone-Regular.woff2') format('woff2'),
-                 url('font/HALTimezone-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'HAL Timezone';
-            src: url('font/HALTimezone-RegularItalic.woff2') format('woff2'),
-                 url('font/HALTimezone-RegularItalic.woff') format('woff');
-            font-weight: normal;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'HAL Timezone Mono';
-            src: url('font/HALTimezone-Mono.woff2') format('woff2'),
-                 url('font/HALTimezone-Mono.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
 
-        @keyframes highlightFade {
-            0% {
-                background-color: #00ff00;
-            }
-            60% {
-                background-color: #00ff00;
-            }
-            100% {
-                background-color: #fff;
-            }
-        }
-
-        .column.highlight {
-            animation: highlightFade 1.5s ease-out forwards;
-        }
-
-        @keyframes slideInModal {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideOutModal {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(100%);
-            }
-        }
-
+        /* ── Base ── */
         html {
             scroll-behavior: smooth;
         }
@@ -84,12 +31,53 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             display: flex;
+            flex-direction: column;
         }
 
+        /* ── Content wrapper ── */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* ── Layout ── */
+        main {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 100%;
+            height: 33.33%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            flex-wrap: nowrap;
+            cursor: grab;
+        }
+
+        .box:active {
+            cursor: grabbing;
+        }
+
+        #top {
+            height: 60%;
+        }
+
+        #bottom {
+            height: 20%;
+            font-size: 12px;
+            font-family: 'HAL Timezone Mono', monospace;
+        }
+
+        /* ── Sidebar left ── */
         .sidebar {
             position: relative;
             width: 2%;
-            height: 100vh;
+            height: 100%;
             background-color: #fff;
             border-right: 1px solid #000;
             z-index: 1000;
@@ -127,38 +115,256 @@
             margin-bottom: 12px;
         }
 
-        main {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            flex: 1;
+        /* ── Sidebar right ── */
+        .sidebar-right {
+            position: relative;
+            width: 2%;
+            height: 100%;
+            background-color: #fff;
+            border-left: 1px solid #000;
+            z-index: 1000;
             overflow: hidden;
+            transition: width 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
         }
 
-        .box {
+        .sidebar-right.open {
+            width: 20%;
+            cursor: default;
+        }
+
+        .sidebar-right .sidebar-content {
+            padding: 32px;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        /* ── Image triggers ── */
+        .image-trigger {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .image-trigger:hover {
+            opacity: 0.6;
+        }
+
+        .sidebar-image {
+            display: none;
             width: 100%;
-            height: 33.33%;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-image.active {
+            display: block;
+        }
+
+        .sidebar-image-caption {
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .sidebar-default-content {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-default-content.hidden {
+            display: none;
+        }
+
+        .sidebar-gallery {
+            display: none;
+        }
+
+        .sidebar-gallery.active {
+            display: block;
+        }
+
+        .gallery-item {
+            margin-bottom: 16px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .gallery-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 0;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .gallery-item img:hover {
+            opacity: 0.8;
+        }
+
+        .gallery-item-caption {
+            display: none;
+        }
+
+        /* Image lightbox modal */
+        .image-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal-overlay.open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .image-modal {
+            max-width: 90vw;
+            max-height: 90vh;
+            background-color: transparent;
+            border: 1px solid #000;
+            padding: 0;
+            position: relative;
+            overflow: visible;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .image-modal-overlay.open .image-modal {
+            transform: scale(1);
+        }
+
+        .image-modal img {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+        }
+
+        .history-log {
+            display: none;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .history-log.active {
+            display: block;
+        }
+
+        .history-item {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item-type {
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .history-item-content {
+            color: #000;
+            word-break: break-word;
+        }
+
+        /* ── Sidebar bottom ── */
+        .sidebar-bottom {
+            position: relative;
+            width: 100%;
+            height: 2%;
+            background-color: #fff;
+            border-top: 1px solid #000;
+            z-index: 1000;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .sidebar-bottom.open {
+            height: 20%;
+            cursor: default;
+        }
+
+        .sidebar-bottom .sidebar-content {
+            padding: 16px 32px;
             overflow-x: auto;
             overflow-y: hidden;
+            height: 100%;
+            font-size: 12px;
+            line-height: 1.4;
             display: flex;
             flex-wrap: nowrap;
-            cursor: grab;
+            gap: 16px;
         }
 
-        .box:active {
-            cursor: grabbing;
+        .sidebar-bottom h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
         }
 
-        #top {
-            height: 60%;
+        .sidebar-bottom p {
+            margin-bottom: 8px;
         }
 
-        #bottom {
-            height: 20%;
+        .history-column {
+            flex-shrink: 0;
+            width: auto;
+            max-width: 120px;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            border-radius: 0;
             font-size: 12px;
-            font-family: 'HAL Timezone Mono', monospace;
+            line-height: 1.1;
+            margin-right: 16px;
         }
 
+        .history-column-timestamp {
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 2px;
+            font-family: 'HAL Timezone Mono', monospace;
+            line-height: 1.0;
+        }
+
+        .history-column-type {
+            font-weight: normal;
+            font-size: 12px;
+            text-transform: none;
+            color: #000;
+            margin-bottom: 0;
+            display: block;
+            margin-left: 0;
+        }
+
+        .history-column-content {
+            color: #000;
+            word-break: break-word;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ── Columns ── */
         .column {
             width: 600px;
             margin: 10px;
@@ -174,6 +380,21 @@
             box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
         }
 
+        .column.c50   { width: 50px; }
+        .column.c200  { width: 200px; }
+        .column.c250  { width: 250px; }
+        .column.c300  { width: 300px; }
+        .column.c400  { width: 400px; }
+        .column.c500  { width: 500px; }
+        .column.c600  { width: 600px; }
+        .column.c700  { width: 700px; }
+        .column.c750  { width: 750px; }
+        .column.c800  { width: 800px; }
+        .column.c900  { width: 900px; }
+        .column.c950  { width: 950px; }
+        .column.c1000 { width: 1000px; }
+
+        /* ── Typography & links ── */
         a {
             transition: opacity 0.2s ease;
             cursor: pointer;
@@ -207,111 +428,30 @@
             opacity: 0.6;
         }
 
-        .column.c50 {
-            width: 50px;
-        }
-        .column.c200 {
-            width: 200px;
-        }
-        .column.c250 {
-            width: 250px;
-        }
-
-        .column.c300 {
-            width: 300px;
-        }
-
-        .column.c400 {
-            width: 400px;
-        }
-
-        .column.c500 {
-            width: 500px;
-        }
-
-        .column.c600 {
-            width: 600px;
-        }
-        .column.c700 {
-            width: 700px;
-        }
-        .column.c750 {
-            width: 750px;
-        }
-        .column.c800 {
-            width: 800px;
-        }
-
-        .column.c900 {
-            width: 900px;
-        }
-        .column.c950 {
-            width: 950px;
-        }
-        .column.c1000 {
-            width: 1000px;
-        }
-
         sup {
             font-size: 0.7em;
             vertical-align: super;
             transition: opacity 0.2s ease;
+        
         }
 
         sup a:hover {
             opacity: 0.6;
         }
 
-        /* Scrollbar Styles */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        small {
+            line-height: 1.1 !important;
+            font-size: 12px;
+            font-family: 'HAL Timezone Mono', monospace;
+            display: block;
+            margin-top: 12px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #f5f5f5;
+        .sidebar-panel small {
+            line-height: 1.1 !important;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #000;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #333;
-        }
-
-        /* Firefox scrollbar */
-        * {
-            scrollbar-color: #000 #f5f5f5;
-            scrollbar-width: thin;
-        }
-
-        .sidebar-right {
-            position: relative;
-            width: 2%;
-            height: 100vh;
-            background-color: #fff;
-            border-left: 1px solid #000;
-            z-index: 1000;
-            overflow: hidden;
-            transition: width 0.4s ease;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .sidebar-right.open {
-            width: 20%;
-            cursor: default;
-        }
-
-        .sidebar-right .sidebar-content {
-            padding: 32px;
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        /* Video Modal Styles */
+        /* ── Video modal ── */
         .video-modal-overlay {
             display: none;
             position: fixed;
@@ -344,21 +484,97 @@
             display: block;
         }
 
+        /* ── Scrollbars ── */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #000;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+
+        * {
+            scrollbar-color: #000 #f5f5f5;
+            scrollbar-width: thin;
+        }
+
+        /* ── Animations ── */
+        @keyframes highlightFade {
+            0%   { background-color: #00ff00; }
+            60%  { background-color: #00ff00; }
+            100% { background-color: #fff; }
+        }
+
+        .column.highlight {
+            animation: highlightFade 1.5s ease-out forwards;
+        }
+
+        @keyframes slideInModal {
+            from { transform: translateX(100%); }
+            to   { transform: translateX(0); }
+        }
+
+        @keyframes slideOutModal {
+            from { transform: translateX(0); }
+            to   { transform: translateX(100%); }
+        }
+
+        /* ── Fonts ── */
+        @font-face {
+            font-family: 'HAL Timezone';
+            src: url('font/HALTimezone-Regular.woff2') format('woff2'),
+                 url('font/HALTimezone-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'HAL Timezone';
+            src: url('font/HALTimezone-RegularItalic.woff2') format('woff2'),
+                 url('font/HALTimezone-RegularItalic.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: 'HAL Timezone Mono';
+            src: url('font/HALTimezone-Mono.woff2') format('woff2'),
+                 url('font/HALTimezone-Mono.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- ===================== LEFT SIDEBAR ===================== -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-content">
+    <!-- ===================== CONTENT WRAPPER ===================== -->
+    <div class="content-wrapper">
 
-            <div class="sidebar-panel active" id="panel-default">
-                ...
-            </div>
+        <!-- ===================== LEFT SIDEBAR ===================== -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-content">
 
-            <div class="sidebar-panel" id="panel-test">lala</div>
+                <div class="sidebar-panel active" id="panel-default">
+                    <h3>EMPORIUM</h3>
+                    <p>A spatial index of thoughts on oversaturation, classification, and the arbitrary nature of meaning.</p>
+                    <p>This project explores the boundaries between order and chaos, between what things are and what we pretend them to be. It is an attempt at an impossible catalogue—useful and useless simultaneously.</p>
+                    <p>Navigate the boxes horizontally. Click footnote references to explore the theoretical foundations. Nothing here is complete; everything is in process.</p>
+                </div>
 
-            <div class="sidebar-panel" id="panel-holestory">
+                <div class="sidebar-panel" id="panel-test">lala</div>
+
+                <div class="sidebar-panel" id="panel-holestory">
 GÞ    Hey BB, what was that story about the holes?
 <br><br>GÞ    I don't remember any of the details, you are so good at them.
 <br><br>BB    I don't remember all the details but what I do remember is that they changed the source of the hot water for the first time.
@@ -379,10 +595,7 @@ GÞ    Hey BB, what was that story about the holes?
 <br><br>GÞ    Wait, did you see that article? About the geyser in the garden?
 <br><br>BB    No what! What was that?
 <br><br>GÞ    Ok so … there was an article about this, last summer I think, some man or some family that lived I think in Mosfellsbær, I don't really remember, but they had been digging for something, fixing the pipes or other. They then when in for lunch, and looked out the window and all of a sudden a geyser erupted in their backyard shooting boiling water up 20 metres into the sky, from an old borehole.
-<br><br>BB    Wow that is so their fault
-
-…
-
+<br><br>BB    Wow that is so their fault …
 <br><br>I found it! The article! Geyser opened up in garden in Biskupstungur; "This wasn't the plan"
 <br><br>GÞ    Oh, so it was not Mosfellsbær … I never remember names of places.
 <br><br>BB    Where are Biskupstungur again? Oh it is there, up by Flúðir, close to Bláskógabyggð.
@@ -397,49 +610,50 @@ GÞ    Hey BB, what was that story about the holes?
 <br>
 <br><br>Also to suddenly see the landscape in a new light – it looks different now, everything is full of holes.
 <br><br>GÞ    All these maybe-geysers, hiding in plain sight. It reminds me of when we were sitting at a bar and I asked if you had any gossip and you nearly jumped up and exclaimed: "YES. NEW STONE JUST DROPPED"
-<br><br>BB    The green stone! I think people should gossip more about geology.
+<br><br>BB    The green stone! I think people should gossip more about geology.<br><br>
+<small>From a conversation in early 2022, self-published as a very small book called The Hole Story.</small>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-    <!-- ===================== MAIN CONTENT ===================== -->
-    <main>
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <main>
 
-        <!-- FOOTNOTES (top bar) -->
-        <div class="box" id="bottom">
+            <!-- FOOTNOTES (top bar) -->
+            <div class="box" id="bottom">
 
-            <div class="column c400" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas",
+                <div class="column c400" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas",
 and has been translated in at least as many ways as:
 "that from a long way off look like flies,"<sup><a href="#I">I</a></sup>
 "from a distance look like flies,"<sup><a href="#II">II</a></sup>
 "those that resemble flies from a distance,"<sup><a href="#III">III</a></sup>
 "those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup></div>
 
-            <div class="column c200" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
+                <div class="column c200" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
 
-            <div class="column c400" id="3">3&emsp;Like Roland Barthes wrote about in The Neutral;
+                <div class="column c400" id="3">3&emsp;Like Roland Barthes wrote about in The Neutral;
 "Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity.
 In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10]
 → Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
 
-            <div class="column c400" id="4">4&emsp;Jean Baudrillard, The System of Objects,
+                <div class="column c400" id="4">4&emsp;Jean Baudrillard, The System of Objects,
 trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
 
-        </div>
+            </div>
 
-        <!-- MAIN TEXT -->
-        <div class="box" id="top">
+            <!-- MAIN TEXT -->
+            <div class="box" id="top">
 
-            <div class="column c300">Oversaturation is: devoid of surface tension  (ephemeral)
+                <div class="column c300">Oversaturation is: devoid of surface tension  (ephemeral)
 → devoid of distance → it is a previously intact membrane  (lacking interest)
 → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal)
 → in pieces, distracted, inexact → sublime without pleasure → emptying → too full
 → an exaggeration of the  miniature → too much of a good thing.</div>
 
-            <div class="column c50">I</div>
+                <div class="column c50">I</div>
 
-            <div class="column c600">I am trying to make an <a class="sidebar-link" data-panel="panel-test">index</a>
+                <div class="column c600">I am trying to make an <a class="sidebar-link" data-panel="panel-test">index</a>
 of everything I think  about when I think about Oversaturation.
 Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things
 after a shopping center, a buying palace, a castle of commodities.
@@ -449,15 +663,15 @@ knowledge where animals are depicted as belonging to various categories, e.g.
 "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase,
 n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
 
-            <div class="column c400">Any attempt at categorisation or indexation is futile to begin with,
+                <div class="column c400">Any attempt at categorisation or indexation is futile to begin with,
 but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe
 not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup>
 → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect)
 of scintillations on what exactly Oversaturation might mean and look like,
 however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup></div>
 
-            <div class="column c500">The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection,
-that contained items like books, a copper bowl, a glass butterfly, a meme, a grayspeckled pen,
+                <div class="column c500">The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection,
+that contained items like books, a copper bowl, a glass butterfly, <a class="image-trigger" data-image="image-meme">a meme,</a> a grayspeckled pen,
 <a class="sidebar-link" data-panel="panel-holestory">a story about holes,</a>
 and a photo of a clear plastic bottle through which you could see an active volcano.
 I also wrote a different kind of list, about a year ago, sorting through a shelf of knickknacks,
@@ -465,7 +679,7 @@ like the imagined ontological potential of a photograph of soup (the spectacle a
 on a restaurant menu. I sort everything that I have and try to catalogue it,
 and I would never (I should) throw anything away that is of theoretical or practical use.</div>
 
-            <div class="column c750">But the door, the door, it won't shut!
+                <div class="column c750">But the door, the door, it won't shut!
 My grandparents had a garage and the garage had a door.
 Inside (it was a typical garage) a painting of a green landscape hung at the end,
 various containers with things useful and not littered the shelves, a workbench,
@@ -482,7 +696,7 @@ a confrontation and trivial it seems. Inessential even → the membrane that con
 nothing to the meaning of things – of its use, means or end.
 Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.</div>
 
-            <div class="column c500">Lamps with metal stands are coated in a chrome-emulating silver,
+                <div class="column c500">Lamps with metal stands are coated in a chrome-emulating silver,
 with flecks of metallic glitter like a cart on a rollercoaster;
 or, to go even further, my grandfather bought me a lamp of plastic, colored silver –
 the lamp was no longer metal but the metaphor of it was (I later painted it black and deeply regretted it).
@@ -491,9 +705,9 @@ of the state of nature, which explains why [it's] so aggressive, why [it's] so n
 None of these things are, strictly, what they are, as people keep adding layers onto them
 of what they are not but pretend to be → the hallucinogenic properties of added color</div>
 
-            <div class="column c50">II</div>
+                <div class="column c50">II</div>
 
-            <div class="column c500">There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed
+                <div class="column c500">There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed
 by events at the office she works at; treasured items keep disappearing mysteriously.
 She says to her friend and coworker:
 <i><span class="video-trigger" data-video="clockwatchersVideo">"Maybe I blacked out or something,
@@ -503,20 +717,20 @@ I don't know anything anymore.
 How do you know something?
 How do you know anything for sure?"</span></i></div>
 
-            <div class="column c250">Now, an empty folder titled
+                <div class="column c250">Now, an empty folder titled
 "Pride.And.Prejudice.2005.sdr.bluray.movie.1080p.av1.5.1.opus-Rosy"
 keeps appearing in my (otherwise pristine) Downloads folder
 and a few years ago I had a virus where Safari would continuously download
 a defective PDF of Foucault's third volume of the History of Sexuality.</div>
 
-            <div class="column c400">Every night I sleep with the window open, it doesn't matter what time of year it is,
+                <div class="column c400">Every night I sleep with the window open, it doesn't matter what time of year it is,
 the window has to be open and while laying there I think of the Spanish Flu and its consequences,
 sanatoriums and their influence on interior design, tuberculosis, sleeping porches and the wire industry
 (I wish I had one), how Le Corbusier is (perversely) afraid of the dirty, dirty, ground so he builds on stilts,
 x-ray fetishism in architecture, transparent powerstrips and infants in wagons on the balcony in winter,
 while gulping frozen air from a tiny slit in the duvet.</div>
 
-            <div class="column c600">Oversaturation comes to increasingly absurd conclusions.
+                <div class="column c600">Oversaturation comes to increasingly absurd conclusions.
 Baudrillard, at some point, described the modern person as a mental hypochondriac or a cybernetician;
 "someone obsessed with the perfect circulation of messages"
 → where virtual hygiene, one of signifying and communicating, is constructed instead of rising and forming from origin.
@@ -526,9 +740,9 @@ resulting in the hypochondria insisting upon itself, renewing itself,
 the circuit travelled becomes smaller and smaller, until its eventual implosion.
 A hypochondriac stops life out of fear, and Oversaturation does too.</div>
 
-            <div class="column c50">III</div>
+                <div class="column c50">III</div>
 
-            <div class="column c400">Oversaturation is devoid of interest as everything is flattened,
+                <div class="column c400">Oversaturation is devoid of interest as everything is flattened,
 or it is ephemeral, as in it is an ill-categorizeable pile of pamphlets and notes, and tends to get lost –
 or even ethereal, as in occupying air, as in a fleeting and fragile idea.
 It does not really abide by logic, nor does it surprise;
@@ -538,20 +752,20 @@ outrageously close, frustratingly rigid in its insistence on incomprehension,
 a hypersensitivity and therefore susceptibility to instant absorption –
 a formless sensation of infinity.</div>
 
-        </div>
+            </div>
 
-        <!-- BIBLIOGRAPHY -->
-        <div class="box" id="bottom">
+            <!-- BIBLIOGRAPHY -->
+            <div class="box" id="bottom">
 
-            <div class="column c200" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i>
+                <div class="column c200" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i>
 (Pantheon Books: New York, 1971), p. xv.
 Itself a translation from Spanish to French to English.</div>
 
-            <div class="column c250" id="II">II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins</i>
+                <div class="column c250" id="II">II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins</i>
 / The Analytical Language of John Wilkins in PDF form,
 attributing various translations, but identical to none.</div>
 
-            <div class="column c950" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins"
+                <div class="column c950" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins"
 in Other Inquisitions 1937–1952, trans. Ruth L. C. Simms (University of Texas Press: Austin, 1975), p. 103,
 and also in "Borgesian Joke" in Linguist List (7.1446), published on Tue Oct 15 1996, found on Wikipedia,
 where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned
@@ -561,12 +775,43 @@ On the same website, curious browsers can find this sentence:
 "The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO)
 from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."</div>
 
-            <div class="column c300" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language"
+                <div class="column c300" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language"
 in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger
 (Viking Penguin: New York, 1999), p. 231.</div>
 
+            </div>
+        </main>
+
+        <!-- ===================== RIGHT SIDEBAR ===================== -->
+        <div class="sidebar-right" id="sidebarRight">
+            <div class="sidebar-content">
+                <div class="sidebar-default-content">
+                    <h2>IMAGES</h2>
+                    <p>Collected images from browsing.</p>
+                </div>
+
+                <div class="sidebar-gallery" id="sidebarGallery">
+                    <!-- Images will be added here dynamically -->
+                </div>
+
+            </div>
         </div>
-    </main>
+
+    </div>
+
+    <!-- ===================== BOTTOM SIDEBAR ===================== -->
+    <div class="sidebar-bottom" id="sidebarBottom">
+        <div class="sidebar-content" id="historyContainer">
+            <!-- History columns will be added here dynamically -->
+        </div>
+    </div>
+
+    <!-- ===================== IMAGE MODAL ===================== -->
+    <div class="image-modal-overlay" id="imageModalOverlay">
+        <div class="image-modal">
+            <img id="enlargedImage" alt="Enlarged image">
+        </div>
+    </div>
 
     <!-- ===================== VIDEO MODAL ===================== -->
     <div class="video-modal-overlay" id="videoModalOverlay">
@@ -578,19 +823,56 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
         </div>
     </div>
 
-    <!-- ===================== RIGHT SIDEBAR ===================== -->
-    <div class="sidebar-right" id="sidebarRight">
-        <div class="sidebar-content">
-            <h2>INDEX</h2>
-            <p>References and related materials.</p>
-        </div>
-    </div>
-
     <script>
         const sidebar = document.getElementById('sidebar');
         const sidebarRight = document.getElementById('sidebarRight');
+        const sidebarBottom = document.getElementById('sidebarBottom');
         const sidebarContent = sidebar.querySelector('.sidebar-content');
         const videoModalOverlay = document.getElementById('videoModalOverlay');
+        const imageModalOverlay = document.getElementById('imageModalOverlay');
+        const enlargedImage = document.getElementById('enlargedImage');
+        const sidebarGallery = document.getElementById('sidebarGallery');
+        const sidebarDefaultContent = document.querySelector('.sidebar-default-content');
+        const historyContainer = document.getElementById('historyContainer');
+
+        // Image data
+        const imageData = {
+            'image-meme': {
+                src: 'img/sand.webp',
+                alt: 'A meme that says: Stop programming computers. Sand was never meant to think. That is very cruel to rocks.',
+                caption: 'From a conversation about computation and the ethics of consciousness.'
+            }
+        };
+
+        // Function to get current timestamp
+        function getTimestamp() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Function to add history column (bottom bar)
+        function addHistoryColumn(type, content) {
+            const timestamp = getTimestamp();
+            const historyColumn = document.createElement('div');
+            historyColumn.className = 'history-column';
+
+            historyColumn.innerHTML = `
+                <div class="history-column-timestamp">${timestamp}</div>
+                <div class="history-column-content">"${content}"</div>
+                <div class="history-column-type">${type}</div>
+            `;
+            
+            // Insert at beginning instead of end (prepend)
+            historyContainer.insertBefore(historyColumn, historyContainer.firstChild);
+
+            // Auto-scroll to left to show newest column
+            setTimeout(() => {
+                historyContainer.parentElement.scrollLeft = 0;
+            }, 10);
+        }
 
         sidebar.addEventListener('click', (e) => {
             if (e.target === sidebar || e.target === sidebarContent) {
@@ -602,29 +884,108 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
             sidebarRight.classList.toggle('open');
         });
 
+        sidebarBottom.addEventListener('click', () => {
+            sidebarBottom.classList.toggle('open');
+        });
+
+        // Image triggers - accumulate in right sidebar AND add to history
+        document.querySelectorAll('.image-trigger').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const imageId = link.getAttribute('data-image');
+                const data = imageData[imageId];
+                const linkText = link.textContent.trim();
+
+                if (data) {
+                    // Show gallery, hide default content
+                    sidebarDefaultContent.classList.add('hidden');
+                    sidebarGallery.classList.add('active');
+
+                    // Add to right sidebar gallery
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    const imgElement = document.createElement('img');
+                    imgElement.src = data.src;
+                    imgElement.alt = data.alt;
+                    imgElement.addEventListener('click', () => {
+                        enlargedImage.src = data.src;
+                        enlargedImage.alt = data.alt;
+                        imageModalOverlay.classList.add('open');
+                    });
+                    galleryItem.appendChild(imgElement);
+                    sidebarGallery.appendChild(galleryItem);
+
+                    // Open right sidebar if not already open
+                    if (!sidebarRight.classList.contains('open')) {
+                        sidebarRight.classList.add('open');
+                    }
+
+                    // Scroll gallery to bottom
+                    setTimeout(() => {
+                        const sidebarContentElem = sidebarRight.querySelector('.sidebar-content');
+                        sidebarContentElem.scrollTop = sidebarContentElem.scrollHeight;
+                    }, 10);
+
+                    // Add to bottom history with the clicked word
+                    addHistoryColumn('Image', linkText);
+                }
+            });
+        });
+
+        // Sidebar links - add to history only
         document.querySelectorAll('.sidebar-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const panelId = link.getAttribute('data-panel');
+                const linkText = link.textContent.trim();
 
+                // Hide all panels
                 document.querySelectorAll('.sidebar-panel').forEach(panel => {
                     panel.classList.remove('active');
                 });
 
+                // Show selected panel
                 const selectedPanel = document.getElementById(panelId);
                 if (selectedPanel) {
                     selectedPanel.classList.add('active');
                     if (!sidebar.classList.contains('open')) {
                         sidebar.classList.add('open');
                     }
+                    
+                    // Add to history
+                    addHistoryColumn('Panel', linkText);
                 }
             });
         });
 
+        // Footnote links - add to history only
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                const linkText = link.textContent.trim();
+
+                if (targetElement) {
+                    targetElement.classList.remove('highlight');
+                    void targetElement.offsetWidth;
+                    targetElement.classList.add('highlight');
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Add to history
+                    addHistoryColumn('Footnote', linkText);
+                }
+            });
+        });
+
+        // Video triggers - add to history only
         document.querySelectorAll('.video-trigger').forEach(element => {
             element.addEventListener('click', (e) => {
                 e.preventDefault();
                 videoModalOverlay.classList.add('open');
+                
+                // Add to history
+                addHistoryColumn('Video', 'How do you know anything for sure?');
             });
         });
 
@@ -636,19 +997,11 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
             }
         });
 
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                if (targetElement) {
-                    targetElement.classList.remove('highlight');
-                    void targetElement.offsetWidth;
-                    targetElement.classList.add('highlight');
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            });
+        // Close image modal on click outside
+        imageModalOverlay.addEventListener('click', (e) => {
+            if (e.target === imageModalOverlay) {
+                imageModalOverlay.classList.remove('open');
+            }
         });
 
         function makeDraggable(box) {
