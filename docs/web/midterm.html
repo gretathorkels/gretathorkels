@@ -23,6 +23,28 @@ p {
         padding-right: 10px;
     }
 }
+
+.hover-image {
+    position: relative;
+    display: inline;
+}
+
+.hover-image .hover-preview {
+    position: absolute;
+    top: 1.4em;
+    left: 0;
+    z-index: 100;
+    width: 200px;
+    border: 1px solid #000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.hover-image:hover .hover-preview {
+    opacity: 1;
+    visibility: visible;
+}
     </style>
 </head>
 <body>
@@ -45,16 +67,18 @@ First, I wanted to make a performative lecture, an excercise in non-linearity �
 
 While deciding if I would stay the semester, I had a 1+1 with Femke. We talked about a lot but mainly on using this period as research. I was experiencing what I was trying to write about, and I couldn't possibly make it make sense in any meaningful way, other than keeping a diary and writing down what I say when I feel overwhelmed. <br><br>
 
-I kept the diary, and I was also thinking about the make-up assignment for the Venice project – these diaries eventually became the text <i>Mediumsized</i>, to be published in <i>Trophy Logic</i>, May 28 2026.
+Another thing we talked about, was this book <span class="hover-image"><i>Lines of Thought: Branching Diagrams and the Medieval Mind</i><img class="hover-preview" src="img/linesofthought.jpg" alt="Lines of Thought"></span> by Ayelet Even-Ezra.<br><br>
+
+I kept the diary, and I was also thinking about the make-up assignment for the Venice project – these diaries eventually became the text <i>Mediumsized</i>, to be published in <span class="hover-image"><i>Trophy Logic</i><img class="hover-preview" src="img/trophylogic.jpg" alt="Trophy Logic"></span>, May 28 2026.
 
 <br><br>
-<i>Mediumsized</i> is a short text, majorly inspired by Ed Atkins' book <i>Flower</i>. I had previously read his play <i>Sorcerer</i>, and I was 
+<i>Mediumsized</i> is a short text, majorly inspired by Ed Atkins' book <span class="hover-image"><i>Flower</i><img class="hover-preview" src="img/flower.jpg" alt="Flower"></span>. I had previously read his and Steven Zultanski's play <span class="hover-image"><i>Sorcerer</i><img class="hover-preview" src="img/sorcerer.jpeg" alt="Sorcerer"></span>, and I was 
 
 
 
 </p>
 
-<iframe src="emporium.html" style="width:100%; height:600px; border:none;"></iframe>
+<!-- <iframe src="emporium.html" style="width:100%; height:600px; border:none;"></iframe> -->
 
 
 
