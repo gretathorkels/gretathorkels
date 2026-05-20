@@ -290,7 +290,7 @@
         .sidebar-bottom {
             position: relative;
             width: 100%;
-            height: 2%;
+            height: 3%;
             background-color: #fff;
             border-top: 1px solid #000;
             z-index: 1000;
@@ -390,9 +390,20 @@
         .column.c700  { width: 700px; }
         .column.c750  { width: 750px; }
         .column.c800  { width: 800px; }
+        .column.c850  { width: 850px; }
         .column.c900  { width: 900px; }
         .column.c950  { width: 950px; }
         .column.c1000 { width: 1000px; }
+
+        /* ── Forced italic for Mono (no italic variant exists) ── */
+        .font-mono-italic,
+        #bottom i, #bottom em,
+        .sidebar-bottom i, .sidebar-bottom em,
+        small i, small em {
+            font-style: normal;
+            display: inline-block;
+            transform: skewX(-12deg);
+        }
 
         /* ── Typography & links ── */
         a {
@@ -529,6 +540,87 @@
             to   { transform: translateX(100%); }
         }
 
+        /* ── Mobile notice ── */
+        #mobile-notice {
+            display: none;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                overflow: auto;
+            }
+
+            body {
+                display: block;
+            }
+
+            #mobile-notice {
+                display: block;
+                padding: 16px;
+                font-size: 14px;
+                font-family: 'HAL Timezone', sans-serif;
+                border-bottom: 1px solid #000;
+                margin-bottom: 10px;
+            }
+
+            .content-wrapper {
+                display: block;
+            }
+
+            .sidebar,
+            .sidebar-right,
+            .sidebar-bottom {
+                display: none !important;
+            }
+
+            main {
+                width: 100%;
+                height: auto;
+                overflow: visible;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Reorder: main text first, footnotes second, bibliography third */
+            /* DOM order inside main: child 1 = footnotes, child 2 = #top, child 3 = bibliography */
+            #top                      { order: 1; }
+            main > .box:nth-child(1)  { order: 2; } /* footnotes */
+            main > .box:nth-child(3)  { order: 3; } /* bibliography */
+
+            #top,
+            #bottom {
+                height: auto !important;
+            }
+
+            .box {
+                height: auto !important;
+                overflow-x: visible;
+                overflow-y: visible;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+
+            .column,
+            .column[class*="c"] {
+                width: 100% !important;
+                margin: 0;
+                padding: 10px 16px;
+            }
+
+            /* Disable interactive links */
+            .sidebar-link,
+            .video-trigger,
+            .image-trigger,
+            a[href^="#"] {
+                pointer-events: none;
+                cursor: default;
+                text-decoration: none;
+                opacity: 1 !important;
+            }
+        }
+
         /* ── Fonts ── */
         @font-face {
             font-family: 'HAL Timezone';
@@ -558,6 +650,8 @@
 </head>
 <body>
 
+    <div id="mobile-notice">This is a read-only version. For optimal experience, view on desktop.</div>
+
     <!-- ===================== CONTENT WRAPPER ===================== -->
     <div class="content-wrapper">
 
@@ -566,52 +660,49 @@
             <div class="sidebar-content">
 
                 <div class="sidebar-panel active" id="panel-default">
-                    <h3>EMPORIUM</h3>
-                    <p>A spatial index of thoughts on oversaturation, classification, and the arbitrary nature of meaning.</p>
-                    <p>This project explores the boundaries between order and chaos, between what things are and what we pretend them to be. It is an attempt at an impossible catalogue—useful and useless simultaneously.</p>
-                    <p>Navigate the boxes horizontally. Click footnote references to explore the theoretical foundations. Nothing here is complete; everything is in process.</p>
+                    
                 </div>
 
                 <div class="sidebar-panel" id="panel-test">lala</div>
 
                 <div class="sidebar-panel" id="panel-holestory">
-GÞ    Hey BB, what was that story about the holes?
-<br><br>GÞ    I don't remember any of the details, you are so good at them.
-<br><br>BB    I don't remember all the details but what I do remember is that they changed the source of the hot water for the first time.
-<br><br>GÞ    For the first time?
-<br><br>BB    Yes, it was for the first time, and now they do it regularly, after that summer of 2020. They did it again last summer, because it went well. But because they did it for the first time, there were loads of things they had to plan for: water from one place had more magnesium than the other, there was some kind of buildup of minerals, it was hotter, it was colder. there were lots of things.
-<br><br>GÞ    Wait wasn't that related to the thing about Vesturbæjarlaug?
-<br><br>BB    Ah yes! The poolwater turned red. Turns out it was because of the new water in the pipes, I feel like that was the magnesium thing. Because the waterpipes had a buildup of some kind of chemical, and reacted in some way, turning our pool red. Also something with hard or soft water? What that is, exactly I'm not sure. But also, this wasn't reported – we just knew it because my cousin worked at the water company.
-<br><br><br>Anyway.
-<br><br>All of a sudden, we were getting hot water from Hellisheiði, which is a high-temperature area, while we used to get it from Laugardalurinn, which is a low-temperature area. That's the reason why it became so hard to regulate the water from the faucets, because it was way hotter than before. Luckily, there were not any hot water-related accidents that I know of.
-<br><br>But yeah, they changed the source of water to rest the old supply. The water level rose and rose in Laugardalur, and it had never been so high, I think it was nearly 10 meters under the surface.
-<br><br>I thought it was pretty funny, so I imagined that it was a gigantic cellar, a basement under everything, and the water filled the basement, but then it's actually just about "water in the earth" and I don't understand at all how that works.
-<br><br>GÞ    Yes that's what I'm so curious about! Is it just a hole? An empty space under the ground? Maybe I don't want to know what it means.
-<br><br>BB    Exactly, I don't get it, I mean, was the ground 10 meters below us squishy or fluid or what.
-<br><br>And then there were all the holes.
-<br><br>People have dug a LOT of experimental holes around all of Reykjavík, and they weren't neccesarily recorded or documented. Some of them were made a really long time ago, decades even, and usually they have been filled with something, somehow plugged, and it evens out the pressure inside the great basement of water.
-<br><br>My cousin, was looking for them, the holes, that is. Imagine him saying something like: "What could be a hole? Is this a hole?" He was checking if they had a plug in them or if they were open. Because if they are open, the water can travel up because of a change in pressure, and they become geysers.
-<br><br>Which was so crazy, because then one day we could wake up in our house and have a geyser in our garden
-<br><br>GÞ    Wait, did you see that article? About the geyser in the garden?
-<br><br>BB    No what! What was that?
-<br><br>GÞ    Ok so … there was an article about this, last summer I think, some man or some family that lived I think in Mosfellsbær, I don't really remember, but they had been digging for something, fixing the pipes or other. They then when in for lunch, and looked out the window and all of a sudden a geyser erupted in their backyard shooting boiling water up 20 metres into the sky, from an old borehole.
-<br><br>BB    Wow that is so their fault …
-<br><br>I found it! The article! Geyser opened up in garden in Biskupstungur; "This wasn't the plan"
-<br><br>GÞ    Oh, so it was not Mosfellsbær … I never remember names of places.
-<br><br>BB    Where are Biskupstungur again? Oh it is there, up by Flúðir, close to Bláskógabyggð.
-<br><br>GÞ    That's pretty far away, then it can't be connected.
-<br><br>BB    "The hole had been cold for more than 20 years, I was digging a canal and came close to the hole, it must have started around then" – there was this change in pressure, as the hole was not plugged.
-<br><br>GÞ    I find it such a funny interview, because they were looking into making it a tourist attraction. Like "now we have to live with this new hole in the garden."
-<br><br>BB    This happened just last summer?
-<br><br>GÞ    Yes!!
-<br><br>BB    Wow. But the best thing about it, is that this whole operation — it felt like a spy movie — an undercover operation happening all hush hush in secret. It was an experiment, not reported at all, and they just hoped for the best. And then to realise "wait there might be hundreds of undocumented holes all around town."
-<br><br>A lot of these holes are residential areas now, and we just have to trust that the houses are built on cement. I once called my cousin and he was just in a car park on Rauðarársstígur, inspecting a very old hole, that had apparently been plugged.
-<br><br>When I heard about this, I was coming home to Reykjavík from the highlands where I had been for some time. There is NO gossip at all in the highlands – and I brought this story that was supposed to be the gossip of the year. You had just come home from LungA, from where you could obviously bring endless amounts of gossip.
-<br>
-<br><br>Also to suddenly see the landscape in a new light – it looks different now, everything is full of holes.
-<br><br>GÞ    All these maybe-geysers, hiding in plain sight. It reminds me of when we were sitting at a bar and I asked if you had any gossip and you nearly jumped up and exclaimed: "YES. NEW STONE JUST DROPPED"
-<br><br>BB    The green stone! I think people should gossip more about geology.<br><br>
-<small>From a conversation in early 2022, self-published as a very small book called The Hole Story.</small>
+                GÞ    Hey BB, what was that story about the holes?
+                <br><br>GÞ    I don't remember any of the details, you are so good at them.
+                <br><br>BB    I don't remember all the details but what I do remember is that they changed the source of the hot water for the first time.
+                <br><br>GÞ    For the first time?
+                <br><br>BB    Yes, it was for the first time, and now they do it regularly, after that summer of 2020. They did it again last summer, because it went well. But because they did it for the first time, there were loads of things they had to plan for: water from one place had more magnesium than the other, there was some kind of buildup of minerals, it was hotter, it was colder. there were lots of things.
+                <br><br>GÞ    Wait wasn't that related to the thing about Vesturbæjarlaug?
+                <br><br>BB    Ah yes! The poolwater turned red. Turns out it was because of the new water in the pipes, I feel like that was the magnesium thing. Because the waterpipes had a buildup of some kind of chemical, and reacted in some way, turning our pool red. Also something with hard or soft water? What that is, exactly I'm not sure. But also, this wasn't reported – we just knew it because my cousin worked at the water company.
+                <br><br><br>Anyway.
+                <br><br>All of a sudden, we were getting hot water from Hellisheiði, which is a high-temperature area, while we used to get it from Laugardalurinn, which is a low-temperature area. That's the reason why it became so hard to regulate the water from the faucets, because it was way hotter than before. Luckily, there were not any hot water-related accidents that I know of.
+                <br><br>But yeah, they changed the source of water to rest the old supply. The water level rose and rose in Laugardalur, and it had never been so high, I think it was nearly 10 meters under the surface.
+                <br><br>I thought it was pretty funny, so I imagined that it was a gigantic cellar, a basement under everything, and the water filled the basement, but then it's actually just about "water in the earth" and I don't understand at all how that works.
+                <br><br>GÞ    Yes that's what I'm so curious about! Is it just a hole? An empty space under the ground? Maybe I don't want to know what it means.
+                <br><br>BB    Exactly, I don't get it, I mean, was the ground 10 meters below us squishy or fluid or what.
+                <br><br>And then there were all the holes.
+                <br><br>People have dug a LOT of experimental holes around all of Reykjavík, and they weren't neccesarily recorded or documented. Some of them were made a really long time ago, decades even, and usually they have been filled with something, somehow plugged, and it evens out the pressure inside the great basement of water.
+                <br><br>My cousin, was looking for them, the holes, that is. Imagine him saying something like: "What could be a hole? Is this a hole?" He was checking if they had a plug in them or if they were open. Because if they are open, the water can travel up because of a change in pressure, and they become geysers.
+                <br><br>Which was so crazy, because then one day we could wake up in our house and have a geyser in our garden
+                <br><br>GÞ    Wait, did you see that article? About the geyser in the garden?
+                <br><br>BB    No what! What was that?
+                <br><br>GÞ    Ok so … there was an article about this, last summer I think, some man or some family that lived I think in Mosfellsbær, I don't really remember, but they had been digging for something, fixing the pipes or other. They then when in for lunch, and looked out the window and all of a sudden a geyser erupted in their backyard shooting boiling water up 20 metres into the sky, from an old borehole.
+                <br><br>BB    Wow that is so their fault …
+                <br><br>I found it! The article! Geyser opened up in garden in Biskupstungur; "This wasn't the plan"
+                <br><br>GÞ    Oh, so it was not Mosfellsbær … I never remember names of places.
+                <br><br>BB    Where are Biskupstungur again? Oh it is there, up by Flúðir, close to Bláskógabyggð.
+                <br><br>GÞ    That's pretty far away, then it can't be connected.
+                <br><br>BB    "The hole had been cold for more than 20 years, I was digging a canal and came close to the hole, it must have started around then" – there was this change in pressure, as the hole was not plugged.
+                <br><br>GÞ    I find it such a funny interview, because they were looking into making it a tourist attraction. Like "now we have to live with this new hole in the garden."
+                <br><br>BB    This happened just last summer?
+                <br><br>GÞ    Yes!!
+                <br><br>BB    Wow. But the best thing about it, is that this whole operation — it felt like a spy movie — an undercover operation happening all hush hush in secret. It was an experiment, not reported at all, and they just hoped for the best. And then to realise "wait there might be hundreds of undocumented holes all around town."
+                <br><br>A lot of these holes are residential areas now, and we just have to trust that the houses are built on cement. I once called my cousin and he was just in a car park on Rauðarársstígur, inspecting a very old hole, that had apparently been plugged.
+                <br><br>When I heard about this, I was coming home to Reykjavík from the highlands where I had been for some time. There is NO gossip at all in the highlands – and I brought this story that was supposed to be the gossip of the year. You had just come home from LungA, from where you could obviously bring endless amounts of gossip.
+                <br>
+                <br><br>Also to suddenly see the landscape in a new light – it looks different now, everything is full of holes.
+                <br><br>GÞ    All these maybe-geysers, hiding in plain sight. It reminds me of when we were sitting at a bar and I asked if you had any gossip and you nearly jumped up and exclaimed: "YES. NEW STONE JUST DROPPED"
+                <br><br>BB    The green stone! I think people should gossip more about geology.<br><br>
+                <small>From a conversation in early 2022, self-published as a very small book called The Hole Story.</small>
                 </div>
 
             </div>
@@ -623,32 +714,44 @@ GÞ    Hey BB, what was that story about the holes?
             <!-- FOOTNOTES (top bar) -->
             <div class="box" id="bottom">
 
-                <div class="column c400" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas",
-and has been translated in at least as many ways as:
-"that from a long way off look like flies,"<sup><a href="#I">I</a></sup>
-"from a distance look like flies,"<sup><a href="#II">II</a></sup>
-"those that resemble flies from a distance,"<sup><a href="#III">III</a></sup>
-"those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup></div>
+                <div class="column c400" id="1">
+                    1&emsp;The last classification was originally written as "que de lejos parecen moscas", and has been translated in at least as many ways as: "that from a long way off look like flies,"<sup><a href="#I">I</a></sup> "from a distance look like flies,"<sup><a href="#II">II</a></sup> "those that resemble flies from a distance,"<sup><a href="#III">III</a></sup> "those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup>
+                </div>
 
-                <div class="column c200" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
+                <div class="column c200" id="2">
+                    2&emsp;Borges, The Analytical Language of John Wilkins.
+                </div>
 
-                <div class="column c400" id="3">3&emsp;Like Roland Barthes wrote about in The Neutral;
-"Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity.
-In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10]
-→ Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
+                <div class="column c400" id="3">
+                    3&emsp;Like Roland Barthes wrote about in The Neutral; "Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity. In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10] → Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
 
-                <div class="column c200" id="4">4&emsp;Jean Baudrillard, The System of Objects,
-trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
+                <div class="column c200" id="4">
+                    4&emsp;Jean Baudrillard, The System of Objects, trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
 
-<div class="column c200" id="5">5&emsp;David Owen, “Inside Out” in The New Yorker, 27. July 2024.<sup><a href="#V">V</a></sup> </div>
+                <div class="column c200" id="5">
+                    5&emsp;David Owen, “Inside Out” in The New Yorker, 27. July 2024.<sup><a href="#V">V</a></sup> </div>
 
-<div class="column c200" id="6">6&emsp;Beatriz Colomina, X-Ray Architecture, (Lars Müller Publishers: Zürich, 2019).</div>
+                <div class="column c200" id="6">
+                    6&emsp;Beatriz Colomina, X-Ray Architecture, (Lars Müller Publishers: Zürich, 2019).</div>
 
-<div class="column c200" id="7">7&emsp;Baudrillard, The System of Objects, p. 32.</div>
-<div class="column c200" id="8">8&emsp;Or, in more visual terms; the Euthanasia Coaster, with its 500m lift and seven consequently smaller loops (clothoid inversions), resulting in euphoria and death in 10G.</div>
-<div class="column c400" id="9">9&emsp;Jean Baudrillard, The Ecstasy of Communication, (SEMIOTEXT(E): New York, 1987), trans. Bernard Schutze and Caroline Schutze p. 27: “an over-proximity of all things, a foul promiscuity of all things which beleaguer and penetrate him, meeting with no resistance, and no halo, no aura, not even the aura of his own body protects him. In spite of himself the schizophrenic is open to everything and lives in the most extreme confusion.”</div>
-<div class="column c200" id="10">10&emsp;</div>
-<div class="column c200" id="11">11&emsp;</div>
+                <div class="column c200" id="7">
+                    7&emsp;Baudrillard, The System of Objects, p. 32.
+                </div>
+
+                <div class="column c200" id="8">
+                    8&emsp;Or, in more visual terms; the Euthanasia Coaster, with its 500m lift and seven consequently smaller loops (clothoid inversions), resulting in euphoria and death in 10G.
+                </div>
+                <div class="column c400" id="9">
+                    9&emsp;Jean Baudrillard, The Ecstasy of Communication, (SEMIOTEXT(E): New York, 1987), trans. Bernard Schutze and Caroline Schutze p. 27: “an over-proximity of all things, a foul promiscuity of all things which beleaguer and penetrate him, meeting with no resistance, and no halo, no aura, not even the aura of his own body protects him. In spite of himself the schizophrenic is open to everything and lives in the most extreme confusion.”
+                </div>
+
+                <div class="column c200" id="10">
+                    10&emsp;
+                </div>
+
+                <div class="column c200" id="11">
+                    11&emsp;
+                </div>
 
 
 
@@ -657,145 +760,98 @@ trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
             <!-- MAIN TEXT -->
             <div class="box" id="top">
 
-                <div class="column c300">Oversaturation is: devoid of surface tension  (ephemeral)
-→ devoid of distance → it is a previously intact membrane  (lacking interest)
-→ it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal)
-→ in pieces, distracted, inexact → sublime without pleasure → emptying → too full
-→ an exaggeration of the  miniature → too much of a good thing.</div>
+                <div class="column c400">Oversaturation is: devoid of surface tension  (ephemeral) → devoid of distance → it is a previously intact membrane  (lacking interest) → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the  miniature → too much of a good thing.</div>
 
                 <div class="column c50">I</div>
 
-                <div class="column c600">I am trying to make an <a class="sidebar-link" data-panel="panel-test">index</a>
-of everything I think  about when I think about Oversaturation.
-Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things
-after a shopping center, a buying palace, a castle of commodities.
-This should maybe also be a statement on the nature of lists – or on classification at large or small.
-→ Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic
-knowledge where animals are depicted as belonging to various categories, e.g.
-"a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase,
-n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
+                <div class="column c600">
+                    I am trying to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
 
-                <div class="column c400">Any attempt at categorisation or indexation is futile to begin with,
-but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe
-not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup>
-→ What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect)
-of scintillations on what exactly Oversaturation might mean and look like,
-however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup></div>
+                <div class="column c400">
+                    Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup>
+                </div>
 
-                <div class="column c500">The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection,
-that contained items like books, a copper bowl, a glass butterfly, <a class="image-trigger" data-image="image-meme">a meme,</a> a grayspeckled pen,
-<a class="sidebar-link" data-panel="panel-holestory">a story about holes,</a>
-and a photo of a clear plastic bottle through which you could see an active volcano.
-I also wrote a different kind of list, about a year ago, sorting through a shelf of knickknacks,
-like the imagined ontological potential of a photograph of soup (the spectacle and performance of the image-soup)
-on a restaurant menu. I sort everything that I have and try to catalogue it,
-and I would never (I should) throw anything away that is of theoretical or practical use.</div>
+                <div class="column c500">
+                    The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection, that contained items like books, a copper bowl, a glass butterfly, <a class="image-trigger" data-image="image-meme">a meme,</a> a grayspeckled pen, <a class="sidebar-link" data-panel="panel-holestory">a story about holes,</a> and a photo of a clear plastic bottle through which you could see an active volcano. I also wrote a different kind of list, about a year ago, sorting through a shelf of knickknacks, like the imagined ontological potential of a photograph of soup (the spectacle and performance of the image-soup) on a restaurant menu. I sort everything that I have and try to catalogue it, and I would never (I should) throw anything away that is of theoretical or practical use.
+                </div>
 
-                <div class="column c750">But the door, the door, it won't shut!
-My grandparents had a garage and the garage had a door.
-Inside (it was a typical garage) a painting of a green landscape hung at the end,
-various containers with things useful and not littered the shelves, a workbench,
-a heavy odor of gasoline in the air.
-But the door, the door, I could not stop thinking about the door.
-It was made of long horizontal planks of wood, on small nearly invisible hinges,
-so that they could rise from lying vertically to resting horizontally, under the ceiling.
-I knew it was wood, from looking up at the resting door and seeing its character,
-the aged porous softness – on the other side it was painted brown.
-Why brown? I would ask myself endlessly and every time I came to the same conclusion:
-it was painted brown to look like wood, but it was wood and why did it need to look like
-what it was, when it already was it? A challenge presents itself, or a challenger,
-a confrontation and trivial it seems. Inessential even → the membrane that contributes
-nothing to the meaning of things – of its use, means or end.
-Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.</div>
+                <div class="column c850">
+                    <i>But the door, the door, it won't shut!</i> My grandparents had a garage and the garage had a door. Inside (it was a typical garage) a painting of a green landscape hung at the end, various containers with things useful and not littered the shelves, a workbench, a heavy odor of gasoline in the air. But the door, the door, I could not stop thinking about the door. It was made of long horizontal planks of wood, on small nearly invisible hinges, so that they could rise from lying vertically to resting horizontally, under the ceiling. I knew it was wood, from looking up at the resting door and seeing its character, the aged porous softness – on the other side it was painted brown. Why brown? I would ask myself endlessly and every time I came to the same conclusion: it was painted brown to look like wood, but it was wood and why did it need to look like what it was, when it already was it? A challenge presents itself, or a challenger, a confrontation and trivial it seems. Inessential even → the membrane that contributes nothing to the meaning of things – of its use, means or end. Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.
+                </div>
 
-                <div class="column c500">Lamps with metal stands are coated in a chrome-emulating silver,
-with flecks of metallic glitter like a cart on a rollercoaster;
-or, to go even further, my grandfather bought me a lamp of plastic, colored silver –
-the lamp was no longer metal but the metaphor of it was (I later painted it black and deeply regretted it).
-The color is arbitrary, but for its performance → "[It turns]out to be nothing but an impossible echo
-of the state of nature, which explains why [it's] so aggressive, why [it's] so naïve."<sup><a href="#4">4</a></sup>
-None of these things are, strictly, what they are, as people keep adding layers onto them
-of what they are not but pretend to be → the hallucinogenic properties of added color</div>
+                <div class="column c500">
+                    Lamps with metal stands are coated in a chrome-emulating silver, with flecks of metallic glitter like a cart on a rollercoaster; or, to go even further, my grandfather bought me a lamp of plastic, colored silver – the lamp was no longer metal but the metaphor of it was (I later painted it black and deeply regretted it). The color is arbitrary, but for its performance → "[It turns]out to be nothing but an impossible echo of the state of nature, which explains why [it's] so aggressive, why [it's] so naïve."<sup><a href="#4">4</a></sup> None of these things are, strictly, what they are, as people keep adding layers onto them of what they are not but pretend to be → the hallucinogenic properties of added color.
+                </div>
 
                 <div class="column c50">II</div>
 
-                <div class="column c500">There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed
-by events at the office she works at; treasured items keep disappearing mysteriously.
-She says to her friend and coworker:
-<i><span class="video-trigger" data-video="clockwatchersVideo">"Maybe I blacked out or something,
-but I think I'm the guilty one, I think I did it.
-I've been looking for that wallet all over the place, and I can't find it anywhere.
-I don't know anything anymore.
-How do you know something?
-How do you know anything for sure?"</span></i></div>
+                <div class="column c500">
+                    There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed by events at the office she works at; treasured items keep disappearing mysteriously. She says to her friend and coworker: <i><span class="video-trigger" data-video="clockwatchersVideo">"Maybe I blacked out or something, but I think I'm the guilty one, I think I did it. I've been looking for that wallet all over the place, and I can't find it anywhere. I don't know anything anymore. How do you know something? How do you know anything for sure?"</span></i>
+                </div>
 
-                <div class="column c400">Now, an empty folder titled
-"Pride.And.Prejudice.2005.sdr.bluray.movie.1080p.av1.5.1.opus-Rosy"
-keeps appearing in my (otherwise pristine) Downloads folder
-and a few years ago I had a virus where Safari would continuously download
-a defective PDF of Foucault's third volume of the History of Sexuality.</div>
+                <div class="column c400">
+                    Now, an empty folder titled "Pride.And.Prejudice.2005.sdr.bluray.movie.1080p.av1.5.1.opus-Rosy" keeps appearing in my (otherwise pristine) Downloads folder and a few years ago I had a virus where Safari would continuously download a defective PDF of Foucault's third volume of the History of Sexuality.
+                </div>
 
-                <div class="column c400">Every night I sleep with the window open, it doesn't matter what time of year it is,
-the window has to be open and while laying there I think of the Spanish Flu and its consequences,
-sanatoriums and their influence on interior design, tuberculosis, sleeping porches and the wire industry<sup><a href="#5">5</a></sup>
-(I wish I had one), how Le Corbusier is (perversely) afraid of the dirty, dirty, ground so he builds on stilts,
-x-ray fetishism in architecture,<sup><a href="#6">6</a></sup> transparent powerstrips and infants in wagons on the balcony in winter,
-while gulping frozen air from a tiny slit in the duvet.</div>
+                <div class="column c500">
+                    Every night I sleep with the window open, it doesn't matter what time of year it is, the window has to be open and while laying there I think of the Spanish Flu and its consequences, sanatoriums and their influence on interior design, tuberculosis, sleeping porches and the wire industry<sup><a href="#5">5</a></sup> (I wish I had one), how Le Corbusier is (perversely) afraid of the dirty, dirty, ground so he builds on stilts, x-ray fetishism in architecture,<sup><a href="#6">6</a></sup> transparent powerstrips and infants in wagons on the balcony in winter, while gulping frozen air from a tiny slit in the duvet.
+                </div>
 
-                <div class="column c600">Oversaturation comes to increasingly absurd conclusions.
-Baudrillard, at some point, described the modern person as a mental hypochondriac or a cybernetician;
-"someone obsessed with the perfect circulation of messages"<sup><a href="#7">7</a></sup>
-→ where virtual hygiene, one of signifying and communicating, is constructed instead of rising and forming from origin.
-A closed loop of sorts, that does not acknowledge that endless circles are all secretly lossy;
-in the recursion, something is always lost (in thermodynamic terms, entropic decay),<sup><a href="#8">8</a></sup>
-resulting in the hypochondria insisting upon itself, renewing itself,
-the circuit travelled becomes smaller and smaller, until its eventual implosion.
-A hypochondriac stops life out of fear, and Oversaturation does too.</div>
+                <div class="column c600">
+                    Oversaturation comes to increasingly absurd conclusions. Baudrillard, at some point, described the modern person as a mental hypochondriac or a cybernetician; "someone obsessed with the perfect circulation of messages"<sup><a href="#7">7</a></sup> → where virtual hygiene, one of signifying and communicating, is constructed instead of rising and forming from origin. A closed loop of sorts, that does not acknowledge that endless circles are all secretly lossy; in the recursion, something is always lost (in thermodynamic terms, entropic decay),<sup><a href="#8">8</a></sup> resulting in the hypochondria insisting upon itself, renewing itself, the circuit travelled becomes smaller and smaller, until its eventual implosion. A hypochondriac stops life out of fear, and Oversaturation does too.
+                </div>
 
                 <div class="column c50">III</div>
 
-                <div class="column c500">Oversaturation is devoid of interest as everything is flattened,
-or it is ephemeral, as in it is an ill-categorizeable pile of pamphlets and notes, and tends to get lost –
-or even ethereal, as in occupying air, as in a fleeting and fragile idea.
-It does not really abide by logic, nor does it surprise;
-its internal rules are more related to a schizophrenic<sup><a href="#9">9</a></sup> world view,
-than they are the librarian's dewey decimal system –
-outrageously close, frustratingly rigid in its insistence on incomprehension,
-a hypersensitivity and therefore susceptibility to instant absorption –
-a formless sensation of infinity.</div>
+                <div class="column c500">
+                    Oversaturation is devoid of interest as everything is flattened, or it is ephemeral, as in it is an ill-categorizeable pile of pamphlets and notes, and tends to get lost – or even ethereal, as in occupying air, as in a fleeting and fragile idea. It does not really abide by logic, nor does it surprise; its internal rules are more related to a schizophrenic<sup><a href="#9">9</a></sup> world view, than they are the librarian's dewey decimal system – outrageously close, frustratingly rigid in its insistence on incomprehension, a hypersensitivity and therefore susceptibility to instant absorption – a formless sensation of infinity.</div>
 
-<div class="column c900">A linearity (or at the very least, a reasonable logic) is far away, at the sorting facility for second-hand clothing that I worked at last summer (<i>I got a job there because I loved things</i>) – this was an environment where a paper bag falls out of the container with a note that says “single socks” (<i>This reminded me of the short story, Crystals, by Italo Calvino, where the main character Qfwfq longs for the days when all the atoms in the universe had the potential of crystallising, if it were spacious and cold enough. Before everything was incandescent magma, with no discernible structure, which eventually morphed into steel-and-glass skyscrapers and quartz watches</i>), or used sex toys fall out of plastic bags, and Margiela dresses glint on the conveyor belt, Vivienne Westwood hats appear out of thin air, and those red sky-high Chloé platforms wedges from 2008 tempt me as I pick them out of the pile (<i>Qfwfq, now disillusioned with the false purity of glass, renounces the amorphic solid pretending to be a crystalline structure, the “simulated order” of modernity; seeing it as a different side of the same coin, the banal simulation of order and the listless boredom of disorder</i>), nylon shoulderbags with secret notes of affairs, and what feels like a leaky brain, with overwhelmingly specific and inscrutable categories of where things are stored in the facility, seeping content, the overspillage flowing through the industrial district. </div>
+                <div class="column c950">
+                    A linearity (or at the very least, a reasonable logic) is far away, at the sorting facility for second-hand clothing that I worked at last summer (<i>I got a job there because I loved things</i>) – this was an environment where a paper bag falls out of the container with a note that says “single socks” (<i>This reminded me of the short story, Crystals, by Italo Calvino, where the main character Qfwfq longs for the days when all the atoms in the universe had the potential of crystallising, if it were spacious and cold enough. Before everything was incandescent magma, with no discernible structure, which eventually morphed into steel-and-glass skyscrapers and quartz watches</i>), or used sex toys fall out of plastic bags, and Margiela dresses glint on the conveyor belt, Vivienne Westwood hats appear out of thin air, and those red sky-high Chloé platforms wedges from 2008 tempt me as I pick them out of the pile (<i>Qfwfq, now disillusioned with the false purity of glass, renounces the amorphic solid pretending to be a crystalline structure, the “simulated order” of modernity; seeing it as a different side of the same coin, the banal simulation of order and the listless boredom of disorder</i>), nylon shoulderbags with secret notes of affairs, and what feels like a leaky brain, with overwhelmingly specific and inscrutable categories of where things are stored in the facility, seeping content, the overspillage flowing through the industrial district.
+                </div>
     
-    <div class="column c800">On my last day at the sorting facility, my boss asked me what I had written about before; I replied honestly: “<i>I have written very little but mostly about the absurd cultural situatedness of Crystal Pepsi, a soft drink launched in the early nineties.</i>” She said; “</i>Are you kidding … My husband’s cousin worked on Crystal Pepsi. He’s a biochemical engineer who specialises in juice – he also worked on Snapple.</i>”  In Crystals, the moment before anything materialised from its amorphic disorder, was the moment the main character longed for, as if it were the most generative moment of potentialities and upcoming coincidences → just before something really happens, something else happens in the imaginative realm, which is, in some ways far superior to lived reality, being a place without immediate consequences; This is also Oversaturation, an interaction without happening. </div>
+                <div class="column c700">
+                     On my last day at the sorting facility, my boss asked me what I had written about before; I replied honestly: “<i>I have written very little but mostly about the absurd cultural situatedness of Crystal Pepsi, a soft drink launched in the early nineties.</i>” She said; “<i>Are you kidding … My husband’s cousin worked on Crystal Pepsi. He’s a biochemical engineer who specialises in juice – he also worked on Snapple.</i>”  In Crystals, the moment before anything materialised from its amorphic disorder, was the moment the main character longed for, as if it were the most generative moment of potentialities and upcoming coincidences → just before something really happens, something else happens in the imaginative realm, which is, in some ways far superior to lived reality, being a place without immediate consequences; This is also Oversaturation, an interaction without happening. 
+                </div>
 
-            </div>
+                <div class="column c600">
+                     Oversaturation is a vast quantity of material that you encounter once and never again; offering the filled brain a massive quantity of object upon object, contaminating and multiplying, it cannot stop spilling over. It is all too close for comfort, conjuring the image of the skin of the body being of stretched half-sheer material → things flashing constantly and travelling inside and out → through which the world might be seen but is mostly obscured, interaction both unavoidable and optional at the same time. 
+                 </div>
 
-            <!-- BIBLIOGRAPHY -->
+                 <div class="column c50">IV</div>
+
+                 <div class="column c600">
+                    In his <i>Critique of Judgement</i>, Kant asks: “<i>What now is meant by the expression that anything is great or small or of medium size?</i>” He goes on: “<i>the Sublime is that in comparison with which everything else is small.</i>” When considering the scale of Oversaturation (an indexation of relativity of size and effect) the Sublime appears in all its absolute greatness — it asked me to think through Oversaturation and Sublime as relatives; Kant described the Sublime as “<i>to be found in a formless object, so far as in it or by occasion of it boundlessness is represented, and yet its totality is also present to thought.</i>” Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless. 
+
+
+                 </div>
+
+                 </div>
+              
+
+
+
+<!--------------- BIBLIOGRAPHY ---------------->
             <div class="box" id="bottom">
 
-                <div class="column c200" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i>
-(Pantheon Books: New York, 1971), p. xv.
-Itself a translation from Spanish to French to English.</div>
+                <div class="column c200" id="I">
+                    I&emsp;Michel Foucault, <i>The Order of Things</i> (Pantheon Books: New York, 1971), p. xv. Itself a translation from Spanish to French to English.</div>
 
-                <div class="column c250" id="II">II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins</i>
-/ The Analytical Language of John Wilkins in PDF form,
-attributing various translations, but identical to none.</div>
+                <div class="column c250" id="II">
+                    II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins/ The Analytical Language of John Wilkins</i>  in PDF form, attributing various translations, but identical to none.
+                </div>
 
-                <div class="column c950" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins"
-in Other Inquisitions 1937–1952, trans. Ruth L. C. Simms (University of Texas Press: Austin, 1975), p. 103,
-and also in "Borgesian Joke" in Linguist List (7.1446), published on Tue Oct 15 1996, found on Wikipedia,
-where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned
-in the text was in fact real, coming to the conclusion of:
-"I believe that one cannot prove the non-existence of a book conclusively."
-On the same website, curious browsers can find this sentence:
-"The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO)
-from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."</div>
+                <div class="column c950" id="III">
+                    III&emsp;Borges, "The Analytical Language of John Wilkins" in <i>Other Inquisitions 1937–1952</i>, trans. Ruth L. C. Simms (University of Texas Press: Austin, 1975), p. 103, and also in "Borgesian Joke" in <i>Linguist List</i> (7.1446), an article published on Tue Oct 15 1996, and found on Wikipedia, where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned in the text was in fact real, coming to the conclusion of: "I believe that one cannot prove the non-existence of a book conclusively." On the same website, curious browsers can find this sentence: "The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO) from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."
+                </div>
 
-                <div class="column c300" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language"
-in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger
-(Viking Penguin: New York, 1999), p. 231.</div>
+                <div class="column c300" id="IV">
+                    IV&emsp;Borges, "John Wilkins' Analytical Language"in <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger(Viking Penguin: New York, 1999), p. 231
+                </div>
 
-<div class="column c300" id="V">V&emsp;For all the years of insisting on keeping the window open, even in Berlin or Amsterdam, it has become convenient to just send this article to friends who object to the practice.</div>
+                <div class="column c300" id="V">
+                     V&emsp;For all the years of insisting on keeping the window open, even in Berlin or Amsterdam, it has become convenient to just send this article to friends who object to the practice.
+                </div>
 
             </div>
         </main>
@@ -804,8 +860,7 @@ in  <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eli
         <div class="sidebar-right" id="sidebarRight">
             <div class="sidebar-content">
                 <div class="sidebar-default-content">
-                    <h2>IMAGES</h2>
-                    <p>Collected images from browsing.</p>
+                    
                 </div>
 
                 <div class="sidebar-gallery" id="sidebarGallery">
