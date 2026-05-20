@@ -113,6 +113,19 @@ li {
     background-color: var(--bg-color);
 }
 
+.visitor-count {
+    position: fixed;
+    top: 50px;
+    left: 16px;
+    z-index: 100;
+    border: 1px solid #222;
+    padding: 4px 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    color: #222;
+    background-color: var(--bg-color);
+}
+
 @media (max-width: 600px) {
     html, body {
         overflow: auto;
@@ -223,6 +236,7 @@ a:hover {
 <body>
 
 <span class="word-count" id="wordCount">0 words</span>
+<span class="visitor-count" id="visitorCount">... visitors</span>
 <a class="emporium-link" href="emporium.html">Emporium</a>
 
 <div class="layout">
@@ -397,6 +411,13 @@ a:hover {
         colText.style.color = interpolateColor(scrollTextColors, progress);
         document.documentElement.style.setProperty('--bg-color', interpolateColor(scrollBgColors, progress));
     });
+
+    fetch('https://api.countapi.xyz/hit/gretathorkels.net/midterm')
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('visitorCount').textContent = data.value + ' visitors';
+        })
+        .catch(() => {});
     </script>
 </body>
 </html>
