@@ -412,12 +412,15 @@ a:hover {
         document.documentElement.style.setProperty('--bg-color', interpolateColor(scrollBgColors, progress));
     });
 
-    fetch('https://api.countapi.xyz/hit/gretathorkels.net/midterm')
+    fetch('https://api.counterapi.dev/v1/gretathorkels.net/midterm/up')
         .then(r => r.json())
         .then(data => {
-            document.getElementById('visitorCount').textContent = data.value + ' visitors';
+            document.getElementById('visitorCount').textContent = data.count + ' visitors';
         })
-        .catch(() => {});
+        .catch(err => {
+            console.error('visitor counter:', err);
+            document.getElementById('visitorCount').textContent = '– visitors';
+        });
     </script>
 </body>
 </html>
