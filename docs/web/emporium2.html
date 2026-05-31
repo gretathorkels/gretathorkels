@@ -230,6 +230,7 @@
             z-index: 2000;
             opacity: 0;
             transition: opacity 0.3s ease;
+            mix-blend-mode: multiply;
         }
 
         .image-modal-overlay.open {
@@ -246,7 +247,7 @@
             border: 1px solid #000;
             padding: 0;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
@@ -419,6 +420,7 @@
 
 
 
+
         /* ── Forced italic for Mono (no italic variant exists) ── */
         .sidebar-bottom i, .sidebar-bottom em,
         small i, small em {
@@ -493,6 +495,33 @@
 
         .sidebar-panel small {
             line-height: 1.1 !important;
+        }
+
+        /* ── Game modal ── */
+        .game-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-modal-overlay.open {
+            display: flex;
+        }
+
+        .game-modal {
+            width: 500px;
+            height: 430px;
+            background-color: #000;
+            border: 1px solid #000;
+            overflow: hidden;
+            position: relative;
         }
 
         /* ── Video modal ── */
@@ -780,6 +809,11 @@
         </div>
     </div>
 
+    <!-- ===================== GAME MODAL ====================== -->
+    <div class="game-modal-overlay" id="gameModalOverlay">
+        <div class="game-modal" id="gameModalContent"></div>
+    </div>
+
     <!-- ===================== VIDEO MODAL ===================== -->
     <div class="video-modal-overlay" id="videoModalOverlay">
         <div class="video-modal">
@@ -797,6 +831,8 @@
         const sidebarContent = sidebar.querySelector('.sidebar-content');
         const videoModalOverlay = document.getElementById('videoModalOverlay');
         const imageModalOverlay = document.getElementById('imageModalOverlay');
+        const gameModalOverlay  = document.getElementById('gameModalOverlay');
+        const gameModalContent  = document.getElementById('gameModalContent');
         const enlargedImage = document.getElementById('enlargedImage');
         const historyContainer = document.getElementById('historyContainer');
         const topBox = document.getElementById('top');
@@ -811,6 +847,10 @@
                 src: 'img/sand.webp',
                 alt: 'A meme that says: Stop programming computers. Sand was never meant to think. That is very cruel to rocks.',
                 caption: '.'
+            },
+            'errantry-e': {
+                src: 'img/errantry-e.png',
+                alt: ''
             }
         };
 
@@ -854,7 +894,7 @@
                     <div class="column" id="section-I">I</div>
 
                     <div class="column">
-                        I am trying to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
+                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
 
                     <div class="column">
                         Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup>
@@ -1014,7 +1054,7 @@
                     <div class="essay-title">Errantry</div>
 
                     <div class="column">
-                        <i>Efficiency</i>, or utility, is defined as something that is ­useful, ­economical, money-­making, constructive, which goes against loitering, and is done with clear direction. It is not efficient to wander aimlessly (without clear intention) or to be adrift (without clear heading), nor is it accepted to be frivolous (without clear purpose). There it is: the society of transparency and utility is at it again, making everything <i>glassy</i>. But glass, when shattered and imperfect, is erratic.
+                        <a class="image-trigger" data-image="errantry-e"><i>Efficiency</i></a>, or utility, is defined as something that is ­useful, ­economical, money-­making, constructive, which goes against loitering, and is done with clear direction. It is not efficient to wander aimlessly (without clear intention) or to be adrift (without clear heading), nor is it accepted to be frivolous (without clear purpose). There it is: the society of transparency and utility is at it again, making everything <i>glassy</i>. But glass, when shattered and imperfect, is erratic.
                     </div>
                     <div class="column">
                         A friend sent me a screenshot of the ­dictionary entry for the word <i>erratic</i>, which means being uneven, unpredictable, or, in geological terms, to be a wandering rock, differing from its surroundings. Iridescence is produced when light shines on an erratic surface. Another friend once described me as being rococo. Rococo takes its name from the French word <i>rocaille</i>, which means stones or broken shells, used decoratively, to soften curves and break up geometric forms and symmetry, intensely dramatic and frivolous. “Errantry does not align – it produces iridescence.”<sup><a href="#1">1</a></sup> Shimmer is found only in irregularity, when the light shines on something and it differs from its surroundings, it is erratic, iridescent. 
@@ -1190,6 +1230,18 @@
                 };
             });
 
+            // Game triggers
+            document.querySelectorAll('.game-trigger').forEach(el => {
+                el.onclick = (e) => {
+                    e.preventDefault();
+                    if (gameModalOverlay.classList.contains('open')) return;
+                    gameModalContent.innerHTML = gameInstance.render;
+                    gameModalOverlay.classList.add('open');
+                    gameInstance.init();
+                    addHistoryColumn('Game', el.getAttribute('data-game') || 'game');
+                };
+            });
+
             // Sidebar links
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.onclick = (e) => {
@@ -1310,6 +1362,14 @@
             }
         });
 
+        gameModalOverlay.addEventListener('click', (e) => {
+            if (e.target === gameModalOverlay) {
+                gameInstance.destroy();
+                gameModalOverlay.classList.remove('open');
+                gameModalContent.innerHTML = '';
+            }
+        });
+
 
         // Column minimize/maximize functionality
         document.querySelectorAll('.minimize-btn').forEach(btn => {
@@ -1333,6 +1393,8 @@
 
 
     </script>
+
+    <script src="game/game_1.js"></script>
 
 </body>
 </html>
