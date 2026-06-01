@@ -221,7 +221,7 @@
         }
 
         .menu-year {
-            font-size: 0.6em;
+            font-size: 10px;
             opacity: 0.5;
             vertical-align: middle;
             font-family: 'HAL Timezone Mono', monospace;
@@ -263,7 +263,7 @@
             z-index: 2000;
             opacity: 0;
             transition: opacity 0.3s ease;
-            mix-blend-mode: multiply;
+            pointer-events: none;
         }
 
         .image-modal-overlay.open {
@@ -341,6 +341,14 @@
             font-size: 12px;
             line-height: 1.1;
             margin-right: 16px;
+        }
+
+        .history-column.clickable {
+            cursor: pointer;
+        }
+
+        .history-column.clickable:hover {
+            opacity: 0.5;
         }
 
         .history-column-timestamp {
@@ -501,12 +509,13 @@
 
         /* ── Typography & links ── */
         a {
-            transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease, color 0.2s ease;
             cursor: pointer;
         }
 
         a:hover {
-            opacity: 0.6;
+            opacity: 1;
+            color: #0000ee;
         }
 
         a[href^="#"] {
@@ -541,12 +550,12 @@
         }
 
         sup a[href^="#"] {
-            color: #2d6a2d;
+            color: #00bfff;
         }
 
         sup a[href^="#"]:hover {
             opacity: 1;
-            color: #1db81d;
+            color: #1e90ff;
         }
 
         small {
@@ -630,6 +639,13 @@
 
         .column.highlight {
             animation: highlightFade 1.5s ease-out forwards;
+        }
+
+        @keyframes glitter-blingee {
+            0%   { transform: scale(0) rotate(0deg);   opacity: 0; color: #ffffff; }
+            25%  { transform: scale(1) rotate(30deg);  opacity: 1; color: #ffffff; }
+            70%  { transform: scale(1) rotate(60deg);  opacity: 1; color: var(--glitter-color); }
+            100% { transform: scale(0) rotate(90deg);  opacity: 0; color: var(--glitter-color); }
         }
 
         @keyframes slideInModal {
@@ -882,7 +898,7 @@
                     <div class="right-menu-item" data-essay="mediumsized">Mediumsized <span class="menu-year">2026</span></div>
                     <div class="right-menu-item" data-essay="emporium">Emporium or, the Useless Supplement <span class="menu-year">2025</span></div>
                     <div class="right-menu-item" data-essay="essay2">I Have Been Thing(k)ing <span class="menu-year">2024</span></div>
-                    <div class="right-menu-item" data-essay="essay3">Stop! Look at the Moon <span class="menu-year">2023</span></div>
+                    <div class="right-menu-item" data-essay="essay3">Stop! Look at the Moon <span class="menu-year">2024</span></div>
                     <div class="right-menu-item" data-essay="errantry">Errantry <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-essay="essay5">The Word For World is a Grain of Sand <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-action="info">Info</div>
@@ -914,8 +930,7 @@
     <!-- ===================== VIDEO MODAL ===================== -->
     <div class="video-modal-overlay" id="videoModalOverlay">
         <div class="video-modal">
-            <video id="clockwatchersVideo" controls width="100%">
-                <source src="video/clockwatchers.mp4" type="video/mp4">
+            <video id="modalVideo" controls width="100%">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -927,6 +942,11 @@
         const sidebarBottom = document.getElementById('sidebarBottom');
         const sidebarContent = sidebar.querySelector('.sidebar-content');
         const videoModalOverlay = document.getElementById('videoModalOverlay');
+        const modalVideo = document.getElementById('modalVideo');
+        const videoData = {
+            'clockwatchers': { src: 'video/clockwatchers.mp4', label: 'How do you know anything for sure?' },
+            'butthedoor':    { src: 'video/butthedoor.mp4',    label: 'But the door, the door, it won\'t shut!' }
+        };
         const imageModalOverlay = document.getElementById('imageModalOverlay');
         const gameModalOverlay  = document.getElementById('gameModalOverlay');
         const gameModalContent  = document.getElementById('gameModalContent');
@@ -988,12 +1008,12 @@
                         January 2026. </small>
                     </p>
 
-                    <p>Oversaturation is: devoid of surface tension  (ephemeral) → devoid of distance → it is a previously intact membrane  (lacking interest) → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the  miniature → too much of a good thing.</p>
+                    <p>Oversaturation is: devoid of surface tension (ephemeral) → devoid of distance → it is a previously intact membrane (lacking interest) → it is punctured and oozing → excessive → it is amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the miniature → too much of a good thing.</p>
 
                     <h2>I</h2>
 
                     <p>
-                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></p>
+                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think about when I think about Oversaturation. Maybe I should name my index EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a) belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></p>
 
                     <p>
                         Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup>
@@ -1004,7 +1024,7 @@
                     </p>
 
                     <p>
-                        <i>But the door, the door, it won't shut!</i> My grandparents had a garage and the garage had a door. Inside (it was a typical garage) a painting of a green landscape hung at the end, various containers with things useful and not littered the shelves, a workbench, a heavy odor of gasoline in the air. But the door, the door, I could not stop thinking about the door. It was made of long horizontal planks of wood, on small nearly invisible hinges, so that they could rise from lying vertically to resting horizontally, under the ceiling. I knew it was wood, from looking up at the resting door and seeing its character, the aged porous softness – on the other side it was painted brown. Why brown? I would ask myself endlessly and every time I came to the same conclusion: it was painted brown to look like wood, but it was wood and why did it need to look like what it was, when it already was it? A challenge presents itself, or a challenger, a confrontation and trivial it seems. Inessential even → the membrane that contributes nothing to the meaning of things – of its use, means or end. Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.
+                        <i><span class="video-trigger" data-video="butthedoor">But the door, the door, it won't shut!</span></i> My grandparents had a garage and the garage had a door. Inside (it was a typical garage) a painting of a green landscape hung at the end, various containers with things useful and not littered the shelves, a workbench, a heavy odor of gasoline in the air. But the door, the door, I could not stop thinking about the door. It was made of long horizontal planks of wood, on small nearly invisible hinges, so that they could rise from lying vertically to resting horizontally, under the ceiling. I knew it was wood, from looking up at the resting door and seeing its character, the aged porous softness – on the other side it was painted brown. Why brown? I would ask myself endlessly and every time I came to the same conclusion: it was painted brown to look like wood, but it was wood and why did it need to look like what it was, when it already was it? A challenge presents itself, or a challenger, a confrontation and trivial it seems. Inessential even → the membrane that contributes nothing to the meaning of things – of its use, means or end. Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.
                     </p>
 
                     <p>
@@ -1014,7 +1034,7 @@
                     <h2>II</h2>
 
                     <p>
-                        There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed by events at the office she works at; treasured items keep disappearing mysteriously. She says to her friend and coworker: <i><span class="video-trigger" data-video="clockwatchersVideo">"Maybe I blacked out or something, but I think I'm the guilty one, I think I did it. I've been looking for that wallet all over the place, and I can't find it anywhere. I don't know anything anymore. How do you know something? How do you know anything for sure?"</span></i>
+                        There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed by events at the office she works at; treasured items keep disappearing mysteriously. She says to her friend and coworker: <i><span class="video-trigger" data-video="clockwatchers">"Maybe I blacked out or something, but I think I'm the guilty one, I think I did it. I've been looking for that wallet all over the place, and I can't find it anywhere. I don't know anything anymore. How do you know something? How do you know anything for sure?"</span></i>
                     </p>
 
                     <p>
@@ -1051,10 +1071,6 @@
                      <p>
                         In his <i>Critique of Judgement</i>, Kant asks: "<i>What now is meant by the expression that anything is great or small or of medium size?</i>"<sup><a href="#12">12</a></sup> He goes on: "<i>the Sublime is that in comparison with which everything else is small.</i>"<sup><a href="#13">13</a></sup> When considering the scale of Oversaturation (an indexation of relativity of size and effect) the Sublime appears in all its absolute greatness — it asked me to think through Oversaturation and Sublime as relatives; Kant described the Sublime as "<i>to be found in a formless object, so far as in it or by occasion of it boundlessness is represented, and yet its totality is also present to thought.</i>"<sup><a href="#14">14</a></sup> Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless. 
                      </p>
-
-                     <p>
-                        Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless.
-                    </p>
 
                     <p>
                         There is no objective Oversaturation, for the sensation appears in the mind, in response to relative stimuli – a magnitude, as such that the imagination cannot comprehend. While the Sublime is defined as oscillating between states of aversion and pleasure in facing absolute greatness, the reasonable response to Oversaturation is only a disgust at the vulgarity of pure amount. Oversaturation might therefore have more in common with the monstrous: <i>“An object is monstrous if by its size it destroys the purpose which constitutes the concept of it.”</i><sup><a href="#15">15</a></sup> Oversaturation is a swelling of normality, a hyper-existence of excess. Oversaturation is kitsch. <i>Oversaturation is not kitsch, but that is an oversaturated thing to say.</i>
@@ -1192,7 +1208,7 @@
 
                     </p>
                     <p>
-                        In the essay </I>Dirt and Desire: Essay on the ­Phenomenology of Female Pollution in ­Antiquity</I>, Anne Carson writes about the historical defini­tion of femininity as the dirty, wet and leaky counter­part to a masculine dry solidity. Cleanliness (order) is defined as ­matter <I>in</I> place, dirt (disorder) is defined as matter <I>out</I> of place.<sup><a href="#11">11</a></sup> To be wet and leaky is to be without ­boundaries, it is to be mud, to be soft. A dry solidity is only boundaries, it is a perfect container, a ­complete vessel. To be contained is to be ordered. The ordering of matter can go many ways and one of them, if not confronted (shaken), is the increasingly calibrated organisation of time, where not a drop can go to waste – but, like in <I>Momo</I>, time saved is time disappeared. 
+                        In the essay <I>Dirt and Desire: Essay on the ­Phenomenology of Female Pollution in ­Antiquity</I>, Anne Carson writes about the historical defini­tion of femininity as the dirty, wet and leaky counter­part to a masculine dry solidity. Cleanliness (order) is defined as ­matter <I>in</I> place, dirt (disorder) is defined as matter <I>out</I> of place.<sup><a href="#11">11</a></sup> To be wet and leaky is to be without ­boundaries, it is to be mud, to be soft. A dry solidity is only boundaries, it is a perfect container, a ­complete vessel. To be contained is to be ordered. The ordering of matter can go many ways and one of them, if not confronted (shaken), is the increasingly calibrated organisation of time, where not a drop can go to waste – but, like in <I>Momo</I>, time saved is time disappeared. 
                     </p>
                     <p>
                         Calibrated energy-saving (in other words: ­chaos protection) transforms the human from an amorphous muddy and muddled animal, to a glassy, enclosed vessel. That is – in saving time, like the intangible Time Thieves tell me to do, there is a search for complete understanding, an erasing of unknowns. Each morning I perform a choreography to perfection: I make coffee, line up my vitamins, wash my face and brush my teeth. These acts all happen simultaneously so they take the shortest amount of time possible. Rushing, but ­quietly, once more, with ­precision! This choreography erases unex­pect­ed­ness and the unknown that each day brings. If every day is exactly the same, how can you ever be thrown off balance? But beauty is found in the unknown, in the muddled twilight zone of opaque incoherence. Adhering to this ­perspective of thought, the one ­perpetuated by the Time Thieves (a familiar motif?) is impossible, for I struggle, and nearly everyone I know struggles, to keep all these things aloft. Saving time, saving energy, requires the human being to become solid, <I>glassy</I>, fully transparent and knowable. In saving energy to become glass, the flow from the sun oscillates with increasing ­frequency. It must eventually hit a snag and spin out of control from its perfectly predicted (but ill-­advised) path – there is no machine that can continue to run smoothly, automatically, without ­requiring maintenance.
@@ -1243,6 +1259,28 @@
                     </p>
                 
                 `
+            },
+            'essay3': {
+                title: 'Stop! Look at the Moon',
+                content: `
+                    <div class="essay-title">Stop! Look at the Moon</div>
+
+                    <p><i>[not pictured: blurry photo of a new moon at dusk in winter.]</i></p>
+
+                    <p>
+                        stop! look at the moon - look its spectacular - look - i know the pizza is getting cold but look - how it hangs low over the horizon, the new moon - the outline clear - the sphere bulbous - we are driving stop the car and look - go from hungry to wandering - shift from the fast car and into the high tide - two ducks sit on the water - i can hardly see them but they are almost there - i enjoy almost not seeing them, daring my eyes to think they are not there - the color of deep dusk, deep greens deep blues a hint of deep orange, overlapped by grey lines or clouds and there it is - it doesnt look real it looks made painted, extrapolated - it is not real or unreal, it is transformed - from something in zero G to a hanging object, welcomed into the atmosphere - inside of the stratosphere - like a round island - a place for vacation, for yearning - a fantasy unfolds in me - building and excavating - what was it, a fabulation on how yoghurt came from a well on the moon - well - I see the adventure forming, the colors gaining saturation as I set off on the trip - first i need to cross the bridge, it is invisible but the ducks help me, for they are the bridge - i am grateful that they were not not there.
+                    </p>
+
+                    <p>
+                       i am thinking what if clouds were not lumpy but strandy, what if water clinged together not in clumps but in strings, the sky long and hairy - in fog you would move through the strands, brushing your shoulder, clinging to your backpack - i had a vision of this while falling asleep - the clouds look like that from afar but not up close
+                    </p>
+
+                    <p>
+                        the clouds by the moon were long and horizontal, very unlike their lumpy nature, maybe they became more like their true desired self, that of the hair - or is that - the "made" vision - untrue but wishing - it does not need explaining but; a thought; what if mountains formed in strands so that fog could pass into it untroubled, offering wetness to limestone - trees are strands, why not more, other, etc.
+                    </p>
+
+                    <p><small>[observation written for Transformation Sequence, a monthly radio show on IDA Radio by Drop Shadow Darling. <a href="https://soundcloud.com/ida_radio/transformation-sequence-crystal-garden-140224?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank">Audio available here.</a>]</small></p>
+                `
             }
         };
 
@@ -1256,7 +1294,7 @@
         }
 
         // Function to add history column (bottom bar)
-        function addHistoryColumn(type, content) {
+        function addHistoryColumn(type, content, action) {
             const timestamp = getTimestamp();
             const historyColumn = document.createElement('div');
             historyColumn.className = 'history-column';
@@ -1266,7 +1304,12 @@
                 <div class="history-column-content">"${content}"</div>
                 <div class="history-column-type">${type}</div>
             `;
-            
+
+            if (action) {
+                historyColumn.classList.add('clickable');
+                historyColumn.addEventListener('click', action);
+            }
+
             // Insert at beginning instead of end (prepend)
             historyContainer.insertBefore(historyColumn, historyContainer.firstChild);
 
@@ -1300,27 +1343,46 @@
             bibliography.scrollTop = 0;
 
             attachEventListeners();
-            addHistoryColumn('Essay', essay.title || essayKey);
+            addHistoryColumn('Essay', essay.title || essayKey, () => loadEssay(essayKey));
+        }
+
+        function spawnGlitter(element) {
+            const rect = element.getBoundingClientRect();
+            const colors = ['#00bfff', '#1e90ff', '#c0c0c0', '#e8e8e8', '#a8a8a8'];
+            const shapes = ['*', '+', '×', '·', '*', '*', '+'];
+            const pad = 50;
+            const p = document.createElement('div');
+            const x = rect.left - pad + Math.random() * (rect.width + pad * 2);
+            const y = rect.top  - pad + Math.random() * (rect.height + pad * 2);
+            const size = 10 + Math.random() * 18;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const dur = 0.5 + Math.random() * 0.5;
+            p.textContent = shape;
+            p.style.cssText = `position:fixed;left:${x}px;top:${y}px;font-size:${size}px;font-family:'HAL Timezone Mono',monospace;--glitter-color:${color};pointer-events:none;z-index:9999;animation:glitter-blingee ${dur}s ease-in-out forwards;transform-origin:center;line-height:1;`;
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), dur * 1000 + 100);
         }
 
         // Attach event listeners to dynamically loaded content
         function attachEventListeners() {
             // Image triggers
             document.querySelectorAll('.image-trigger').forEach(link => {
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    if (imageModalOverlay.classList.contains('open')) {
-                        imageModalOverlay.classList.remove('open');
-                        return;
-                    }
-                    const imageId = link.getAttribute('data-image');
-                    const data = imageData[imageId];
-                    if (data) {
+                const imageId = link.getAttribute('data-image');
+                const data = imageData[imageId];
+                if (!data) return;
+                link.onmouseenter = () => {
+                    enlargedImage.src = data.src;
+                    enlargedImage.alt = data.alt;
+                    imageModalOverlay.classList.add('open');
+                    addHistoryColumn('Image', link.textContent.trim(), () => {
                         enlargedImage.src = data.src;
                         enlargedImage.alt = data.alt;
                         imageModalOverlay.classList.add('open');
-                        addHistoryColumn('Image', link.textContent.trim());
-                    }
+                    });
+                };
+                link.onmouseleave = () => {
+                    imageModalOverlay.classList.remove('open');
                 };
             });
 
@@ -1328,13 +1390,20 @@
             document.querySelectorAll('.video-trigger').forEach(el => {
                 el.onclick = (e) => {
                     e.preventDefault();
+                    const key = el.getAttribute('data-video');
+                    const data = videoData[key];
+                    if (!data) return;
                     if (videoModalOverlay.classList.contains('open')) {
                         videoModalOverlay.classList.remove('open');
-                        document.getElementById('clockwatchersVideo').pause();
+                        modalVideo.pause();
                         return;
                     }
+                    modalVideo.src = data.src;
                     videoModalOverlay.classList.add('open');
-                    addHistoryColumn('Video', 'Clockwatchers scene');
+                    addHistoryColumn('Video', data.label, () => {
+                        modalVideo.src = data.src;
+                        videoModalOverlay.classList.add('open');
+                    });
                 };
             });
 
@@ -1346,7 +1415,7 @@
                     gameModalContent.innerHTML = gameInstance.render;
                     gameModalOverlay.classList.add('open');
                     gameInstance.init();
-                    addHistoryColumn('Game', el.getAttribute('data-game') || 'game');
+                    addHistoryColumn('Game', el.getAttribute('data-game') || 'game', () => gameModalOverlay.classList.add('open'));
                 };
             });
 
@@ -1364,12 +1433,24 @@
                     if (panel) {
                         panel.classList.add('active');
                         sidebar.classList.add('open');
-                        addHistoryColumn('Panel', link.textContent.trim());
+                        addHistoryColumn('Panel', link.textContent.trim(), () => {
+                            document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.remove('active'));
+                            panel.classList.add('active');
+                            sidebar.classList.add('open');
+                        });
                     }
                 };
             });
 
             // Footnote links (essay → footnotes/bibliography)
+            document.querySelectorAll('sup a[href^="#"]').forEach(link => {
+                let glitterTimer;
+                link.addEventListener('mouseenter', () => {
+                    spawnGlitter(link);
+                    glitterTimer = setInterval(() => spawnGlitter(link), 60);
+                });
+                link.addEventListener('mouseleave', () => clearInterval(glitterTimer));
+            });
             document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.onclick = (e) => {
                     e.preventDefault();
@@ -1380,7 +1461,10 @@
                         void target.offsetWidth;
                         target.classList.add('highlight');
                         target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        addHistoryColumn('Footnote', link.textContent.trim());
+                        addHistoryColumn('Footnote', link.textContent.trim(), () => {
+                            const t = document.getElementById(targetId);
+                            if (t) { t.classList.remove('highlight'); void t.offsetWidth; t.classList.add('highlight'); t.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+                        });
                     }
                 };
             });
@@ -1438,7 +1522,10 @@
                     const target = document.getElementById(sectionId);
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-                        addHistoryColumn('Section', itemText);
+                        addHistoryColumn('Section', itemText, () => {
+                            const t = document.getElementById(sectionId);
+                            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                        });
                     }
                 } else if (action === 'info') {
                     if (sidebar.classList.contains('open')) {
@@ -1447,7 +1534,11 @@
                         document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.remove('active'));
                         document.getElementById('panel-info').classList.add('active');
                         sidebar.classList.add('open');
-                        addHistoryColumn('Info', itemText);
+                        addHistoryColumn('Info', itemText, () => {
+                            document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.remove('active'));
+                            document.getElementById('panel-info').classList.add('active');
+                            sidebar.classList.add('open');
+                        });
                     }
                 }
             });
@@ -1460,7 +1551,7 @@
         videoModalOverlay.addEventListener('click', (e) => {
             if (e.target === videoModalOverlay) {
                 videoModalOverlay.classList.remove('open');
-                document.getElementById('clockwatchersVideo').pause();
+                modalVideo.pause();
             }
         });
 
