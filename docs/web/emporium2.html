@@ -663,6 +663,48 @@
             display: block;
         }
 
+        /* ── Grain essay floating modals ── */
+        .grain-modal {
+            display: none;
+            position: fixed;
+            background: #fafafa;
+            border: 1px solid #000;
+            z-index: 500;
+            width: 360px;
+            min-width: 120px;
+            min-height: 60px;
+            resize: both;
+            overflow: auto;
+        }
+
+        .grain-modal.visible {
+            display: block;
+        }
+
+        .grain-modal-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 4px 4px 0 4px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .grain-modal-header:active {
+            cursor: grabbing;
+        }
+
+        .grain-modal-body {
+            padding: 8px 12px 12px 12px;
+            font-family: 'HAL Timezone Mono', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        #grain-modal-1 { top: 8vh;  left: calc(50% - 180px); }
+        #grain-modal-2 { top: 38vh; left: calc(50% - 180px); }
+        #grain-modal-3 { top: 68vh; left: calc(50% - 180px); }
+
+
         /* ── Animations ── */
         @keyframes highlightFade {
             0%   { background-color: #0099ff; }
@@ -914,11 +956,12 @@
 
                 <div class="sidebar-panel" id="panel-mediumsized-colophon">
                     Released in <i>Trophy Logic</i> as part of a writing seminar in <i>Critical Studies</i> in Sandberg Instituut in Amsterdam in the Netherlands in May 2026.<br>
-                    <br>
+                    <br><br>
+                    Thank you to Rouzbeh Shadpey for the editorial advice.
                     
 
                     <br><br><br>
-                    <b>TROPHY LOGIC</b><br>
+                    TROPHY LOGIC<br><br>
                     Collected writing from the<br>
                     Critical Studies Department<br>
                     Sandberg Instituut, 2026<br>
@@ -1110,6 +1153,41 @@
     </div>
 
     <!-- ===================== VIDEO MODAL ===================== -->
+    <div class="grain-modal" id="grain-modal-1">
+        <div class="grain-modal-header">
+            <button class="minimize-btn grain-modal-close" data-target="grain-modal-1">close</button>
+        </div>
+        <div class="grain-modal-body">
+            <span style="display:block; text-align:center;">A DREAM</span><br>
+            My eyesight had become blurry, so I went to get laser eye surgery. While I was getting the surgery, my mind left my body and went to the mall. Upon my mind's return, after a bit of window shopping, I discovered that the surgeon had experienced some difficulties. He said he could not perform the procedure because I had an ingrown hair somewhere – I needed to find it first. The nurse said that this was because of America.
+        </div>
+    </div>
+
+    <div class="grain-modal" id="grain-modal-2">
+        <div class="grain-modal-header">
+            <button class="minimize-btn grain-modal-close" data-target="grain-modal-2">close</button>
+        </div>
+        <div class="grain-modal-body">
+            [sorting through individual grains of sand]<br>
+            meaningful. meaningful. ­boring.<br>
+            entire world. kinda cool.­ boring.<br>
+            ooh deeply meaningful. <br><br><span style="font-size:9px;">(tinyobscurae, Twitter Post,
+            17. October 2022, 11:51.)</span>
+        </div>
+    </div>
+
+    <div class="grain-modal" id="grain-modal-3">
+        <div class="grain-modal-header">
+            <button class="minimize-btn grain-modal-close" data-target="grain-modal-3">close</button>
+        </div>
+        <div class="grain-modal-body">
+            <span class="image-trigger" data-image="crystalpepsi-1">Right now, you're wondering why you can't see anything.</span><br><br>
+            <span class="image-trigger" data-image="crystalpepsi-2">Right now, someone just got a taste of the future.</span><br><br>
+            <span class="image-trigger" data-image="crystalpepsi-3">Right now we're gonna make it CLEAR.</span><br><br>
+            I know a phenomenon when I drink one!
+        </div>
+    </div>
+
     <div class="video-modal-overlay" id="videoModalOverlay">
         <div class="video-modal">
             <video id="modalVideo" controls width="100%">
@@ -1159,6 +1237,18 @@
             'rocksign': {
                 src: 'img/rocksign.jpg',
                 alt: 'Rock as sign'
+            },
+            'crystalpepsi-1': {
+                src: 'img/crystalpepsi-1.png',
+                alt: ''
+            },
+            'crystalpepsi-2': {
+                src: 'img/crystalpepsi-2.png',
+                alt: ''
+            },
+            'crystalpepsi-3': {
+                src: 'img/crystalpepsi-3.png',
+                alt: ''
             }
         };
 
@@ -1606,11 +1696,7 @@
 
                     <p><small>2023.</small></p>
 
-                    <h2>A Dream</h2>
-
-                    <p>My eyesight had become blurry, so I went to get laser eye surgery. While I was getting the surgery, my mind left my body and went to the mall. Upon my mind's return, after a bit of window shopping, I discovered that the surgeon had experienced some difficulties. He said he could not perform the procedure because I had an ingrown hair somewhere – I needed to find it first. The nurse said that this was because of America.</p>
-
-
+                
 
                     <p>To see a shimmer is to see a sign. I saw a bottle of Crystal Pepsi shimmer: this thing, which I have not seen in real life, holds within itself a story that I urgently needed to dive into. The story is one of transparency and its principal material, glass: of being see-through, seen-through, lit up and lit through, clear as day – and its opposite, that of the rock: of being impassable, inscrutable, closed in and closed off, clear as mud.</p>
 
@@ -1962,6 +2048,18 @@
 
             attachEventListeners();
             addHistoryColumn('Essay', essay.title || essayKey, () => loadEssay(essayKey));
+
+            // Grain essay floating modals
+            document.querySelectorAll('.grain-modal').forEach(m => {
+                if (essayKey === 'grain') {
+                    m.classList.add('visible');
+                } else {
+                    m.classList.remove('visible');
+                }
+            });
+            if (essayKey !== 'grain') {
+                document.getElementById('grain-hover-img-display').style.display = 'none';
+            }
         }
 
         function spawnGlitter(element) {
@@ -2191,6 +2289,41 @@
                 gameModalOverlay.classList.remove('open');
                 gameModalContent.innerHTML = '';
             }
+        });
+
+
+        // Grain modal close buttons
+        document.querySelectorAll('.grain-modal-close').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.getElementById(btn.dataset.target).classList.remove('visible');
+            });
+        });
+
+        // Grain modal drag
+        document.querySelectorAll('.grain-modal-header').forEach(header => {
+            const modal = header.closest('.grain-modal');
+            let dragging = false, startX, startY, origLeft, origTop;
+            header.addEventListener('mousedown', (e) => {
+                if (e.target.classList.contains('minimize-btn')) return;
+                dragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                const rect = modal.getBoundingClientRect();
+                origLeft = rect.left;
+                origTop = rect.top;
+                modal.style.right = 'auto';
+                modal.style.bottom = 'auto';
+                modal.style.left = origLeft + 'px';
+                modal.style.top = origTop + 'px';
+                e.preventDefault();
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (!dragging) return;
+                modal.style.left = (origLeft + e.clientX - startX) + 'px';
+                modal.style.top  = (origTop  + e.clientY - startY) + 'px';
+            });
+            document.addEventListener('mouseup', () => { dragging = false; });
         });
 
 
