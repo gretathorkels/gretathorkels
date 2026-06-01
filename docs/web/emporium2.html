@@ -22,13 +22,13 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            background-color: #efefef;
+            background-color: #fafafa;
         }
 
         body {
-            font-size: 23px;
+            font-size: 27px;
             line-height: 1.22;
-            font-family: 'HAL Timezone', sans-serif;
+            font-family: 'Dutch 801', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             display: flex;
@@ -71,9 +71,14 @@
         #top {
             flex: 1;
             overflow-y: auto;
-            padding: 400px 12%;
+            padding: 0 12%;
             margin: 0;
             align-content: flex-start;
+        }
+
+        #top-content {
+            padding-top: 400px;
+            padding-bottom: 400px;
         }
 
         /* Remove padding when anything else is open alongside */
@@ -90,9 +95,28 @@
             padding-bottom: 400px;
         }
 
+        main:has(#top.minimized) #footnotes:not(.hidden),
+        main:has(#top.minimized) #bibliography:not(.hidden) {
+            flex: 1;
+        }
+
+        #top .column-header {
+            justify-content: center;
+        }
+
+        #top .column-header .minimize-btn {
+            display: none;
+        }
+
+        main:has(#footnotes:not(.hidden)) #top .column-header .minimize-btn,
+        main:has(#bibliography:not(.hidden)) #top .column-header .minimize-btn {
+            display: inline-block;
+        }
+
         #footnotes .column-header {
             justify-content: flex-end;
         }
+
 
         #bibliography {
             flex: 0 0 200px;
@@ -117,7 +141,7 @@
             position: relative;
             width: 0;
             height: 100%;
-            background-color: #efefef;
+            background-color: #fafafa;
             z-index: 1000;
             overflow: hidden;
             transition: width 0.4s ease;
@@ -134,6 +158,14 @@
             padding: 32px;
             overflow-y: auto;
             height: 100%;
+        }
+
+        #sidebar-close-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 10;
+            background: transparent;
         }
 
         .sidebar-panel {
@@ -158,7 +190,7 @@
             position: relative;
             width: 2%;
             height: 100%;
-            background-color: #efefef;
+            background-color: #fafafa;
             border-left: 1px solid #000;
             z-index: 1000;
             overflow: hidden;
@@ -192,6 +224,7 @@
             font-size: 0.6em;
             opacity: 0.5;
             vertical-align: middle;
+            font-family: 'HAL Timezone Mono', monospace;
         }
 
         .right-menu-item:hover {
@@ -270,7 +303,7 @@
             position: relative;
             width: 100%;
             height: 3%;
-            background-color: #efefef;
+            background-color: #fafafa;
             border-top: 1px solid #000;
             z-index: 1000;
             overflow: hidden;
@@ -368,6 +401,15 @@
             opacity: 0.7;
         }
 
+        #menu-btn {
+            position: fixed;
+            right: 0;
+            top: 12px;
+            writing-mode: vertical-rl;
+            z-index: 1100;
+            cursor: pointer;
+        }
+
         /* Minimized state */
         #footnotes,
         #top,
@@ -413,9 +455,28 @@
             margin-bottom: 0;
         }
 
-        .subheader {
+        #top p {
+            width: 100%;
+            margin: 0;
+            padding: 15px;
+            overflow-y: visible;
+            white-space: normal;
+            word-wrap: break-word;
+            transition: background-color 0.2s ease;
+        }
+
+        #top p:last-child {
+            padding-bottom: 15px;
+            margin-bottom: 0;
+        }
+
+        #top h2 {
             text-transform: uppercase;
             text-align: center;
+            font-size: inherit;
+            font-weight: normal;
+            font-family: 'Dutch 801 Display', sans-serif;
+            padding: 15px;
         }
 
 
@@ -431,8 +492,7 @@
 
         /* ── Essay title ── */
         .essay-title {
-            /* font-size: 2.5em; */
-            /* font-style: italic; */
+            font-family: 'Dutch 801 Display', sans-serif;
             padding: 15px;
             line-height: 1.2;
             text-align: center;
@@ -480,8 +540,13 @@
         
         }
 
-        sup a:hover {
-            opacity: 0.6;
+        sup a[href^="#"] {
+            color: #2d6a2d;
+        }
+
+        sup a[href^="#"]:hover {
+            opacity: 1;
+            color: #1db81d;
         }
 
         small {
@@ -560,7 +625,7 @@
         /* ── Animations ── */
         @keyframes highlightFade {
             0%   { background-color: #0099ff; }
-            100% { background-color: #efefef; }
+            100% { background-color: #fafafa; }
         }
 
         .column.highlight {
@@ -597,7 +662,7 @@
                 display: block;
                 padding: 16px;
                 font-size: 14px;
-                font-family: 'HAL Timezone', sans-serif;
+                font-family: 'Dutch 801', sans-serif;
                 border-bottom: 1px solid #000;
                 margin-bottom: 10px;
             }
@@ -639,7 +704,9 @@
             }
 
             .column,
-            .column[class*="c"] {
+            .column[class*="c"],
+            #top p,
+            #top h2 {
                 width: 100% !important;
                 margin: 0;
                 padding: 10px 16px;
@@ -685,6 +752,33 @@
             font-display: swap;
         }
 
+        @font-face {
+            font-family: 'Dutch 801';
+            src: url('font/dutch.woff2') format('woff2'),
+                 url('font/dutch.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Dutch 801';
+            src: url('font/dutchi.woff2') format('woff2'),
+                 url('font/dutchi.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Dutch 801 Display';
+            src: url('font/Font - TrueType - Dutch 801 Roman Headline BT.woff2') format('woff2'),
+                 url('font/Font - TrueType - Dutch 801 Roman Headline BT.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
     </style>
 </head>
 <body>
@@ -696,6 +790,7 @@
 
         <!-- ===================== LEFT SIDEBAR ===================== -->
         <div class="sidebar" id="sidebar">
+            <button class="minimize-btn" id="sidebar-close-btn">close</button>
             <div class="sidebar-content">
 
                 <div class="sidebar-panel active" id="panel-default">
@@ -767,6 +862,7 @@
                 <div class="column-header">
                     <button class="minimize-btn" data-target="top">minimize</button>
                 </div>
+                <div id="top-content"></div>
             </div>
 
 <!--------------- BIBLIOGRAPHY ---------------->
@@ -779,6 +875,7 @@
         </main>
 
         <!-- ===================== RIGHT SIDEBAR ===================== -->
+        <button class="minimize-btn" id="menu-btn">menu</button>
         <div class="sidebar-right open" id="sidebarRight">
             <div class="sidebar-content">
                 <nav class="right-menu">
@@ -786,7 +883,7 @@
                     <div class="right-menu-item" data-essay="emporium">Emporium or, the Useless Supplement <span class="menu-year">2025</span></div>
                     <div class="right-menu-item" data-essay="essay2">I Have Been Thing(k)ing <span class="menu-year">2024</span></div>
                     <div class="right-menu-item" data-essay="essay3">Stop! Look at the Moon <span class="menu-year">2023</span></div>
-                    <div class="right-menu-item" data-essay="essay4">Errantry <span class="menu-year">2023</span></div>
+                    <div class="right-menu-item" data-essay="errantry">Errantry <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-essay="essay5">The Word For World is a Grain of Sand <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-action="info">Info</div>
                 </nav>
@@ -836,6 +933,7 @@
         const enlargedImage = document.getElementById('enlargedImage');
         const historyContainer = document.getElementById('historyContainer');
         const topBox = document.getElementById('top');
+        const topContent = document.getElementById('top-content');
         const footnotes = document.getElementById('footnotes');
         const bibliography = document.getElementById('bibliography');
         const footnotesBody = document.getElementById('footnotes-body');
@@ -857,6 +955,7 @@
         // Essay content mapping
         const essayContent = {
             'emporium': {
+                title: 'Emporium or, the Useless Supplement',
                 footnotesContent: `
                     <div class="column" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas", and has been translated in at least as many ways as: "that from a long way off look like flies,"<sup><a href="#I">I</a></sup> "from a distance look like flies,"<sup><a href="#II">II</a></sup> "those that resemble flies from a distance,"<sup><a href="#III">III</a></sup> "those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup></div>
                     <div class="column" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
@@ -884,152 +983,152 @@
                 `,
                 content: `
                     <div class="essay-title">Emporium or, the Useless Supplement</div>
-                    <div class="column">
+                    <p>
                     <small>
                         January 2026. </small>
-                    </div>
+                    </p>
 
-                    <div class="column" id="section-title">Oversaturation is: devoid of surface tension  (ephemeral) → devoid of distance → it is a previously intact membrane  (lacking interest) → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the  miniature → too much of a good thing.</div>
+                    <p>Oversaturation is: devoid of surface tension  (ephemeral) → devoid of distance → it is a previously intact membrane  (lacking interest) → it is punctured and oozing → excessive → it is  amorphic → nuanced (ethereal) → in pieces, distracted, inexact → sublime without pleasure → emptying → too full → an exaggeration of the  miniature → too much of a good thing.</p>
 
-                    <div class="column" id="section-I">I</div>
+                    <h2>I</h2>
 
-                    <div class="column">
-                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></div>
+                    <p>
+                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think  about when I think about Oversaturation. Maybe I should name my index  EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a)  belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></p>
 
-                    <div class="column">
+                    <p>
                         Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup>
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         The EMPORIUM reminded me of this other list I wrote once, that I called my rock collection, that contained items like books, a copper bowl, a glass butterfly, <a class="image-trigger" data-image="image-meme">a meme,</a> a grayspeckled pen, <a class="sidebar-link" data-panel="panel-holestory">a story about holes,</a> and a photo of a clear plastic bottle through which you could see an active volcano. I also wrote a different kind of list, about a year ago, sorting through a shelf of knickknacks, like the imagined ontological potential of a photograph of soup (the spectacle and performance of the image-soup) on a restaurant menu. I sort everything that I have and try to catalogue it, and I would never (I should) throw anything away that is of theoretical or practical use.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         <i>But the door, the door, it won't shut!</i> My grandparents had a garage and the garage had a door. Inside (it was a typical garage) a painting of a green landscape hung at the end, various containers with things useful and not littered the shelves, a workbench, a heavy odor of gasoline in the air. But the door, the door, I could not stop thinking about the door. It was made of long horizontal planks of wood, on small nearly invisible hinges, so that they could rise from lying vertically to resting horizontally, under the ceiling. I knew it was wood, from looking up at the resting door and seeing its character, the aged porous softness – on the other side it was painted brown. Why brown? I would ask myself endlessly and every time I came to the same conclusion: it was painted brown to look like wood, but it was wood and why did it need to look like what it was, when it already was it? A challenge presents itself, or a challenger, a confrontation and trivial it seems. Inessential even → the membrane that contributes nothing to the meaning of things – of its use, means or end. Close to the door, a concrete building rose, painted in the greenish grey color of the cement it was made of.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Lamps with metal stands are coated in a chrome-emulating silver, with flecks of metallic glitter like a cart on a rollercoaster; or, to go even further, my grandfather bought me a lamp of plastic, colored silver – the lamp was no longer metal but the metaphor of it was (I later painted it black and deeply regretted it). The color is arbitrary, but for its performance → "[It turns]out to be nothing but an impossible echo of the state of nature, which explains why [it's] so aggressive, why [it's] so naïve."<sup><a href="#4">4</a></sup> None of these things are, strictly, what they are, as people keep adding layers onto them of what they are not but pretend to be → the hallucinogenic properties of added color.
-                    </div>
+                    </p>
 
-                    <div class="column" id="section-II">II</div>
+                    <h2>II</h2>
 
-                    <div class="column">
+                    <p>
                         There is a scene in the movie <i>Clockwatchers</i> where Jane is increasingly disturbed by events at the office she works at; treasured items keep disappearing mysteriously. She says to her friend and coworker: <i><span class="video-trigger" data-video="clockwatchersVideo">"Maybe I blacked out or something, but I think I'm the guilty one, I think I did it. I've been looking for that wallet all over the place, and I can't find it anywhere. I don't know anything anymore. How do you know something? How do you know anything for sure?"</span></i>
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Now, an empty folder titled "Pride.And.Prejudice.2005.sdr.bluray.movie.1080p.av1.5.1.opus-Rosy" keeps appearing in my (otherwise pristine) Downloads folder and a few years ago I had a virus where Safari would continuously download a defective PDF of Foucault's third volume of the History of Sexuality.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Every night I sleep with the window open, it doesn't matter what time of year it is, the window has to be open and while laying there I think of the Spanish Flu and its consequences, sanatoriums and their influence on interior design, tuberculosis, sleeping porches and the wire industry<sup><a href="#5">5</a></sup> (I wish I had one), how Le Corbusier is (perversely) afraid of the dirty, dirty, ground so he builds on stilts, x-ray fetishism in architecture,<sup><a href="#6">6</a></sup> transparent powerstrips and infants in wagons on the balcony in winter, while gulping frozen air from a tiny slit in the duvet.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Oversaturation comes to increasingly absurd conclusions. Baudrillard, at some point, described the modern person as a mental hypochondriac or a cybernetician; "someone obsessed with the perfect circulation of messages"<sup><a href="#7">7</a></sup> → where virtual hygiene, one of signifying and communicating, is constructed instead of rising and forming from origin. A closed loop of sorts, that does not acknowledge that endless circles are all secretly lossy; in the recursion, something is always lost (in thermodynamic terms, entropic decay),<sup><a href="#8">8</a></sup> resulting in the hypochondria insisting upon itself, renewing itself, the circuit travelled becomes smaller and smaller, until its eventual implosion. A hypochondriac stops life out of fear, and Oversaturation does too.
-                    </div>
+                    </p>
 
-                    <div class="column" id="section-III">III</div>
+                    <h2>III</h2>
 
-                    <div class="column">
-                        Oversaturation is devoid of interest as everything is flattened, or it is ephemeral, as in it is an ill-categorizeable pile of pamphlets and notes, and tends to get lost – or even ethereal, as in occupying air, as in a fleeting and fragile idea. It does not really abide by logic, nor does it surprise; its internal rules are more related to a schizophrenic<sup><a href="#9">9</a></sup> world view, than they are the librarian's dewey decimal system – outrageously close, frustratingly rigid in its insistence on incomprehension, a hypersensitivity and therefore susceptibility to instant absorption – a formless sensation of infinity.</div>
+                    <p>
+                        Oversaturation is devoid of interest as everything is flattened, or it is ephemeral, as in it is an ill-categorizeable pile of pamphlets and notes, and tends to get lost – or even ethereal, as in occupying air, as in a fleeting and fragile idea. It does not really abide by logic, nor does it surprise; its internal rules are more related to a schizophrenic<sup><a href="#9">9</a></sup> world view, than they are the librarian's dewey decimal system – outrageously close, frustratingly rigid in its insistence on incomprehension, a hypersensitivity and therefore susceptibility to instant absorption – a formless sensation of infinity.</p>
 
-                    <div class="column">
+                    <p>
                         A linearity (or at the very least, a reasonable logic) is far away, at the sorting facility for second-hand clothing that I worked at last summer (<i>I got a job there because I loved things</i>) – this was an environment where a paper bag falls out of the container with a note that says "single socks" (<i>This reminded me of the short story, Crystals, by Italo Calvino, where the main character Qfwfq longs for the days when all the atoms in the universe had the potential of crystallising, if it were spacious and cold enough. Before everything was incandescent magma, with no discernible structure, which eventually morphed into steel-and-glass skyscrapers and quartz watches</i>), or used sex toys fall out of plastic bags, and Margiela dresses glint on the conveyor belt, Vivienne Westwood hats appear out of thin air, and those red sky-high Chloé platforms wedges from 2008 tempt me as I pick them out of the pile<sup><a href="#10">10</a></sup> (<i>Qfwfq, now disillusioned with the false purity of glass, renounces the amorphic solid pretending to be a crystalline structure, the "simulated order" of modernity; seeing it as a different side of the same coin, the banal simulation of order and the listless boredom of disorder</i>), nylon shoulderbags with secret notes of affairs, and what feels like a leaky brain, with overwhelmingly specific and inscrutable categories of where things are stored in the facility, seeping content, the overspillage flowing through the industrial district.
-                    </div>
+                    </p>
             
-                    <div class="column">
+                    <p>
                          On my last day at the sorting facility, my boss asked me what I had written about before; I replied honestly: "<i>I have written very little but mostly about the absurd cultural situatedness of Crystal Pepsi,<sup><a href="#11">11</a></sup> a soft drink launched in the early nineties.</i>" She said; "<i>Are you kidding … My husband's cousin worked on Crystal Pepsi. He's a biochemical engineer who specialises in juice – he also worked on Snapple.</i>"  In Crystals, the moment before anything materialised from its amorphic disorder, was the moment the main character longed for, as if it were the most generative moment of potentialities and upcoming coincidences → just before something really happens, something else happens in the imaginative realm, which is, in some ways far superior to lived reality, being a place without immediate consequences; This is also Oversaturation, an interaction without happening. 
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                          Oversaturation is a vast quantity of material that you encounter once and never again; offering the filled brain a massive quantity of object upon object, contaminating and multiplying, it cannot stop spilling over. It is all too close for comfort, conjuring the image of the skin of the body being of stretched half-sheer material → things flashing constantly and travelling inside and out → through which the world might be seen but is mostly obscured, interaction both unavoidable and optional at the same time. 
-                     </div>
+                     </p>
 
-                     <div class="column" id="section-IV">IV</div>
+                    <h2>IV</h2>
 
-                     <div class="column">
+                     <p>
                         In his <i>Critique of Judgement</i>, Kant asks: "<i>What now is meant by the expression that anything is great or small or of medium size?</i>"<sup><a href="#12">12</a></sup> He goes on: "<i>the Sublime is that in comparison with which everything else is small.</i>"<sup><a href="#13">13</a></sup> When considering the scale of Oversaturation (an indexation of relativity of size and effect) the Sublime appears in all its absolute greatness — it asked me to think through Oversaturation and Sublime as relatives; Kant described the Sublime as "<i>to be found in a formless object, so far as in it or by occasion of it boundlessness is represented, and yet its totality is also present to thought.</i>"<sup><a href="#14">14</a></sup> Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless. 
-                     </div>
+                     </p>
 
-                     <div class="column">
+                     <p>
                         Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         There is no objective Oversaturation, for the sensation appears in the mind, in response to relative stimuli – a magnitude, as such that the imagination cannot comprehend. While the Sublime is defined as oscillating between states of aversion and pleasure in facing absolute greatness, the reasonable response to Oversaturation is only a disgust at the vulgarity of pure amount. Oversaturation might therefore have more in common with the monstrous: <i>“An object is monstrous if by its size it destroys the purpose which constitutes the concept of it.”</i><sup><a href="#15">15</a></sup> Oversaturation is a swelling of normality, a hyper-existence of excess. Oversaturation is kitsch. <i>Oversaturation is not kitsch, but that is an oversaturated thing to say.</i>
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Dynamic sublimity is best experienced at the correct distance, as it is not related to terror or apathy – thunderous clouds, red storms or whichever natural phenomena, is not sublime when seen up close (in danger) or very far away (not my problem). The experience of closeness interferes with the imagination of the infinite. Oversaturation, however, is experienced only in extreme close-up. Like Kant wrote about the correct distance to the great pyramids in Egypt; <i>“If we are very near, the eye requires some time to complete the apprehension of the tiers from the bottom up to the apex; and then the first tiers are always partly forgotten before the Imagination has taken in the last, and so the comprehension of them is never complete.”</i><sup><a href="#16">16</a></sup>
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         But how can Oversaturation be seen as great, in comparison with the Sublime, next to which everything else is seen as small? If Indifference is small (a great thing seen far away), then the Sublime must be medium-sized (a great thing seen from the right distance, where it implies its infinity) and Oversaturation is great (a great thing that is perceived as multiplying infinitely). 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         A difference in the type of greatness is present, too; my argument is not necessarily that Oversaturation is larger than the Sublime – it is more akin to Oversaturation being a type of sublimity without pleasure. This kind of sublimity comes close to Calvino’s short story chronicled above – everything keeps changing and so it remains the same, a sameness so large it eats everything, a rolling infinity, constantly renewing and always distracting. Oversaturation is a wall without neither ledge nor ladder, a sameness so achingly visible, it is like unerotic nakedness, free from any desire. 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         The largest common denominator between the two is their intrinsic banality; they are sensations felt only subjectively and in very particular circumstances – much time cannot be wasted on their indexing; it is impossible, and in a way pointless, to describe the magnitude of the feeling either way. 
-                    </div>
-                    <div class="column">
-                        V
-                    </div>
-                    <div class="column">
+                    </p>
+                    <h2>V</h2>
+                    <p>
                         In a very small book, commonly used as entertainment at the dinner table, this little children’s riddle can be found: “What becomes bigger the more you take from it?” Answer: “A hole.” → From this an implied inversion also rings true: “What becomes smaller the more you add to it?” Answer: “A hole.”
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                             On the memory card in a camera by the name of FujiFilm FinePix A345, there are around one hundred and fifty pictures of the horizon from the same vantage point at various points in time, the earliest from 2006, but mostly from 2011–12. This could potentially be a vision of the gigantic, or absolute great, seen through the miniature → that is, the sunset, as captured and rendered in 4.1 megapixels, seen through the 1.7 inch LCD screen of the digital camera. They were all taken by my grandfather, Atli Helgason, shortly before my grandmother, Jóna Greta Sigurjónsdóttir, passed away. He was living alone in an apartment building, and she lived close by in a retirement home.
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         In August 2025, Cory Arcangel sold a digital edition of thirty six photos called MY_PHOTO.ISO on Metalabel; he had bought a camera (Sony FD Mavica MVC-FD75 Digital Still Camera) at some point in the 2010s, that saved pictures directly onto a floppy disk. He had no idea what to do with it, until he started taking photos of the sky. He made up a game, where the rules were: find the camera, sometimes by running home, every time he thought the sky was worth documenting, filling up the disk, deleting pictures at random to make space for the new sky. He lives in Stavanger, Norway, and much like in Reykjavík where my grandparents lived, the weather changes abruptly and therefore the sky too. 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         In both of these cameras, an absence of purpose prompted the photographer to capture the largest visible entities in existence on Earth – namely the sky and the ocean. In photographing that which is the largest, it is made the smallest, for the sensation of Sublime and the Oversaturated is non-transferrable, a solitary event. In trying to capture infinity, a smallness appears; the absolute miniature of the snapshot. And it is not even just one shot of the eternal, but over a hundred, making the eternal question even smaller, more quotidian. 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         The more there is added to it, the smaller it gets → repetition cancels out the awe or punch of the Sublime or Oversaturation – ideas that seem many-layered or too much, but in their complexity they flatten out; Repetition might therefore be the rightful antithesis to Oversaturation (<i>this does not apply to the Sublime, as repetition would only increase its scale ad infinitum</i>), which could, at some point, become simplicity (if you’re lucky).
-                    </div>
+                    </p>
                 `
             },
             'mediumsized': {
+                title: 'Mediumsized',
                 footnotes: false,
                 content: `
                     <div class="essay-title">Mediumsized</div>
 
-                    <div class="column">
+                    <p>
                     <small>
                         Released in <i>Trophy Logic</i> as part of a writing seminar in <i>Critical Studies</i> in Sandberg Instituut in Amsterdam in the Netherlands in May 2026. </small>
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         In a dream, I am writing this text on a sheet of creamy A3 paper as something to be exhibited. I write in pencil, with short center-aligned lines, in an unreadable and airy cursive script. The text is about discovery. Underneath the paper, a wooden crater filled with soft pillowy people. They are trying to read it.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         Whenever I think I should work on my lecture, I think I should first, quickly, answer this message from a friend, or someone asks me what time it is, making me forget what language I am speaking. I wonder at the words I can never seem to replace from one language to the other. Off the top of my head, the list starts like this: <i>Paraply, Campingvogn, Tennisketcher</i>, and the entire alphabet. There are more. I take photos, they are of nothing. Or “nothing.” Every camera I own seems unable to focus and I cannot either. The list of cameras: green <i>iPhone 12 Mini</i>, black <i>iPhone 12 Mini</i> (both broken in the same way), <i>Nikon Coolpix</i> (broken screen), FujiFilm Finepix (not broken, but scared). I tap tap tap my phone tap tap. A dream in the form of a small black bat flies around my head, attacks me in the dark and lovingly eats the tissue paper I laid out on my knee.
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         I am in a place with fish everywhere and so I want to eat vegetables only. Fish is disgusting to eat when surrounded by water and bridges and salt, and bacalao is the worst of them all, like ocean-flavored mashed tires with potatoes. I saw a seagull with a fish in its mouth. I looked at it and thought how strange it is to have feet that go slow and hands that go fast. I keep going to this restaurant that has fish but also has a poké bowl, and to get the bowl I have to point at the images on the menu – BLACK RICE, INSALATA, TOFU, CIPOLLA CROCCANTE – I am still thinking of the profundity of the vegetables photographed, the ones I am pointing at. It occurs to me that I have never talked to a food stylist. Do not confuse this restaurant with the other one, the one with the aquarium mounted on the toilet wall, with speakers blaring a concerto to me and the two sad fish swimming around – melancholic piano and pissing sounds.  
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         I write in my journal every morning except when I don’t, and when I <i>do</i> write, I start by writing the date, time, place (city, location) and somewhere towards the end, I might remember to put down the day of the week. They don’t seem to matter as much, although they change every day, while the time of day stays steadily within the same range of 7:49–9:52. A spider dreams of making the web sturdy, until it is holding legs in a circle with hundreds of other spiders, vibrating at 432 Hz. They live in the little space between matter, the window, and my bed. I dream of putting acetone on my lips. 
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         <i>I think everything should be arranged in size order, and everything short of, or larger than medium should be excluded on the grounds that it is either arbitrary or vulgar.</i> How can you compare something when everything is only seen from up close, obscuring the limits? How can you discern the importance of small-medium-large if you are never confronted with a horizon?  
-                        </div>
-                    <div class="column">
+                        </p>
+                    <p>
                         I want to perform my lecture in front of an empty hall. I love it when the time spent is vastly more than is obviously visible; I like spending immense amounts of time working on nothing in particular. I like when the <i>something</i> becomes a <i>nothing</i>. 
-                    </div>
+                    </p>
 
 
                 `
             },
-            'essay4': {
+            'errantry': {
+                title: 'Errantry',
                 footnotesContent: `
                     <div class="column" id="1">1&emsp;Wayne Koestenbaum, "In Defence of Nuance," foreword to <i>A Lover's Discourse</i> by Roland Barthes (New York, US: Hill and Wang, 2010), ix.</div>
                     <div class="column" id="2">2&emsp;Joan Didion, "Why I Write," <i>New York Times</i>, 5. December, 1976.</div>
@@ -1053,95 +1152,95 @@
                 content: `
                     <div class="essay-title">Errantry</div>
 
-                    <div class="column">
+                    <p>
                         <a class="image-trigger" data-image="errantry-e"><i>Efficiency</i></a>, or utility, is defined as something that is ­useful, ­economical, money-­making, constructive, which goes against loitering, and is done with clear direction. It is not efficient to wander aimlessly (without clear intention) or to be adrift (without clear heading), nor is it accepted to be frivolous (without clear purpose). There it is: the society of transparency and utility is at it again, making everything <i>glassy</i>. But glass, when shattered and imperfect, is erratic.
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         A friend sent me a screenshot of the ­dictionary entry for the word <i>erratic</i>, which means being uneven, unpredictable, or, in geological terms, to be a wandering rock, differing from its surroundings. Iridescence is produced when light shines on an erratic surface. Another friend once described me as being rococo. Rococo takes its name from the French word <i>rocaille</i>, which means stones or broken shells, used decoratively, to soften curves and break up geometric forms and symmetry, intensely dramatic and frivolous. “Errantry does not align – it produces iridescence.”<sup><a href="#1">1</a></sup> Shimmer is found only in irregularity, when the light shines on something and it differs from its surroundings, it is erratic, iridescent. 
-                    </div>
+                    </p>
 
-                    <div class="column">
+                    <p>
                         I keep coming back to it – ­iridescence! ­Shimmer is an irregularity that grabs our attention – a potential glimmer of a story, a spark of imagination,<sup><a href="#2">2</a></sup> or an oscillation between stages. Things appear when they are looked at and disappear when they are not,<sup><a href="#3">3</a></sup> a shimmer beyond good and evil, beyond detection, outside of a system, in search of something that exists beyond stereotypes and obviousness – ­twinklings.<sup><a href="#4">4</a></sup> In The ­Neutral, Roland Barthes wrote that “to fall into the infinitely futile helps one’s awareness of the feeling of life.” He was describing the nuance felt/seen while going out at dusk, wandering around town “receiving tiny, ­perfectly futile details of street life,”<sup><a href="#5">5</a></sup> coming to the conclusion that these details – a menu written in chalk, a tiny priest in a ­cassock – were, when seen, the embodied pleasure of being alive. The taste of life, pure in its smallness and ­futility.<sup><a href="#6">6</a></sup> These moments are inefficient for they have no clear purpose, but they do not need it; they are <i>there</i> in their shimmery glory, to be caught or seen, if one wishes to. 
 
-                    </div>
-                    <div class="column subheader">
+                    </p>
+                    <h2>
                         SIT
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         In the poem <I>Sentences</I>, Sara ­Magenheimer writes about ladders, screens, frames, etc. The first sentence in the section on waiting rooms is: “Time requires form and will take the shape of its container.”<sup><a href="#7">7</a></sup> A waiting room is a place that is formed by time. Waiting room time is inescapable. Time does not <I>pass</I> so much as it sits, for in every moment it can be over, and every <I>sitting moment</I> proves that it does not move so much as it abruptly ends. Time is sitting, waiting, ­unpassing, until it stands up. ­Waiting rooms are useful, for they are tools for organisation and order, they are channels or funnels, sieves, from a chaotic outside to the ­organised inside. 
-                    </div>
-                    <div class="column subheader">
+                    </p>
+                    <h2>
                         SLIP
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         In the novel <I>Efndir</I>, Þórhildur ­Ólafsdóttir writes about a different form of time, one where a woman in her sixties moves into her ­childhood home in the north of ­Iceland. In the house, which is a relic and a reminder, time does not exactly <I>sit</I>, but rather it travels or slips. A kind of time travelling, where you can simply ­conjure a time you remember, or slip between states. The house breathes time; it swells and comes alive with ­people, smells and sounds of the past, exhaling into a calm solitary present. The woman delights in the ­slippage, while her friends and family beg of her to move back to the capital, back to the real world.<sup><a href="#8">8</a></sup>
-                    </div>
+                    </p>
 
-                    <div class="column subheader">
+                    <h2>
                         SAVE
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         In the children’s book <I>Momo</I>, Michael Ende depicts a town of calm, ruled by the transformative power of imagination, ­listening and taking time. Momo arrives on the outskirts of a small town and makes a home for herself in an abandoned amphitheatre where the town’s children gather to play. She is an attentive and empathic ­listener, and her presence amplifies the imagination of the children and adults alike. At night, she listens to the sky. In the town, <I>the small tasks</I> make <I>the life</I>: time moves slowly as ­people take their time, enjoying menial everyday tasks. This is all thrown off when persuasive grey men with smelly grey cigars arrive in town, selling the idea of <I>saving time</I> by depositing time in time accounts at the time bank. They are the Time Thieves and the time saved ultimately benefits their own ­selfish use. Every single moment of joy is wiped away – the bantering with the barber, the ­storytelling, the time spent with loved ones.<sup><a href="#9">9</a></sup> The pure utility of saving time, of erasing ­twinklings of time, of no ­longer ­stopping to gaze at the sun. It makes ­everything futile in its utility, for then what remains beyond capital and economic growth?
 
-                    </div>
-                    <div class="column subheader">
+                    </p>
+                    <h2>
                         Transference
 
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         The sun emits a steady flow of energy into the solar system, the galaxy and so on. In its constantly vibrating path, it is mathema­tically destined to cause the organisation of matter into an increasingly ordered state. Like ­levelling ground coffee in a filter, like an earthquake, the ­constant ­reorganisation of matter is the ­process of transformation, from one state to another. This energy causes a <I>chancy</I> kind of order, always on the verge of descending into chaos, constantly descending and ­ascending, ­re­assembling and dismantling.<sup><a href="#10">10</a></sup>
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         In the essay </I>Dirt and Desire: Essay on the ­Phenomenology of Female Pollution in ­Antiquity</I>, Anne Carson writes about the historical defini­tion of femininity as the dirty, wet and leaky counter­part to a masculine dry solidity. Cleanliness (order) is defined as ­matter <I>in</I> place, dirt (disorder) is defined as matter <I>out</I> of place.<sup><a href="#11">11</a></sup> To be wet and leaky is to be without ­boundaries, it is to be mud, to be soft. A dry solidity is only boundaries, it is a perfect container, a ­complete vessel. To be contained is to be ordered. The ordering of matter can go many ways and one of them, if not confronted (shaken), is the increasingly calibrated organisation of time, where not a drop can go to waste – but, like in <I>Momo</I>, time saved is time disappeared. 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         Calibrated energy-saving (in other words: ­chaos protection) transforms the human from an amorphous muddy and muddled animal, to a glassy, enclosed vessel. That is – in saving time, like the intangible Time Thieves tell me to do, there is a search for complete understanding, an erasing of unknowns. Each morning I perform a choreography to perfection: I make coffee, line up my vitamins, wash my face and brush my teeth. These acts all happen simultaneously so they take the shortest amount of time possible. Rushing, but ­quietly, once more, with ­precision! This choreography erases unex­pect­ed­ness and the unknown that each day brings. If every day is exactly the same, how can you ever be thrown off balance? But beauty is found in the unknown, in the muddled twilight zone of opaque incoherence. Adhering to this ­perspective of thought, the one ­perpetuated by the Time Thieves (a familiar motif?) is impossible, for I struggle, and nearly everyone I know struggles, to keep all these things aloft. Saving time, saving energy, requires the human being to become solid, <I>glassy</I>, fully transparent and knowable. In saving energy to become glass, the flow from the sun oscillates with increasing ­frequency. It must eventually hit a snag and spin out of control from its perfectly predicted (but ill-­advised) path – there is no machine that can continue to run smoothly, automatically, without ­requiring maintenance.
 
-                    </div>
+                    </p>
                     
-                    <div class="column subheader">
+                    <h2>
                         LEAK
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         In the essay <I>On Probability and ­Possibility</I>, biologist Lewis Thomas wrote: “Despite all the evidence of ­biological privacy in our cells and tissues, there is a certain slippage in our brains. No one, in fact, can lay claim with certainty to his own mind.”<sup><a href="#12">12</a></sup>
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         <I>There is a certain slippage in our brains</I>. Brains are leaky! They are not complete ­entities, of course not, for brains are nothing if not communication and transference, despite being locked away inside heads. The nature of every ­concrete thing is inherently unknown,<sup><a href="#13">13</a></sup> and there lies the beauty of ­communication. An amorphous muddle of back and forth between minds in opaque ­craniums, round and round, ever changing, vibrating. This slippage goes against the economics of time as something linear, to be bested. Luckily, ideas and thoughts slip through easily, like water through a sieve.
 
-                    </div>
-                    <div class="column subheader">
+                    </p>
+                    <h2>
                         EXIT
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         It seems a ­meteorite has crashed into me, ­turning my mind to stone. Therefore my mind gained value, by virtue of its accidental collaboration with the extra-­terrestrial, but it also lost its main function, that of a useful mind.<sup><a href="#14">14</a></sup> To be useless is to be transformed from something useful to its anti-­thesis, that of the futile. Neither definition can exist without the other, as they are both defined by being in opposition <I>to</I> each other. It is not a natural ­phenomenon, for what is considered <I>useful</I> ­varies wildly between cultures; it is a construct defined by time-and-space-specific social relationships and power.<sup><a href="#15">15</a></sup> This stonemind has made me stubborn. It made it difficult to write this text, to start it, to ­conceive of it. Thoughts of its uselessness keep me up at night, it is useless to lay awake for hours and I am ­useless the following day. No sleep is ­non-­economical. It is useless to think about the fact that no one needs this text, but even if that were the case; what is the purpose of need? “Things don’t have ­purposes, as if the universe were a machine, where every part has a useful function. What is the ­purpose of a ­galaxy? What matters is that we are a part.”<sup><a href="#16">16</a></sup> ­Purpose is a hero’s journey. Purpose is not the right word. 
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         In the novel <I>The Word for World is ­Forest</I>, Ursula K. Le Guin ­portrays ­capitalism and ­colonialism as a useless and non­sensical dystopia. There, the pure destruction of the earth (if not <I>the</I> Earth, then another earth) is en­acted for the ­purpose of economic growth (essentially a ­trivial reason). Earth (our Earth) has no trees left, and so, a ­forest-rich planet 27 light years away is colonised in order to excavate and export its massive amount of trees. The native people of the planet, small and green, are a peaceful people but as they are ­subjected to oppression and violence by ­arrogant ­colonisers, they revolt and exact ­revenge. 
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         The roundtrip, for a spaceship loaded with trees to Earth and back, takes roughly 54 years.<sup><a href="#17">17</a></sup> This does not make any sense – the earth has been ruined, the beautiful membrane of the cell-like planet has been punctured, and to fix it, the ­logical solution is to find <I>another</I> planet to ­puncture? Using trees instead of gold or metals seems to be on purpose, as the perception of ­us­ability is ­important. Trees are useful, yes, but not as useful as metals – trees do not become weapons or heavy machinery or phones. This speaks to the arbitrariness of colonialism and its pointless violence for a ­perceived, socially ­constructed utility.
 
-                    </div>
-                    <div class="column subheader">
+                    </p>
+                    <h2>
                         LASSITUDE
 
-                    </div>
-                    <div class="column">
+                    </h2>
+                    <p>
                         A state of efficiency leads to a state of fatigue, of weariness. To be weary is to be tired of the never ­ending, never satiated condition of time thirst – it is ­necessary to drink, but water is scarce.
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         Sometimes, when I am very thirsty, I set a timer every twenty minutes and drink a glass of water each time the clock rings. Sometimes, when I am very weary, I set a timer for twenty minutes and lie still until the clock rings. This is not a long term solution – I have a hard time remembering to drink water (who has the time?) and I am constantly working or thinking of working or feeling guilty for not working, and life, somehow, is not life, and it is all labour, and it all has deadlines and they multiply. There are always more deadlines than you think. 
 
-                    </div>
-                    <div class="column">
+                    </p>
+                    <p>
                         From weariness comes an energy, a need to get out of the cage of weariness, to <I>feel something</I>. Burning out, yes, but also rekindling, vibrating and reorganising matter, from order into chaos, into a ­different order. To change the pattern, change the sound. “New things are born out of lassitude. <I>Exit</I> weariness.”<sup><a href="#18">18</a></sup>
 
-                    </div>
+                    </p>
                 
                 `
             }
@@ -1177,22 +1276,31 @@
             }, 10);
         }
 
+        // Hide menu items with no essay content
+        document.querySelectorAll('.right-menu-item[data-essay]').forEach(item => {
+            const key = item.getAttribute('data-essay');
+            if (!essayContent[key]) item.style.display = 'none';
+        });
+
         // Load essay content
         function loadEssay(essayKey) {
             const essay = essayContent[essayKey];
             if (!essay) return;
 
-            topBox.innerHTML = essay.content;
+            topContent.innerHTML = essay.content;
             topBox.classList.remove('hidden');
+            topBox.scrollTop = 0;
 
             footnotesBody.innerHTML = essay.footnotesContent || '';
             footnotes.classList.toggle('hidden', !essay.footnotesContent);
+            footnotes.scrollTop = 0;
 
             bibliographyBody.innerHTML = essay.bibliographyContent || '';
             bibliography.classList.toggle('hidden', !essay.bibliographyContent);
+            bibliography.scrollTop = 0;
 
             attachEventListeners();
-            addHistoryColumn('Essay', essayKey);
+            addHistoryColumn('Essay', essay.title || essayKey);
         }
 
         // Attach event listeners to dynamically loaded content
@@ -1370,6 +1478,18 @@
             }
         });
 
+
+        // Left sidebar close button
+        document.getElementById('sidebar-close-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.remove('open');
+        });
+
+        // Menu button
+        document.getElementById('menu-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebarRight.classList.toggle('open');
+        });
 
         // Column minimize/maximize functionality
         document.querySelectorAll('.minimize-btn').forEach(btn => {
