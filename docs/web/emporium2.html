@@ -478,6 +478,20 @@
             margin-bottom: 0;
         }
 
+        #top ul {
+            padding: 15px 15px 15px 60px;
+            width: 100%;
+        }
+
+        #top li {
+            padding: 4px 0;
+        }
+
+        #top blockquote {
+            padding: 15px 10%;
+            font-style: italic;
+        }
+
         #top h2 {
             text-transform: uppercase;
             text-align: center;
@@ -639,6 +653,27 @@
 
         .column.highlight {
             animation: highlightFade 1.5s ease-out forwards;
+        }
+
+        @keyframes highlightFadeInlineBg {
+            0%   { background-color: #0099ff; }
+            75%  { background-color: #0099ff; }
+            100% { background-color: transparent; }
+        }
+
+        @keyframes highlightFadeInlineColor {
+            0%   { color: #ffffff; }
+            75%  { color: #ffffff; }
+            100% { color: #00bfff; }
+        }
+
+        sup.highlight {
+            animation: highlightFadeInlineBg 2.5s ease-in forwards;
+            padding: 0 3px;
+        }
+
+        sup.highlight a[href^="#"] {
+            animation: highlightFadeInlineColor 2.5s ease-in forwards;
         }
 
         @keyframes glitter-blingee {
@@ -849,7 +884,7 @@
                 <br><br>GÞ    I find it such a funny interview, because they were looking into making it a tourist attraction. Like "now we have to live with this new hole in the garden."
                 <br><br>BB    This happened just last summer?
                 <br><br>GÞ    Yes!!
-                <br><br>BB    Wow. But the best thing about it, is that this whole operation — it felt like a spy movie — an undercover operation happening all hush hush in secret. It was an experiment, not reported at all, and they just hoped for the best. And then to realise "wait there might be hundreds of undocumented holes all around town."
+                <br><br>BB    Wow. But the best thing about it, is that this whole operation – it felt like a spy movie – an undercover operation happening all hush hush in secret. It was an experiment, not reported at all, and they just hoped for the best. And then to realise "wait there might be hundreds of undocumented holes all around town."
                 <br><br>A lot of these holes are residential areas now, and we just have to trust that the houses are built on cement. I once called my cousin and he was just in a car park on Rauðarársstígur, inspecting a very old hole, that had apparently been plugged.
                 <br><br>When I heard about this, I was coming home to Reykjavík from the highlands where I had been for some time. There is NO gossip at all in the highlands – and I brought this story that was supposed to be the gossip of the year. You had just come home from LungA, from where you could obviously bring endless amounts of gossip.
                 <br>
@@ -901,6 +936,7 @@
                     <div class="right-menu-item" data-essay="essay3">Stop! Look at the Moon <span class="menu-year">2024</span></div>
                     <div class="right-menu-item" data-essay="errantry">Errantry <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-essay="essay5">The Word For World is a Grain of Sand <span class="menu-year">2023</span></div>
+                    <div class="right-menu-item" data-essay="sand">Sand was never meant to think <span class="menu-year">2022</span></div>
                     <div class="right-menu-item" data-action="info">Info</div>
                 </nav>
             </div>
@@ -969,6 +1005,14 @@
             'errantry-e': {
                 src: 'img/errantry-e.png',
                 alt: ''
+            },
+            'saussure1': {
+                src: 'img/saussure1.png',
+                alt: 'Saussure diagram of a linguistic sign'
+            },
+            'rocksign': {
+                src: 'img/rocksign.jpg',
+                alt: 'Rock as sign'
             }
         };
 
@@ -978,27 +1022,27 @@
                 title: 'Emporium or, the Useless Supplement',
                 footnotesContent: `
                     <div class="column" id="1">1&emsp;The last classification was originally written as "que de lejos parecen moscas", and has been translated in at least as many ways as: "that from a long way off look like flies,"<sup><a href="#I">I</a></sup> "from a distance look like flies,"<sup><a href="#II">II</a></sup> "those that resemble flies from a distance,"<sup><a href="#III">III</a></sup> "those that at a distance resemble flies."<sup><a href="#IV">IV</a></sup></div>
-                    <div class="column" id="2">2&emsp;Borges, The Analytical Language of John Wilkins.</div>
-                    <div class="column" id="3">3&emsp;Like Roland Barthes wrote about in The Neutral; "Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity. In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10] → Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
-                    <div class="column" id="4">4&emsp;Jean Baudrillard, The System of Objects, trans. James Benedict (Verso Books: London, 1996), p. 32.</div>
-                    <div class="column" id="5">5&emsp;David Owen, "Inside Out" in The New Yorker, 27. July 2024.<sup><a href="#V">V</a></sup></div>
-                    <div class="column" id="6">6&emsp;Beatriz Colomina, X-Ray Architecture, (Lars Müller Publishers: Zürich, 2019).</div>
-                    <div class="column" id="7">7&emsp;Baudrillard, The System of Objects, p. 32.</div>
+                    <div class="column" id="2">2&emsp;Borges, <i>The Analytical Language of John Wilkins</i>.</div>
+                    <div class="column" id="3">3&emsp;Like Roland Barthes wrote about in <i>The Neutral</i>; "Verging on the useless or enigmatically useful detail: minutia: at the edge of eccentricity. In short: art of the useless supplement, [p. 30] → A dictionary not of definitions but of twinklings {scintillations} [p. 10] → Paradoxical category of discourses with no outcome: or, better, that do not censure effects but do not care about results. [p. 11]."</div>
+                    <div class="column" id="4">4&emsp;Jean Baudrillard, <i>The System of Objects</i>, trans. James Benedict (London: Verso Books, 1996), 32.</div>
+                    <div class="column" id="5">5&emsp;David Owen, "Inside Out," <i>The New Yorker</i>, July 27, 2024.<sup><a href="#V">V</a></sup></div>
+                    <div class="column" id="6">6&emsp;Beatriz Colomina, <i>X-Ray Architecture</i> (Zürich: Lars Müller Publishers, 2019).</div>
+                    <div class="column" id="7">7&emsp;Baudrillard, <i>The System of Objects</i>, 32.</div>
                     <div class="column" id="8">8&emsp;Or, in more visual terms; the Euthanasia Coaster, with its 500m lift and seven consequently smaller loops (clothoid inversions), resulting in euphoria and death in 10G.</div>
-                    <div class="column" id="9">9&emsp;Jean Baudrillard, The Ecstasy of Communication, (SEMIOTEXT(E): New York, 1987), trans. Bernard Schutze and Caroline Schutze p. 27: "an over-proximity of all things, a foul promiscuity of all things which beleaguer and penetrate him, meeting with no resistance, and no halo, no aura, not even the aura of his own body protects him. In spite of himself the schizophrenic is open to everything and lives in the most extreme confusion."</div>
+                    <div class="column" id="9">9&emsp;Jean Baudrillard, <i>The Ecstasy of Communication</i>, trans. Bernard Schütze and Caroline Schütze (New York: Semiotext(e), 1987), 27: "an over-proximity of all things, a foul promiscuity of all things which beleaguer and penetrate him, meeting with no resistance, and no halo, no aura, not even the aura of his own body protects him. In spite of himself the schizophrenic is open to everything and lives in the most extreme confusion."</div>
                     <div class="column" id="10">10&emsp;Size 41 and not my color, so ultimately not a big temptation, although I still remember I yearned to even be in the vicinity of them when I was a tumblr fashion girl.</div>
                     <div class="column" id="11">11&emsp;A drink where even the color was erased in the name of health and so hypochondriac in nature (a healthy, additive free alternative to regular Pepsi), it tells the story of a fall from meaning, from modernism to postmodernism.</div>
-                    <div class="column" id="12">12&emsp;Immanuel Kant, <i>Kant's Critique of Judgement</i>, trans. J. H. Bernard (Macmillan and Co. Ltd.: London, 1904), p. 106.</div>
-                    <div class="column" id="13">13&emsp;Kant, <i>Critique of Judgement</i>, p. 109.</div>
-                    <div class="column" id="14">14&emsp;Kant, p. 102.</div>
-                    <div class="column" id="15">15&emsp;Kant, p. 113.</div>
-                    <div class="column" id="16">16&emsp;Kant, p. 112.</div>
+                    <div class="column" id="12">12&emsp;Immanuel Kant, <i>Kant's Critique of Judgement</i>, trans. J. H. Bernard (London: Macmillan and Co. Ltd., 1904), 106.</div>
+                    <div class="column" id="13">13&emsp;Kant, <i>Critique of Judgement</i>, 109.</div>
+                    <div class="column" id="14">14&emsp;Kant, <i>Critique of Judgement</i>, 102.</div>
+                    <div class="column" id="15">15&emsp;Kant, <i>Critique of Judgement</i>, 113.</div>
+                    <div class="column" id="16">16&emsp;Kant, <i>Critique of Judgement</i>, 112.</div>
                 `,
                 bibliographyContent: `
-                    <div class="column" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i> (Pantheon Books: New York, 1971), p. xv. Itself a translation from Spanish to French to English.</div>
+                    <div class="column" id="I">I&emsp;Michel Foucault, <i>The Order of Things</i> (New York: Pantheon Books, 1971), xv. Itself a translation from Spanish to French to English.</div>
                     <div class="column" id="II">II&emsp;Jorge Luis Borges, <i>El idioma analítico de John Wilkins/ The Analytical Language of John Wilkins</i> in PDF form, attributing various translations, but identical to none.</div>
-                    <div class="column" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins" in <i>Other Inquisitions 1937–1952</i>, trans. Ruth L. C. Simms (University of Texas Press: Austin, 1975), p. 103, and also in "Borgesian Joke" in <i>Linguist List</i> (7.1446), an article published on Tue Oct 15 1996, and found on Wikipedia, where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned in the text was in fact real, coming to the conclusion of: "I believe that one cannot prove the non-existence of a book conclusively." On the same website, curious browsers can find this sentence: "The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO) from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."</div>
-                    <div class="column" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language" in <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger (Viking Penguin: New York, 1999), p. 231.</div>
+                    <div class="column" id="III">III&emsp;Borges, "The Analytical Language of John Wilkins" in <i>Other Inquisitions 1937–1952</i>, trans. Ruth L. C. Simms (Austin: University of Texas Press, 1975), 103, and also in "Borgesian Joke" in <i>Linguist List</i> (7.1446), an article published on Tue Oct 15 1996, and found on Wikipedia, where a linguist named Lazlo tried to find out if the Celestial Emporium of Benevolent Knowledge mentioned in the text was in fact real, coming to the conclusion of: "I believe that one cannot prove the non-existence of a book conclusively." On the same website, curious browsers can find this sentence: "The second International Humor Studies Seminar will be held at the University of Central Oklahoma (UCO) from July 14 until July 25, 1997, immediately following the International Society for Humor Studies (ISHS) conference."</div>
+                    <div class="column" id="IV">IV&emsp;Borges, "John Wilkins' Analytical Language" in <i>Selected Non-Fictions</i>, transl. Esther Allen, Suzanne Jill Levine, Eliot Weinberger (New York: Viking Penguin, 1999), 231.</div>
                     <div class="column" id="V">V&emsp;For all the years of insisting on keeping the window open, even in Berlin or Amsterdam, it has become convenient to just send this article to friends who object to the practice.</div>
                 `,
                 content: `
@@ -1013,7 +1057,7 @@
                     <h2>I</h2>
 
                     <p>
-                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think about when I think about Oversaturation. Maybe I should name my index EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a) belonging to the Emperor, [—] h) included in this classification, [—] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></p>
+                        I am <a class="game-trigger" data-game="maze-game">trying</a> to make an index of everything I think about when I think about Oversaturation. Maybe I should name my index EMPORIUM – fitting to name a list of nearly arbitrary things after a shopping center, a buying palace, a castle of commodities. This should maybe also be a statement on the nature of lists – or on classification at large or small. → Borges' apocryphal essay on definitions and categorisation goes far in its depiction of encyclopaedic knowledge where animals are depicted as belonging to various categories, e.g. "a) belonging to the Emperor, [–] h) included in this classification, [–] m) just broke the vase, n) from a distance look like flies."<sup><a href="#1">1</a></sup></p>
 
                     <p>
                         Any attempt at categorisation or indexation is futile to begin with, but not if a certain freedom is allowed; "It is clear that there is no classification of the Universe not being arbitrary and full of conjectures."<sup><a href="#2">2</a></sup> → What follows is neither dictionary nor encyclopedia but a list (bestiary sounds good but might be incorrect) of scintillations on what exactly Oversaturation might mean and look like, however useless the process might be, as no solution can ultimately be offered.<sup><a href="#3">3</a></sup>
@@ -1069,7 +1113,7 @@
                     <h2>IV</h2>
 
                      <p>
-                        In his <i>Critique of Judgement</i>, Kant asks: "<i>What now is meant by the expression that anything is great or small or of medium size?</i>"<sup><a href="#12">12</a></sup> He goes on: "<i>the Sublime is that in comparison with which everything else is small.</i>"<sup><a href="#13">13</a></sup> When considering the scale of Oversaturation (an indexation of relativity of size and effect) the Sublime appears in all its absolute greatness — it asked me to think through Oversaturation and Sublime as relatives; Kant described the Sublime as "<i>to be found in a formless object, so far as in it or by occasion of it boundlessness is represented, and yet its totality is also present to thought.</i>"<sup><a href="#14">14</a></sup> Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless. 
+                        In his <i>Critique of Judgement</i>, Kant asks: "<i>What now is meant by the expression that anything is great or small or of medium size?</i>"<sup><a href="#12">12</a></sup> He goes on: "<i>the Sublime is that in comparison with which everything else is small.</i>"<sup><a href="#13">13</a></sup> When considering the scale of Oversaturation (an indexation of relativity of size and effect) the Sublime appears in all its absolute greatness – it asked me to think through Oversaturation and Sublime as relatives; Kant described the Sublime as "<i>to be found in a formless object, so far as in it or by occasion of it boundlessness is represented, and yet its totality is also present to thought.</i>"<sup><a href="#14">14</a></sup> Oversaturation is characterized by its frustrating amorphism, as a boundless sensation, a judgement of reflection → not logical, more vibe-based. It is devoid of interest, as in its sensation does not rely on its desirability to the subject; it seizes the subject regardless. 
                      </p>
 
                     <p>
@@ -1146,23 +1190,23 @@
             'errantry': {
                 title: 'Errantry',
                 footnotesContent: `
-                    <div class="column" id="1">1&emsp;Wayne Koestenbaum, "In Defence of Nuance," foreword to <i>A Lover's Discourse</i> by Roland Barthes (New York, US: Hill and Wang, 2010), ix.</div>
-                    <div class="column" id="2">2&emsp;Joan Didion, "Why I Write," <i>New York Times</i>, 5. December, 1976.</div>
-                    <div class="column" id="3">3&emsp;Jean Baudrillard, <i>The Ecstasy of Communication</i>, transl. Bernard Schütze and Caroline Schütze (Los Angeles, US: Semiotext(e), 2012), 32.</div>
+                    <div class="column" id="1">1&emsp;Wayne Koestenbaum, "In Defence of Nuance," foreword to <i>A Lover's Discourse</i> by Roland Barthes (New York: Hill and Wang, 2010), ix.</div>
+                    <div class="column" id="2">2&emsp;Joan Didion, "Why I Write," <i>New York Times</i>, December 5, 1976.</div>
+                    <div class="column" id="3">3&emsp;Jean Baudrillard, <i>The Ecstasy of Communication</i>, transl. Bernard Schütze and Caroline Schütze (Los Angeles: Semiotext(e), 2012), 32.</div>
                     <div class="column" id="4">4&emsp;Koestenbaum, "In Defence of Nuance," ix.</div>
-                    <div class="column" id="5">5&emsp;Roland Barthes, <i>The Neutral</i>, transl. Rosalind E. Kraudd and Denis Hollier (New York, US: Columbia University Press, 2005), 47.</div>
+                    <div class="column" id="5">5&emsp;Roland Barthes, <i>The Neutral</i>, transl. Rosalind E. Kraudd and Denis Hollier (New York: Columbia University Press, 2005), 47.</div>
                     <div class="column" id="6">6&emsp;Ibid.</div>
-                    <div class="column" id="7">7&emsp;Sara Magenheimer, "Sentences" in <i>Beige Pursuit</i> (New York, US: Wendy's Subway, 2019), 168.</div>
-                    <div class="column" id="8">8&emsp;Þórhildur Ólafsdóttir, <i>Efndir</i> (Reykjavík, IS: Skriða, 2021).</div>
-                    <div class="column" id="9">9&emsp;Michael Ende, <i>Momo</i>, transl. J. Maxwell Brownjohn (London, UK: Puffin, 2009).</div>
-                    <div class="column" id="10">10&emsp;Lewis Thomas, "The Music in This Sphere" in <i>The Lives of A Cell: Notes of A Biology Watcher</i> (New York, US: Bantam Books, 1975), 28.</div>
-                    <div class="column" id="11">11&emsp;Anne Carson, "Dirt and Desire: Essay on the Phenomenology of Female Pollution in Antiquity" in <i>Men in the Off Hours</i> (New York City, US: Vintage Books, 2001), 144.</div>
+                    <div class="column" id="7">7&emsp;Sara Magenheimer, "Sentences" in <i>Beige Pursuit</i> (New York: Wendy's Subway, 2019), 168.</div>
+                    <div class="column" id="8">8&emsp;Þórhildur Ólafsdóttir, <i>Efndir</i> (Reykjavík: Skriða, 2021).</div>
+                    <div class="column" id="9">9&emsp;Michael Ende, <i>Momo</i>, transl. J. Maxwell Brownjohn (London: Puffin, 2009).</div>
+                    <div class="column" id="10">10&emsp;Lewis Thomas, "The Music in This Sphere" in <i>The Lives of A Cell: Notes of A Biology Watcher</i> (New York: Bantam Books, 1975), 28.</div>
+                    <div class="column" id="11">11&emsp;Anne Carson, "Dirt and Desire: Essay on the Phenomenology of Female Pollution in Antiquity" in <i>Men in the Off Hours</i> (New York: Vintage Books, 2001), 144.</div>
                     <div class="column" id="12">12&emsp;Thomas, "On Probability and Possibility" in <i>The Lives of a Cell</i>, 166.</div>
-                    <div class="column" id="13">13&emsp;Carl G. Jung, "Approaching the Unconscious," in <i>Man and His Symbols</i>, ed. Carl G. Jung (New York, US: Dell Publishing, 1968), 5.</div>
-                    <div class="column" id="14">14&emsp;Max Stocklosa, <i>Rocks According to Their Size</i> (Berlin, DE: AKV Berlin, 2016), 11.</div>
-                    <div class="column" id="15">15&emsp;Neil Valelly, <i>Futilitarianism: Neoliberalism and the Production of Uselessness</i> (London, UK: Goldsmiths Press, 2021), 2.</div>
-                    <div class="column" id="16">16&emsp;Ursula K. Le Guin, <i>The Lathe of Heaven</i> (New York, US: Diversion Books, 2014), chap. 6, Kindle.</div>
-                    <div class="column" id="17">17&emsp;Le Guin, <i>The Word for World is Forest</i> (London, UK: Gollancz, 2015).</div>
+                    <div class="column" id="13">13&emsp;Carl G. Jung, "Approaching the Unconscious," in <i>Man and His Symbols</i>, ed. Carl G. Jung (New York: Dell Publishing, 1968), 5.</div>
+                    <div class="column" id="14">14&emsp;Max Stocklosa, <i>Rocks According to Their Size</i> (Berlin: AKV Berlin, 2016), 11.</div>
+                    <div class="column" id="15">15&emsp;Neil Valelly, <i>Futilitarianism: Neoliberalism and the Production of Uselessness</i> (London: Goldsmiths Press, 2021), 2.</div>
+                    <div class="column" id="16">16&emsp;Ursula K. Le Guin, <i>The Lathe of Heaven</i> (New York: Diversion Books, 2014), chap. 6, Kindle.</div>
+                    <div class="column" id="17">17&emsp;Le Guin, <i>The Word for World is Forest</i> (London: Gollancz, 2015).</div>
                     <div class="column" id="18">18&emsp;Barthes, <i>The Neutral</i>, 21.</div>
                 `,
                 content: `
@@ -1280,6 +1324,115 @@
                     </p>
 
                     <p><small>[observation written for Transformation Sequence, a monthly radio show on IDA Radio by Drop Shadow Darling. <a href="https://soundcloud.com/ida_radio/transformation-sequence-crystal-garden-140224?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank">Audio available here.</a>]</small></p>
+                `
+            },
+            'sand': {
+                title: 'Sand was never meant to think (that is very cruel to rocks)',
+                footnotesContent: `
+                    <div class="column" id="1">1&emsp;Susan Stewart, <i>On Longing: Narratives of the Miniature, the Gigantic, the Souvenir, the Collection</i> (1993), 5.</div>
+                    <div class="column" id="2">2&emsp;Ursula K. Le Guin, <i>The Carrier Bag Theory of Fiction</i>.</div>
+                    <div class="column" id="3">3&emsp;Italo Calvino, "A Sign in Space," in <i>The Complete Cosmicomics</i>, 33.</div>
+                    <div class="column" id="4">4&emsp;A drawing by Saussure. Doesn't it look like a rock?</div>
+                    <div class="column" id="5">5&emsp;The rock in this sign is of the type olivine tholeiitic basalt.</div>
+                    <div class="column" id="6">6&emsp;Max Stocklosa, <i>Rocks According to Their Size</i>, 9.</div>
+                    <div class="column" id="7">7&emsp;"Hraunkvikan sýnir beintengingu niður í möttul," RÚV, March 22, 2021.</div>
+                    <div class="column" id="8">8&emsp;David Batchelor, <i>Chromophobia</i>, 21–22.</div>
+                    <div class="column" id="9">9&emsp;Beatriz Colomina, <i>X-Ray Architecture</i> (Zürich: Lars Müller Publishers, 2019), 22.</div>
+                    <div class="column" id="10">10&emsp;Ibid., 116.</div>
+                    <div class="column" id="11">11&emsp;Beatrice Warde, <i>The Crystal Goblet</i>.</div>
+                    <div class="column" id="12">12&emsp;Dan Graham, "Video/Television/Architecture," in <i>Two-Way Mirror</i>, ?88?</div>
+                    <div class="column" id="13">13&emsp;Ibid.</div>
+                    <div class="column" id="14">14&emsp;Stephen Denny, "Mutually Assured (Brand) Destruction: Tab Clear Versus Crystal Pepsi," in <i>Killing Giants: 10 Strategies to Topple the Goliath in Your Industry</i> (New York: Portfolio/Penguin, 2011), 87.</div>
+                    <div class="column" id="15">15&emsp;Ayami Awazuhara, <i>A Heart of a Stone</i>.</div>
+                    <div class="column" id="16">16&emsp;Ursula K. Le Guin, "Being Taken for Granite," in <i>The Wave in the Mind: Talks and Essays on The Writer, The Reader, and the Imagination</i> (2012).</div>
+                `,
+                content: `
+                    <div class="essay-title">Sand was never meant to think<br>(that is very cruel to rocks)</div>
+
+                    <p><small>April 2022.</small></p>
+
+                    <blockquote>The movement from realism to modernism to postmodernism is a movement from the sign as material to the signifying process itself. The reflexivity of the modernist use of language calls to attention not to the material existence of a world lying beyond and outside language but to the world-making capacity of language, a capacity which points to the arbitrariness of the sign at the same time that it points to the world as a transient creation of language.<sup><a href="#1">1</a></sup></blockquote>
+
+                    <p>"A book holds words. Words hold things. Things hold meanings."<sup><a href="#2">2</a></sup> What are things, signs, what do they mean – and why are they so strange? If signs are strange, what about their building blocks, their signifiers, their colour? Colour is one of many things a person sees when light falls onto a thing. Colour is a clear example of signifiers, changing the signified part of the sign with a slight change in wavelength of light. How does the meaning change when the light shines through, and not on? Illuminating the content, asking what the true meaning of it is. To think about true meaning is also to reflect – to project ideas onto objects, turning thoughts inward and navel gazing. To gaze into the crystal and revel in the glittering refracted light.</p>
+
+                    <h2>Lights on</h2>
+
+                    <p>I was a teenager. My boyfriend at the time was selling his snowboarding gear. The individual pieces of gear had specific names like <i>bretti</i>, <i>reimar</i> and <i>skór</i>, and he put it up for sale on a website called bland.is. He asked for 30.000 ISK for the lot, using the word <i>verðhugmynd</i>, and a suburban dad from Akureyri sent him an SMS asking to buy it, and he came and took away the <i>bretti</i> and <i>reimar</i> and <i>skór</i>. It was not a significant moment, but it was significant to me in the way that the gear was handled. It felt so alien, all these words, the <i>verðhugmynd</i>, and I felt how dead these inanimate objects were to me and what they signified to other people like my boyfriend and the suburban dad. I thought I saw intangible <i>reimar</i> tying together only the object and the people who knew what it meant. These <i>reimar</i> were of course the strings tying together the signified and signifier, forming a sign.</p>
+
+                    <p>Signs, Signifiers and their Signified. Signs are things that tell you something. Signs are discernible from their surroundings. In Italo Calvino's short story, <i>A Sign in Space</i>, the character and cosmic know-all Qfwfq, experiences the revolution of the galaxy – he drew a sign at a point in space, just so he could find it again. But wait: what is a sign if there is nothing to compare it to? Even to think something was impossible, as thinking is a result of things being there to think about – of signs being there to signify a thing, that is there, to think about. As Qfwfq made the sign, he also made thought.<sup><a href="#3">3</a></sup> To have signs, is to think and experience things.</p>
+
+                    <p><a class="image-trigger" data-image="saussure1">Signs look like this</a><sup><a href="#4">4</a></sup></p>
+
+                    <p><a class="image-trigger" data-image="rocksign">This also makes sense</a><sup><a href="#5">5</a></sup></p>
+
+                    <p>Everything is a sign if you think it is. Humans think in signs and make signs out of everything, but nothing is a sign unless it has been made a sign. It was the Swiss linguist Saussure who made the drawing above, making it clear that a sign consists of two things: signifier (Form) and signified (Concept), both existing in tension, thus forming the sign. Louis Hjelmslev, a Danish linguist, talked about them as 'expression' and 'content,' with the emphasis on the relationship <i>between signs</i> defining the two planes of the signifier and the signified.</p>
+
+                    <p>In a very small book called <i>Rocks According to Their Size</i>, German author, artist and designer Max Stocklosa writes: "In order to access nature and non-human spheres we came up with the idea of the portal. It is the necessary tool to gain entry… into the interior of objects, the interior of worlds. A shortcut on the transformation path from <i>matter</i> into <i>words</i>. A backdoor that leads to the backend of both things, while they are still in the making. In this tight room matter is on the verge to transform into a concept and vice versa. The air is heavily contaminated with uncertain certains and fuzzy logics."<sup><a href="#6">6</a></sup></p>
+
+                    <p>A portal can be a door to understanding signs. A year ago I walked to the mouth of a volcano, where a very old type of magma was flowing to the surface. A scientist described the volcano as having a direct line from surface to mantle – hypothetically, a very long pole could be used to poke into the centre of the earth. The lava was olivine tholeiitic basalt, older than that which had flowed in that area in more than 7000 years, which is very exciting for the scientists in trying to learn more about Earth.<sup><a href="#7">7</a></sup> Incidentally, this volcano was located about 130 km from Snæfellsjökull, the place that Jules Verne thought was a direct entrance into the centre of the earth. Brendan Fraser was the star of the ill-fated Hollywood adaption of <i>Journey to the Center of the Earth</i>. Fraser, playing a neanderthal in the 1992 movie <i>Encino Man</i>, emerged from the ice underneath a suburban home in California and joined the local high school, teaching the teenagers in the neighbourhood about life along the way. The Encino Man and the lava, they both travel through a portal to understanding and putting things into context, effectively making signs. A rock's travels.</p>
+
+                    <p>This might be off the rocker, more on that later.</p>
+
+                    <h2>Light illuminates</h2>
+
+                    <p>Colour has always been a tool for visual persuasion. Was it not in the arsenal of beings, signalling life, fertility, poison, death, etc.? A very practical sign, for many things have eyes. In the book <i>Chromophobia</i>, the artist and writer David Batchelor writes about how colour has been used as a tool of colonialism, imperialism, sexism and many more oppressive isms. Western culture has attempted to purge colour from most facets of being, by signifying it as being inferior, vulgar, feminine, or cosmetic, inessential, superficial. It is deep, it is shallow – it is both and neither, like many signifiers used at the whims of an oppressor. He writes:</p>
+
+                    <blockquote>If colour is unimportant, I began to wonder, why is it so important to exclude it so forcefully? If colour doesn't matter, why does its abolition matter so much? … The notion that colour is bound up with the fate of western culture sounds odd, and not very likely. But this is what I want to argue: that colour has been the object of extreme prejudice in western culture.<sup><a href="#8">8</a></sup></blockquote>
+
+                    <p>Imagine colours. Start with what you perceive to be 'feminine' colours and reflect on what you think of them, projecting them onto various surfaces in your mind. Incorporate colour combinations or patterns as you go on this journey. Reflect.</p>
+
+                    <p>If colour is a significant signifier, the part of the sign telling us what the meaning of that thing is and what it does, what is the absence of colour? To have no colour is to be void of meaning.</p>
+
+                    <h2>Light shines through</h2>
+
+                    <p>To have no colour, is to let light shine through the surface and illuminate what is within, it is to be transparent. Let go of the exterior, it only gets in the way.</p>
+
+                    <p>Incidentally, or actually not, the x-ray was discovered around the same time as modernism emerged as a concept and antithesis to the goings-on of the time. That which is inscrutable can hold many hidden things – bourgeois tales of grandeur or dust mites and bacteria and viruses and secrets. Beatriz Colomina wrote a book on how modernist architecture was influenced by the revealing nature of the x-ray, the practical interior design of hospitals, and by extension the pandemics of the late 19th and early 20th century.</p>
+
+                    <p>Colomina wrote about how the French architect Le Corbusier argued in <i>La ville radieuse</i> (1935) that the natural earth was a breeding ground for tuberculosis and other illnesses and claimed it to be the enemy of man – so he drew buildings on pillars, with the roofs to be used for sunbathing, exercising and gardening, far removed from the natural (and very dirty) ground.<sup><a href="#9">9</a></sup> Another architect of that time, Mies van der Rohe, was obsessed with x-rays of bodies, using them as illustrations in his articles and referring to his work as "skin and bones" architecture.<sup><a href="#10">10</a></sup></p>
+
+                    <p>In an example of x-ray mentality, the modernist Beatrice Warde writes about typography in her essay <i>The Crystal Goblet</i>. She argues that you cannot appreciate the true quality of the content unless the carrier is perceptually invisible – otherwise you would get confused about what it is you are enjoying; is it the grandeur of the gold? Or the sublime fermented drink that tastes good and is a digestive in small quantities? Things had been too decorated and too much meaning was ascribed to the container, its material and colour, and so they had to be rendered invisible, for the real meaning to shine. "What must it do?" was far more important a sentiment than "how should it look?"<sup><a href="#11">11</a></sup></p>
+
+                    <p>To deny the vessel a meaning, to pretend it is not there seems like a strange game of hide and no seek. "At the same time that glass reveals, it conceals," artist Dan Graham wrote.<sup><a href="#12">12</a></sup> What happens when <i>what it does</i> is more important than <i>how it looks</i>, when what it looks like is invisible, and what it does is lie? There is meaning in the vessel, no matter how invisible it is – seen in its natural habitat, a crystal goblet is a precious and expensive piece of handcraft, reflecting brilliantly in the warm rays of the sun. What is seen is not exactly what is. It retains only the <i>appearance</i> of absolute openness, while its materiality is expensive, unattainable, fragile.<sup><a href="#13">13</a></sup></p>
+
+                    <p>Nothing is invisible unless you are used to it, so you cannot see it out of habit. Unchallenged environments are indeed invisible, unperceivable, or both. An unnoticeable voice, like the one Warde looked for and claimed to be superior, is only invisible because you hear it all the time.</p>
+
+                    <p>Warde and Graham seem to exist on extreme ends of the transparency tightrope game. In one corner, Warde argues for the complete erasure of meaning from the medium, giving the message the full attention – in the other, Graham argues that such erasure cannot exist, for everything has meaning, everything is a sign for something, even invisibility. And so everything that sounds out of place is noticed, but what if it is not out of place? Is it not just <i>in</i> a place? It is the feeling of seeing the <i>bretti</i> and the <i>reimar</i> and the <i>skór</i> again.</p>
+
+                    <p>The Crystal Goblet was marketed as a morally superior alternative to the golden goblet. Years later, Crystal Pepsi was marketed as a healthy additive- and caffeine-free alternative to regular Pepsi.</p>
+
+                    <p>The clear craze of the late 1980s and early 90s was a strange thing because transparency, in western capitalist marketing, was identified to be associated with purity, being healthy. Clarity was needed. To see through the surface was to really perceive the <i>innihald</i> (that which is held within) and the idea formed (again) that the exterior was flimsy, to be disregarded, and to think otherwise was to be vain and vapid. People figuring that a transparent and largely synthetic drink like Crystal Pepsi could be considered healthy, because it looks like water, feels strange. But we are of water, and so things that look 70% like us must be healthy.</p>
+
+                    <p>A lot of people were confused. First, Sprite is clear, and Sprite is in the lemon-lime drink category. The surprise one must feel, to take a sip of a water-looking sparkly substance, thinking it's lemon-lime flavoured and finding out it is a fully fledged cola! Second, as we now know, to be transparent is to be healthy, and Crystal Pepsi was not a diet drink – it contained a lot of sugar.<sup><a href="#14">14</a></sup></p>
+
+                    <p>The story of Crystal Pepsi is a great example of crystal gazing, of trying to predict the future. Crystal Pepsi failed – it was not a diet drink, nor water, nor a lemon-lime drink. It was taken off the market within two years.</p>
+
+                    <h2>Light reflected</h2>
+
+                    <p>Calling it <i>crystal</i> makes it sound like it is a pure, precious stone. But glass and crystal are the same thing, with the exception of a key ingredient, and glass is not <i>a</i> crystal – it is an amorphous solid. It lacks the orderly crystalline structure of precious stones. Glass is made with sand and soda-lime or iron, crystal is made with sand and lead oxide. Both results are glass; but crystal boasts incredible clarity and glass is generally thicker, sturdier, foggy, green or blue. But all glass is made from melted sand, which is made from stones, which are rocks. At various stages, these compounds are all very different signs.</p>
+
+                    <p>If everything is a sign if you think it is, then everything can also be a rock.</p>
+
+                    <p>My rock collection consists of (but is not limited to):</p>
+                    <ul>
+                        <li>At least two books about rocks, maybe more.</li>
+                        <li>A copper bowl I made when I was 11, that has not left my side since.</li>
+                        <li>A piece of glass shaped like a butterfly, because glass is made of sand which, again, is rocks.</li>
+                        <li>A meme that says "stop programming computers, sand was never meant to think. this is very cruel to rocks."</li>
+                        <li>A pen that I think looks like the one my grandfather bought me a set of in 2011. It is grey with a spattering of white dots like the self-drying clay I got at a Bauhaus – the packaging said it was "stone-coloured."</li>
+                        <li>A story about holes, which had to be found and stopped lest they turn into geysers.</li>
+                        <li>A photograph of my gloved hand, holding a transparent and blue-hued bottle containing sparkling water of the brand Kristall (slogan: It is seen, who drinks Kristall). Through the bottle in the background is the volcano I walked to last year.</li>
+                    </ul>
+
+                    <p>In one of my books about rocks, <i>A Heart of a Stone</i>, Ayami Awazuhara wrote about <i>The Song of Stone</i>, a movie from 1963 where the lives of the people were intrinsically intertwined with their profession – everyone worked at a stone quarry. The sounds of stonework became a lullaby, the actions of work and of life merging into one, until the villagers made their own gravestone to lie beneath. They said that stone dies when it is taken from the mountain, roaring at the pain of the separation. The movie is based on the paradox of when stonecutters polished and formed the stone after extraction, they said "the stone is coming to life." In becoming sculpture, it is revived, alive.<sup><a href="#15">15</a></sup></p>
+
+                    <p>Icelandic fluxus artist Sigurður Guðmundsson conceptualised a sculpture, <i>Shore Piece</i> (2002), of granite stones of various shapes and sizes. They were shipped from Sweden to be hand-polished in China, and then shipped to Reykjavík, where they were placed in the rock gardens of Sæbraut, the street that lines the coast. When polished, the stones revealed brilliant hues of red, blue, black and grey. The point of the work seemed to be to revive them, free them from being sad raw parts of a mountain to being the rock stars of the rock garden in all their shiny, eye-catching, glory.</p>
+
+                    <p>Another sculpture by Sigurður is a photograph called <i>Mountains</i> (1980–2). It depicts blocks of granite stacked in an orderly fashion. On the granite is turf. On the turf lies Sigurður. Stacked on his feet are boots, on his stomach: loaves of bread, on his head: books. He could be communicating that our perception of mountains exists because we exist with them, and so all our ideas of mountains are projections of us; they are human-made.</p>
+
+                    <p>"Do not take me for granite," Ursula said.<sup><a href="#16">16</a></sup> In a way, I feel the same way about rocks as I do with animals. They are not pets and it seems foolish to claim ownership over them. Why do the rocks have to be polished by humans to resume their life? I would think that a rock's life is not perceivable by humans, it emerges from the mouth of a volcano, rolls down the mountain, with a plomp! into the body of water, where it stays and sways with the stream until the volcano erupts again. "Coming to life" seems like human-made territory, a lie told, an unnecessary signifier. Sand was never meant to think like a human, this is very cruel to rocks.</p>
+
+                    <p>When light reflects on the surface of the rock, often it shimmers. Shiny, sign-y, things are eye-catching. To see a shimmer, is to see a sign. Glittering, trickling water in a stream in the sun tells me it is there, and so I can cup my hand into it and have a drink of water. A good sign, for I am very thirsty.</p>
                 `
             }
         };
@@ -1475,6 +1628,12 @@
                 col.onclick = () => {
                     const ref = topBox.querySelector(`a[href="#${col.id}"]`);
                     if (ref) {
+                        const sup = ref.closest('sup');
+                        if (sup) {
+                            sup.classList.remove('highlight');
+                            void sup.offsetWidth;
+                            sup.classList.add('highlight');
+                        }
                         ref.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 };
