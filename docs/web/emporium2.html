@@ -22,7 +22,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            background-color: #fafafa;
+            background-color: #ffffff;
         }
 
         body {
@@ -141,7 +141,7 @@
             position: relative;
             width: 0;
             height: 100%;
-            background-color: #fafafa;
+            background-color: #ffffff;
             z-index: 1000;
             overflow: hidden;
             transition: width 0.4s ease;
@@ -190,7 +190,7 @@
             position: relative;
             width: 2%;
             height: 100%;
-            background-color: #fafafa;
+            background-color: #ffffff;
             border-left: 1px solid #000;
             z-index: 1000;
             overflow: hidden;
@@ -303,7 +303,7 @@
             position: relative;
             width: 100%;
             height: 3%;
-            background-color: #fafafa;
+            background-color: #ffffff;
             border-top: 1px solid #000;
             z-index: 1000;
             overflow: hidden;
@@ -667,7 +667,7 @@
         .grain-modal {
             display: none;
             position: fixed;
-            background: #fafafa;
+            background: #ffffff;
             border: 1px solid #000;
             z-index: 500;
             width: 360px;
@@ -772,7 +772,7 @@
         /* ── Animations ── */
         @keyframes highlightFade {
             0%   { background-color: #0099ff; }
-            100% { background-color: #fafafa; }
+            100% { background-color: #ffffff; }
         }
 
         .column.highlight {
@@ -860,26 +860,56 @@
                 width: 100%;
                 height: auto !important;
                 overflow: visible;
-                display: block;
-            }
-
-            /* Mobile nav */
-            #mobile-nav {
                 display: flex;
                 flex-direction: column;
-                min-height: 100vh;
+            }
+
+            /* Essay → footnotes → bibliography order */
+            #top                     { order: 1; }
+            main > #footnotes        { order: 2; }
+            main > #bibliography     { order: 3; }
+
+            #footnotes:not(.hidden),
+            #bibliography:not(.hidden) {
+                display: block !important;
+                height: auto !important;
+                overflow: visible;
+                padding: 0 16px 32px 16px;
+            }
+
+            /* Hide minimize/expand chrome */
+            .column-header {
+                display: none !important;
+            }
+
+            #footnotes,
+            #bibliography {
+                padding: 0 16px 32px 16px;
+            }
+
+            /* Mobile nav — fixed overlay that slides right */
+            #mobile-nav {
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                overflow-y: auto;
+                background: #ffffff;
+                border-left: 1px solid #000;
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
                 padding: 32px;
                 box-sizing: border-box;
+                transition: transform 0.4s ease;
             }
 
-            #mobile-nav.hidden {
-                display: none;
+            #mobile-nav.out {
+                transform: translateX(100%);
             }
-
 
             .mobile-nav-item {
                 line-height: 1.3;
-                margin-bottom: 14px;
+                padding: 14px 0;
                 cursor: pointer;
             }
 
@@ -896,21 +926,24 @@
 
             .mobile-nav-item[data-action="info"] {
                 margin-top: auto;
-                padding-top: 32px;
             }
 
-            /* Mobile back button */
+            /* Mobile back button — fixed at top while reading */
             #mobile-back {
                 display: none;
+                position: fixed;
+                top: 0; left: 0;
                 width: 100%;
                 padding: 12px 16px;
                 text-align: left;
-                background: none;
+                background: #ffffff;
                 border: none;
                 border-bottom: 1px solid #000;
                 cursor: pointer;
                 font-family: 'HAL Timezone Mono', monospace;
                 font-size: 12px;
+                z-index: 50;
+                box-sizing: border-box;
             }
 
             #mobile-back.visible {
@@ -924,7 +957,7 @@
             }
 
             #top {
-                padding: 0 16px !important;
+                padding: 40px 16px 0 16px !important;
                 height: auto !important;
                 overflow: visible;
             }
@@ -937,7 +970,7 @@
 
             #top p,
             #top li {
-                padding: 0;
+                padding: 10px 0;
             }
 
             .column {
@@ -968,6 +1001,18 @@
 
             .grain-modal {
                 display: none !important;
+            }
+
+            .mobile-colophon {
+                order: 4;
+                font-family: 'HAL Timezone Mono', monospace;
+                font-size: 12px;
+                line-height: 1.6;
+                margin-top: 32px;
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-top: 16px;
+                border-top: 1px solid #000;
             }
         }
 
@@ -2275,9 +2320,6 @@
                     m.classList.remove('visible');
                 }
             });
-            if (essayKey !== 'grain') {
-                document.getElementById('grain-hover-img-display').style.display = 'none';
-            }
         }
 
         function spawnGlitter(element) {
@@ -2596,14 +2638,33 @@
 
         function isMobile() { return window.innerWidth <= 768; }
 
+        function injectMobileColophons() {
+            const mainEl = document.querySelector('main');
+            // Remove any previously injected colophons before re-injecting
+            mainEl.querySelectorAll('.mobile-colophon').forEach(el => el.remove());
+            topContent.querySelectorAll('.sidebar-link[data-panel]').forEach(link => {
+                const panelId = link.getAttribute('data-panel');
+                if (!panelId.includes('colophon')) return;
+                const panel = document.getElementById(panelId);
+                if (!panel) return;
+                const div = document.createElement('div');
+                div.className = 'mobile-colophon';
+                div.innerHTML = panel.innerHTML;
+                mainEl.appendChild(div);
+                const parent = link.closest('p') || link.parentNode;
+                parent.style.display = 'none';
+            });
+        }
+
         function showMobileContent() {
             if (!isMobile()) return;
-            mobileNav.classList.add('hidden');
+            injectMobileColophons();
+            mobileNav.classList.add('out');
             mobileBack.classList.add('visible');
         }
 
         function showMobileMenu() {
-            mobileNav.classList.remove('hidden');
+            mobileNav.classList.remove('out');
             mobileBack.classList.remove('visible');
             topBox.classList.add('hidden');
             topContent.innerHTML = '';
@@ -2621,6 +2682,10 @@
                 } else if (action === 'notes') {
                     loadNotes();
                 } else if (action === 'info') {
+                    footnotesBody.innerHTML = '';
+                    footnotes.classList.add('hidden');
+                    bibliographyBody.innerHTML = '';
+                    bibliography.classList.add('hidden');
                     topContent.innerHTML = document.getElementById('panel-info').innerHTML;
                     topBox.classList.remove('hidden');
                 }
