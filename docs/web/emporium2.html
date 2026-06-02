@@ -705,6 +705,70 @@
         #grain-modal-3 { top: 68vh; left: calc(50% - 180px); }
 
 
+        /* ── Notes index ── */
+        #top.notes-mode {
+            padding: 0;
+        }
+
+        #top.notes-mode #top-content {
+            padding-top: 0;
+            padding-bottom: 40px;
+        }
+
+        .notes-title {
+            font-family: 'Dutch 801 Display', sans-serif;
+            padding: 15px 15px 0 15px;
+            line-height: 1.2;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .notes-index {
+            padding: 0;
+        }
+
+        .notes-entry {
+            display: grid;
+            grid-template-columns: 140px 1fr auto;
+            gap: 0 24px;
+            padding: 10px 15px 10px 15px;
+            border-top: 1px solid #000;
+        }
+
+        .notes-entry:last-child {
+            border-bottom: 1px solid #000;
+        }
+
+        .notes-date {
+            font-family: 'HAL Timezone Mono', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 2px;
+            white-space: nowrap;
+        }
+
+        .notes-text {
+            line-height: 1.4;
+        }
+
+        .notes-video-trigger {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .notes-video-trigger:hover {
+            opacity: 0.6;
+        }
+
+        .notes-type {
+            font-family: 'HAL Timezone Mono', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 2px;
+            white-space: nowrap;
+            opacity: 0.5;
+        }
+
         /* ── Animations ── */
         @keyframes highlightFade {
             0%   { background-color: #0099ff; }
@@ -758,24 +822,27 @@
             display: none;
         }
 
+        /* ── Mobile nav (hidden on desktop) ── */
+        #mobile-nav,
+        #mobile-back {
+            display: none;
+        }
+
         /* ── Mobile ── */
         @media (max-width: 768px) {
             html, body {
                 height: auto;
                 overflow: auto;
+                font-size: 18px;
             }
 
             body {
                 display: block;
             }
 
+            /* Hide desktop chrome */
             #mobile-notice {
-                display: block;
-                padding: 16px;
-                font-size: 14px;
-                font-family: 'Dutch 801', sans-serif;
-                border-bottom: 1px solid #000;
-                margin-bottom: 10px;
+                display: none;
             }
 
             .content-wrapper {
@@ -790,40 +857,102 @@
 
             main {
                 width: 100%;
-                height: auto;
+                height: auto !important;
                 overflow: visible;
-                display: flex;
-                flex-direction: column;
+                display: block;
             }
 
-            /* Reorder: main text first, footnotes second, bibliography third */
-            /* DOM order inside main: child 1 = footnotes, child 2 = #top, child 3 = bibliography */
-            #top                      { order: 1; }
-            main > .box:nth-child(1)  { order: 2; } /* footnotes */
-            main > .box:nth-child(3)  { order: 3; } /* bibliography */
+            /* Mobile nav */
+            #mobile-nav {
+                display: block;
+                padding: 0;
+            }
+
+            #mobile-nav.hidden {
+                display: none;
+            }
+
+            #mobile-nav-header {
+                font-family: 'Dutch 801 Display', sans-serif;
+                font-size: 18px;
+                padding: 16px 16px 12px 16px;
+                border-bottom: 1px solid #000;
+            }
+
+            .mobile-nav-item {
+                padding: 12px 16px;
+                border-bottom: 1px solid #000;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 12px;
+            }
+
+            .mobile-nav-year {
+                font-family: 'HAL Timezone Mono', monospace;
+                font-size: 12px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            /* Mobile back button */
+            #mobile-back {
+                display: none;
+                width: 100%;
+                padding: 12px 16px;
+                text-align: left;
+                background: none;
+                border: none;
+                border-bottom: 1px solid #000;
+                cursor: pointer;
+                font-family: 'HAL Timezone Mono', monospace;
+                font-size: 12px;
+            }
+
+            #mobile-back.visible {
+                display: block;
+            }
+
+            /* Essay content on mobile */
+            #top-content {
+                padding-top: 20px !important;
+                padding-bottom: 60px !important;
+            }
 
             #top {
+                padding: 0 16px !important;
                 height: auto !important;
+                overflow: visible;
             }
 
             .box {
                 height: auto !important;
                 overflow-x: visible;
                 overflow-y: visible;
-                flex-direction: column;
-                flex-wrap: wrap;
             }
 
-            .column,
-            .column[class*="c"],
             #top p,
-            #top h2 {
-                width: 100% !important;
-                margin: 0;
-                padding: 10px 16px;
+            #top li {
+                padding: 0;
             }
 
-            /* Disable interactive links */
+            .column {
+                width: 100% !important;
+                padding: 10px 0;
+            }
+
+            /* Notes on mobile */
+            .notes-entry {
+                grid-template-columns: 90px 1fr;
+                gap: 0 12px;
+            }
+
+            .notes-type {
+                display: none;
+            }
+
+            /* Disable interactive elements */
             .sidebar-link,
             .video-trigger,
             .image-trigger,
@@ -832,6 +961,10 @@
                 cursor: default;
                 text-decoration: none;
                 opacity: 1 !important;
+            }
+
+            .grain-modal {
+                display: none !important;
             }
         }
 
@@ -894,7 +1027,19 @@
 </head>
 <body>
 
-    <div id="mobile-notice">This is a read-only version. For optimal experience, view on desktop.</div>
+    <!-- ===================== MOBILE NAV ===================== -->
+    <div id="mobile-nav">
+        <div id="mobile-nav-header">Emporium</div>
+        <div class="mobile-nav-item" data-essay="mediumsized">Mediumsized <span class="mobile-nav-year">2026</span></div>
+        <div class="mobile-nav-item" data-essay="emporium">Emporium or, the Useless Supplement <span class="mobile-nav-year">2025</span></div>
+        <div class="mobile-nav-item" data-essay="moon">Stop! Look at the Moon <span class="mobile-nav-year">2024</span></div>
+        <div class="mobile-nav-item" data-essay="errantry">Errantry <span class="mobile-nav-year">2023</span></div>
+        <div class="mobile-nav-item" data-essay="grain">The Word For World is a Grain of Sand <span class="mobile-nav-year">2023</span></div>
+        <div class="mobile-nav-item" data-essay="sand">Sand was never meant to think <span class="mobile-nav-year">2022</span></div>
+        <div class="mobile-nav-item" data-action="notes">Notes</div>
+        <div class="mobile-nav-item" data-action="info">Info</div>
+    </div>
+    <button id="mobile-back">← menu</button>
 
     <!-- ===================== CONTENT WRAPPER ===================== -->
     <div class="content-wrapper">
@@ -1126,6 +1271,7 @@
                     <div class="right-menu-item" data-essay="errantry">Errantry <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-essay="grain">The Word For World is a Grain of Sand <span class="menu-year">2023</span></div>
                     <div class="right-menu-item" data-essay="sand">Sand was never meant to think <span class="menu-year">2022</span></div>
+                    <div class="right-menu-item" data-action="notes">Notes</div>
                     <div class="right-menu-item" data-action="info">Info</div>
                 </nav>
             </div>
@@ -2029,12 +2175,82 @@
             if (!essayContent[key]) item.style.display = 'none';
         });
 
+        // Load Are.na notes
+        const ARENA_CHANNEL = 'notes-mbly2cjojsc';
+
+        async function loadNotes() {
+            footnotesBody.innerHTML = '';
+            footnotes.classList.add('hidden');
+            bibliographyBody.innerHTML = '';
+            bibliography.classList.add('hidden');
+            document.querySelectorAll('.grain-modal').forEach(m => m.classList.remove('visible'));
+            topBox.classList.add('notes-mode');
+
+            topContent.innerHTML = '<div class="notes-title">Notes</div><p style="font-family:\'HAL Timezone Mono\',monospace;font-size:12px;padding:0 15px;">loading…</p>';
+            topBox.classList.remove('hidden');
+            topBox.scrollTop = 0;
+
+            try {
+                const res = await fetch(`https://api.are.na/v2/channels/${ARENA_CHANNEL}/contents?per=100&sort=created_at&direction=desc`, { cache: 'no-store' });
+                const data = await res.json();
+                const blocks = (data.contents || []).filter(b => b.base_class === 'Block');
+
+                function arenaBlockType(b) {
+                    const ct = b.attachment?.content_type || '';
+                    switch (b.class) {
+                        case 'Block':      return 'text';
+                        case 'Link':       return 'link';
+                        case 'Image':      return 'image';
+                        case 'Attachment': return ct.startsWith('video/') ? 'video' : ct.includes('pdf') ? 'pdf' : 'file';
+                        case 'Media':      return b.embed ? 'video' : 'file';
+                        default:           return (b.class || '—').toLowerCase();
+                    }
+                }
+
+                let html = '<div class="notes-title">Notes</div><div class="notes-index">';
+                blocks.forEach(block => {
+                    const date = new Date(block.created_at).toLocaleDateString('en-GB', {
+                        day: '2-digit', month: '2-digit', year: 'numeric'
+                    });
+                    const type = arenaBlockType(block);
+                    let text = '';
+                    if (block.class === 'Link') {
+                        const url = block.source?.url || '#';
+                        const title = block.title || url;
+                        text = `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
+                        if (block.description) text += `<br><span style="font-family:'HAL Timezone Mono',monospace;font-size:12px;line-height:1.4;display:inline-block;">${block.description}</span>`;
+                    } else if (block.class === 'Image') {
+                        text = block.title || block.description || '—';
+                    } else if (type === 'video') {
+                        const url = block.attachment?.url || block.source?.url || '';
+                        const label = block.title || 'video';
+                        text = `<span class="notes-video-trigger" data-src="${url}">${label}</span>`;
+                    } else if (block.class === 'Media' || block.class === 'Attachment') {
+                        const url = block.source?.url || block.attachment?.url || '#';
+                        text = `<a href="${url}" target="_blank" rel="noopener">${block.title || url}</a>`;
+                    } else {
+                        text = block.content || '';
+                        if (block.description) text += `<br><span style="font-family:'HAL Timezone Mono',monospace;font-size:12px;line-height:1.4;display:inline-block;">${block.description}</span>`;
+                    }
+                    html += `<div class="notes-entry"><span class="notes-date">${date}</span><span class="notes-text">${text}</span><span class="notes-type">${type}</span></div>`;
+                });
+                if (!blocks.length) html += '<div class="notes-entry"><span class="notes-date">–</span><span class="notes-text">No notes yet.</span></div>';
+                html += '</div>';
+
+                topContent.innerHTML = html;
+                addHistoryColumn('Notes', 'Notes', () => loadNotes());
+            } catch (err) {
+                topContent.innerHTML = '<div class="notes-title">Notes</div><p style="padding:0 15px;">Could not load notes.</p>';
+            }
+        }
+
         // Load essay content
         function loadEssay(essayKey) {
             const essay = essayContent[essayKey];
             if (!essay) return;
 
             topContent.innerHTML = essay.content;
+            topBox.classList.remove('notes-mode');
             topBox.classList.remove('hidden');
             topBox.scrollTop = 0;
 
@@ -2249,6 +2465,9 @@
                             if (t) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
                         });
                     }
+                } else if (action === 'notes') {
+                    sidebarRight.classList.remove('open');
+                    loadNotes();
                 } else if (action === 'info') {
                     if (sidebar.classList.contains('open')) {
                         sidebar.classList.remove('open');
@@ -2327,6 +2546,16 @@
         });
 
 
+        // Notes video triggers (delegated — rendered dynamically by loadNotes)
+        topBox.addEventListener('click', (e) => {
+            const trigger = e.target.closest('.notes-video-trigger');
+            if (!trigger) return;
+            const src = trigger.dataset.src;
+            if (!src) return;
+            modalVideo.src = src;
+            videoModalOverlay.classList.add('open');
+        });
+
         // Left sidebar close button
         document.getElementById('sidebar-close-btn').addEventListener('click', (e) => {
             e.stopPropagation();
@@ -2359,6 +2588,43 @@
             });
         });
 
+        // ── Mobile navigation ──
+        const mobileNav  = document.getElementById('mobile-nav');
+        const mobileBack = document.getElementById('mobile-back');
+
+        function isMobile() { return window.innerWidth <= 768; }
+
+        function showMobileContent() {
+            if (!isMobile()) return;
+            mobileNav.classList.add('hidden');
+            mobileBack.classList.add('visible');
+        }
+
+        function showMobileMenu() {
+            mobileNav.classList.remove('hidden');
+            mobileBack.classList.remove('visible');
+            topBox.classList.add('hidden');
+            topContent.innerHTML = '';
+            topBox.classList.remove('notes-mode');
+        }
+
+        mobileBack.addEventListener('click', showMobileMenu);
+
+        document.querySelectorAll('#mobile-nav .mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const essayKey = item.getAttribute('data-essay');
+                const action   = item.getAttribute('data-action');
+                if (essayKey) {
+                    loadEssay(essayKey);
+                } else if (action === 'notes') {
+                    loadNotes();
+                } else if (action === 'info') {
+                    topContent.innerHTML = document.getElementById('panel-info').innerHTML;
+                    topBox.classList.remove('hidden');
+                }
+                showMobileContent();
+            });
+        });
 
     </script>
 
