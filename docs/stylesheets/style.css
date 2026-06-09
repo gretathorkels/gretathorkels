@@ -5,20 +5,11 @@
     url("/src/font/nimbussansround-medium.woff2") format(woff2);
 }
 
-
 body {
   font-family: 'Nimbus Sans Round Medium', sans-serif;
   scroll-behavior: smooth;
   margin-bottom: 50px;
-  background-color: rgb(224, 224, 224);
-
-}
-
-.glitter {
-  position: absolute;
-  z-index: 1000;
-  bottom: 0;
-  right: 0;
+  background-color: rgb(239, 239, 239);
 }
 
 .overlay {
@@ -30,55 +21,34 @@ body {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.0);
-  overflow: scroll;
-  transition-property: display;
-  transition-duration: 2ms;
+  overflow: hidden;
+  pointer-events: none;
 }
-
 
 .overlay-content {
   position: relative;
   width: 100%;
+  height: 100%;
   text-align: center;
-  overflow: scroll;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: center;
+  pointer-events: none;
 }
-
-
-
-
-.overlay-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20%;
-  height: 100%;
-  overflow: scroll;
-  z-index: 500;
-  font-size: 20px;
-}
-
-
 
 .overlay-project {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 85vw;
+  max-width: 1400px;
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  pointer-events: auto;
 }
-
-
-
 
 .project {
   width: 90%;
   margin: auto;
   padding: 10px;
 }
-
 
 .projectimage {
   z-index: 300;
@@ -87,6 +57,11 @@ body {
   height: auto;
   opacity: 0.94;
   padding: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.projectimage:hover {
+  opacity: 1;
 }
 
 .projectimagesmall {
@@ -96,22 +71,12 @@ body {
   height: auto;
   opacity: 0.94;
   padding: 10px;
+  transition: opacity 0.2s ease;
 }
 
-
-
-.overlay-menu-link {
-  text-align: left;
-  background-color: black;
-  width: fit-content;
-  font-size: 15px;
-  text-decoration: none;
-  color: white;
-  margin: 3px;
-  display: inline;
+.projectimagesmall:hover {
+  opacity: 1;
 }
-
-
 
 .projecttext {
   background-color: rgb(240, 242, 236);
@@ -119,185 +84,149 @@ body {
   font-size: 25px;
   line-height: 100%;
   margin: 10px;
-
   border-radius: 2px;
 }
 
-
-.overlay a {
-  display: block;
-  transition: 0.3s;
-}
-
-.overlay a:hover,
-.overlay a:focus {
-  color: #0000ff;
-}
-
-.overlay .closebtn {
+.closebtn {
+  display: none;
   position: fixed;
   top: 0;
   right: 0;
   z-index: 1000;
-  transition: 2ms;
-  padding: 5px 5px 5px 5px;
+  padding: 5px;
   border-radius: 0px 0px 0px 3px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 22px;
   color: #000000;
-  background-color: #67ffdb;
-  transition: 0.2s;
-
+  background-color: #fff;
+  font-family: 'Times New Roman', serif;
+  transition: background-color 0.2s ease;
 }
 
-.overlay .closebtn:hover {
+.closebtn:hover {
   background-color: rgb(224, 224, 224);
-  /* border-left: solid 1px rgb(211, 211, 211);
-  border-bottom: solid 1px rgb(211, 211, 211); */
-  color: black;
-
-  /* color: #67ffdb */
+  font-family: 'Nimbus Sans Round Medium', sans-serif;
 }
 
 .accordion-projects {
   padding: 0;
-  /* background-color: #fff; */
   color: #000;
   cursor: pointer;
-  width: 100%;
+  width: fit-content;
   text-align: left;
   border: none;
   outline: none;
-  transition: 0.2s;
-  font-size: 20px;
+  font-size: 22px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 }
 
-.accordion-projects:hover {
-  color: #53f5cf
+.accordion-projects:hover,
+.accordion-projects:active,
+.accordion-projects.active {
+  font-family: 'Times New Roman', serif;
+  background-color: #fff;
 }
 
-.accordion-projects:active {
-  color: #53f5cf
-}
-
-
-/* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   padding: 0;
-  /* background-color: #fff; */
   color: #000;
   cursor: pointer;
-  width: 100%;
+  width: fit-content;
   text-align: left;
   border: none;
   outline: none;
-  transition: 0.2s;
-  font-size: 20px;
+  font-size: 22px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active,
 .accordion:hover {
-  /* background-color: #0000ff; */
-  color: #53f5cf
+  font-family: 'Times New Roman', serif;
+  background-color: #fff;
 }
 
-/* Style the accordion panel. Note: hidden by default */
 .panel {
   width: 100%;
   padding: 0;
-  /* background-color: white; */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
-
+  transition: max-height 0.3s ease-in-out;
 }
-
 
 .panelinside {
   display: flex;
   flex-flow: row wrap;
-  font-size: 15px;
-}
-
-.panelheader {
-  font-size: 20px;
-  font-style: italic;
-  text-align: center;
+  font-size: 17px;
 }
 
 .panelinsideproject {
-  width: 400px;
-  margin: 10px;
+  flex: 0 0 40%;
+  box-sizing: border-box;
+  padding: 10px;
   text-align: justify;
   font-family: 'Times New Roman', Times, serif;
   line-height: 100%;
 }
 
 .panelinsidetext {
-  width: 200px;
+  flex: 0 0 20%;
+  box-sizing: border-box;
   color: black;
   padding: 10px;
   text-align: justify;
   font-family: 'Times New Roman', Times, serif;
   line-height: 100%;
-
 }
-
 
 .projectlink {
   text-decoration: none;
-  color: rgb(14, 123, 2)
+  color: rgb(14, 123, 2);
+  transition: color 0.2s ease;
 }
 
 .projectlink:hover {
-  text-decoration: wavy;
-  color: rgb(123, 87, 2)
+  color: rgb(123, 87, 2);
 }
-
-
-.panelinsidemenu {
-  width: 200px;
-  color: black;
-  padding: 10px;
-  text-align: justify;
-  /* font-family: 'Times New Roman', Times, serif; */
-  line-height: 100%;
-}
-
-
-
-
 
 @media screen and (max-width: 600px) {
   .panelinsideproject {
-    width: 90%;
-
+    flex: 0 0 100%;
   }
 
   .panelinsidetext {
-    width: 90%;
-
+    flex: 0 0 100%;
   }
 
   .panelinsidemenu {
-    width: 100px;
-    padding: 3px;
+    width: 100%;
+    padding: 4px 10px;
     line-height: 100%;
   }
 
-
-
-}
-
-
-
-@media screen and (max-height: 450px) {
-  .overlay a {
-    font-size: 20px
+  .overlay-content {
+    flex-flow: column nowrap;
   }
 
-  .overlay .closebtn {
+  .overlay-project {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .projectimage {
+    width: 100%;
+    padding: 6px 0;
+  }
+
+  .projectimagesmall {
+    width: 48%;
+    padding: 4px 1%;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .closebtn {
     font-size: 40px;
     top: 15px;
     right: 35px;
