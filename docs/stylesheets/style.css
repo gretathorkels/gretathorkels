@@ -5,10 +5,15 @@
     url("../src/font/nimbussansround-medium.woff2") format(woff2);
 }
 
+::selection {
+  background-color: #fff;
+  color: #000;
+}
+
 body {
   font-family: 'Nimbus Sans Round Medium', sans-serif;
   scroll-behavior: smooth;
-  margin-bottom: 50px;
+  margin-bottom: max(50px, env(safe-area-inset-bottom));
   background-color: rgb(239, 239, 239);
 }
 
@@ -236,6 +241,7 @@ body {
 .panel a {
   font-style: italic;
   color: #0000ff;
+  text-decoration: none;
 }
 
 .panel a:visited {
@@ -243,6 +249,10 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+  .project-nav {
+    display: none !important;
+  }
+
   .panelinsideproject {
     flex: 0 0 100%;
   }
