@@ -180,8 +180,10 @@ body {
 .accordion-projects:active,
 .accordion-projects.active {
   font-family: 'Times New Roman', serif;
-  font-size: 28px;
+  font-size: 27px;
   background-color: #fff;
+  position: relative;
+  top: -5px;
 }
 
 .accordion {
@@ -201,8 +203,10 @@ body {
 .active,
 .accordion:hover {
   font-family: 'Times New Roman', serif;
-  font-size: 28px;
+  font-size: 27px;
   background-color: #fff;
+  position: relative;
+  top: -5px;
 }
 
 .panel {
