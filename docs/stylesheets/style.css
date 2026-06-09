@@ -48,6 +48,8 @@ body {
   height: 100%;
   overflow-y: auto;
   pointer-events: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 15px);
+  mask-image: linear-gradient(to bottom, transparent 0px, black 15px);
 }
 
 .project-nav {
@@ -117,6 +119,7 @@ body {
 .projectimage {
   z-index: 300;
   width: 70%;
+  max-width: 100%;
   max-height: 100%;
   height: auto;
   opacity: 0.94;
@@ -126,6 +129,7 @@ body {
 .projectimagesmall {
   z-index: 300;
   width: 35%;
+  max-width: 100%;
   max-height: 100%;
   height: auto;
   opacity: 0.94;
@@ -256,6 +260,11 @@ body {
 @media screen and (max-width: 600px) {
   .project-nav {
     display: none !important;
+  }
+
+  .project {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .panelinsideproject {
