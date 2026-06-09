@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'Nimbus Sans Round Medium';
   src:
-    url("/src/font/nimbussansround-medium.woff") format(woff),
-    url("/src/font/nimbussansround-medium.woff2") format(woff2);
+    url("../src/font/nimbussansround-medium.woff") format(woff),
+    url("../src/font/nimbussansround-medium.woff2") format(woff2);
 }
 
 body {
@@ -44,6 +44,64 @@ body {
   pointer-events: auto;
 }
 
+.project-nav {
+  display: none;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1000;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 6px 8px;
+  max-width: 220px;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  pointer-events: auto;
+}
+
+.project-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.project-nav-group {
+  display: block;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 4px;
+}
+
+.project-nav-year {
+  display: inline;
+  font-family: 'Times New Roman', serif;
+  font-size: 15px;
+  color: #000;
+  padding: 1px 2px;
+  background-color: rgb(239, 239, 239);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.project-nav-item {
+  display: inline;
+  background-color: rgb(239, 239, 239);
+  cursor: pointer;
+  font-family: 'Nimbus Sans Round Medium', sans-serif;
+  font-size: 13px;
+  padding: 1px 2px;
+  color: #000;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-color 0.2s ease;
+}
+
+.project-nav-item:hover {
+  font-family: 'Times New Roman', serif;
+  font-size: 15px;
+  background-color: #fff;
+}
+
 .project {
   width: 90%;
   margin: auto;
@@ -57,11 +115,6 @@ body {
   height: auto;
   opacity: 0.94;
   padding: 10px;
-  transition: opacity 0.2s ease;
-}
-
-.projectimage:hover {
-  opacity: 1;
 }
 
 .projectimagesmall {
@@ -71,15 +124,10 @@ body {
   height: auto;
   opacity: 0.94;
   padding: 10px;
-  transition: opacity 0.2s ease;
-}
-
-.projectimagesmall:hover {
-  opacity: 1;
 }
 
 .projecttext {
-  background-color: rgb(240, 242, 236);
+  background-color: #fff;
   color: rgb(8, 52, 3);
   font-size: 25px;
   line-height: 100%;
@@ -96,7 +144,7 @@ body {
   padding: 5px;
   border-radius: 0px 0px 0px 3px;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 24px;
   color: #000000;
   background-color: #fff;
   font-family: 'Times New Roman', serif;
@@ -106,6 +154,7 @@ body {
 .closebtn:hover {
   background-color: rgb(224, 224, 224);
   font-family: 'Nimbus Sans Round Medium', sans-serif;
+  font-size: 22px;
 }
 
 .accordion-projects {
@@ -116,7 +165,8 @@ body {
   text-align: left;
   border: none;
   outline: none;
-  font-size: 22px;
+  font-size: 26px;
+  line-height: 1.12;
   background-color: transparent;
   transition: background-color 0.2s ease;
 }
@@ -125,6 +175,7 @@ body {
 .accordion-projects:active,
 .accordion-projects.active {
   font-family: 'Times New Roman', serif;
+  font-size: 28px;
   background-color: #fff;
 }
 
@@ -136,7 +187,8 @@ body {
   text-align: left;
   border: none;
   outline: none;
-  font-size: 22px;
+  font-size: 26px;
+  line-height: 1.12;
   background-color: transparent;
   transition: background-color 0.2s ease;
 }
@@ -144,6 +196,7 @@ body {
 .active,
 .accordion:hover {
   font-family: 'Times New Roman', serif;
+  font-size: 28px;
   background-color: #fff;
 }
 
@@ -180,14 +233,13 @@ body {
   line-height: 100%;
 }
 
-.projectlink {
-  text-decoration: none;
-  color: rgb(14, 123, 2);
-  transition: color 0.2s ease;
+.panel a {
+  font-style: italic;
+  color: #0000ff;
 }
 
-.projectlink:hover {
-  color: rgb(123, 87, 2);
+.panel a:visited {
+  color: magenta;
 }
 
 @media screen and (max-width: 600px) {
