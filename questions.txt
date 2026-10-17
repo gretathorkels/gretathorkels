@@ -1,0 +1,101 @@
+Questions asked during development of gretathorkels.net
+=========================================================
+
+1. text-outline - it looked better before, the outline was softer. is it possible to let the outline bleed more into the type before? a text-innerglow? / the close projects button has disappeared
+2. remove the textshadow effect, its nasty
+3. the close projects button is still not there
+4. put the 'info' accordion above the 'projects' link
+5. Remove the name header and insert it instead into the 'info', converting into the accordion format
+6. make all text, except the overlay texts, a bit bigger
+7. i want to adjust the individual panels inside the accordions - can they be adjusted so they fill the width of the viewport, with one 'wide' and one 'short' width type?
+8. is there a way to clean up the code? is there any unintended chaos?
+9. fix all you can
+10. i put in the arena link
+11. if projects is clicked to open, when clicked again i want it to close the projects
+12. is there any animation where the letters appear, very fast, one by one as if typed?
+13. accordion open
+14. make it 0.1ms
+15. nah ok it's lame, remove it and keep the previous animation!
+16. make a new empty accordion titled 'info'
+17. i changed the hoverstate of the accordions to times new roman with a white background
+18. adjust both
+19. in projects and other projects the background color extends to 100% wide, but in learnings and teachings, the color is only as long as the word. please adjust all to the latter
+20. when projects overlay is active, i want it to have the bg color
+21. make the style identical for the close button
+22. animate the bg-color transition
+23. when hovering over close button, change font into nimbus
+24. times new roman looks slightly smaller than nimbus in the accordion/project titles. can you visually match the sizes? make times a bit bigger
+25. adjust both
+26. make it 26px
+27. adjust times new roman to 28px
+28. when the overlay is open, i would like to add a small, horizontal scrollable bar, where the title of each overlay project is, and by clicking it, you scroll to each project
+29. make the scroll action smooth, so that you see the scrolling happening on click
+30. Make the scrollbar appear at the bottom of the overlay
+31. make the list start with 2025, end with 2018
+32. beautiful. make the background color of the nav, the same as the background color of the body
+33. make the background color of the nav wrap around each word, instead of being the full div
+34. make the max-width of the nav slightly smaller so that it does not go over the images
+35. don't clip with ellipses, make them wrap into two-three lines if needed
+36. but now the background color (both hover and regular) appears as a box instead of wrapping around the words
+37. perharps change the project titles in the sidebar into years
+38. have only one iteration of each year, and update all of them to match the 'YYYY' format exactly, also inside each project
+39. Make the scrollbar appear at the bottom of the overlay
+40. can you change the bar so that it is a vertical bar at the bottom right? And underneath each year, you see a list of projects?
+41. make the list start with 2025, end with 2018
+42. beautiful. make the background color of the nav, the same as the background color of the body
+43. make the background color of the nav wrap around each word, instead of being the full div
+44. make the max-width of the nav slightly smaller so that it does not go over the images
+45. don't clip with ellipses, make them wrap into two-three lines if needed
+46. but now the background color (both hover and regular) appears as a box instead of wrapping around the words
+47. now the long, wordwrapped lines are just center-aligned, with the background still appearing as box?
+48. fix all except Helena Aðalsteinsbur and Iceland University of Art (they are correct)
+49. make it 0.1ms
+50. nah ok it's lame, remove it
+51. fix all you can
+52. what does normalize.css do?
+53. why does the font, when seen online appear as nimbus, but when seen in the 5501 port it appears as helvetica?
+54. now I want to make the accordion fonts slightly bigger, with a smaller line-height
+55. lineheight 1.12, size 24px
+56. make it 26px
+57. adjust times new roman to 28px
+58. fix so that the images are always slightly transparent - not it has a hoverstate that takes away the transparency
+59. When text inside accordions are links, make them be italic, and hyperlink blue - they do not become purple when visited, the become magenta.
+60. make background color for text in the overlay, the same color as background-color in hover accordion titles
+61. now the long, wordwrapped lines are just center-aligned, with the background still appearing as box?
+62. make the max-width 180px
+63. make 200px
+64. make it 220px
+65. make the nav bar appear center aligned, vertically
+66. make a new project for "lungalibrary" - i have put the images in a folder. The text says "LungA Library <br> 2025 <br> Website."
+67. farao should appear first.
+68. make the image conversion like before to the new images to make them more compatible
+69. remove png images from folder
+70. remove img nr 7 from folder and file
+71. is paula buskevica's name consistent?
+72. can you make it into the latvian spelling, Paula Buškevica
+73. the first time she's mentioned, can you add the link for "https://www.paulabuskevica.com/"
+74. remove underline from hyperlinks
+75. can you add a specific highlight function? so that when you highlight, the background-color of the text becomes white like the hover function?
+76. is it completely mobile compatible?
+77. fix! project nav needs a different solution on mobile. hide for now
+78. downscale times new roman in the titles by 1px
+79. the baseline for nimbus and times is also off - is it possible to shift times 2px up?
+80. make it 3px
+81. 4px
+82. 5px
+83. i have an image that i want to be my favicon - it is the sparkles-crystal-clear - can you help me format it so that it fits and upload it?
+84. one issue with the mobile overlay - there is a margin that cuts off the images at the bottom of the screen, as if to protect it from the safari glass url bar.
+85. I want it to go behind the bar - so it scrolls from the very bottom of the screen, behind the bottom bar, and up
+86. are you 100% sure
+87. yes
+88. the accordion text goes under the bottom bar, it's just the overlay that cuts off. earlier I think you mentioned adding a safety margin at the bottom for the images, and I didn't catch it at the time
+89. no i want NO safe-area padding, so that everything is visible underneath the bar. No awkward cut-offs!
+90. [screenshot] also in safari on MacOS, there is a cut-off of the top-bar, instead of the images scrolling up underneath it. is it possible to make that happen?
+91. it should be about 120px
+92. no 20
+93. no 15
+94. but why can't it scroll underneath the bar itself? is this some kind of safari restriction?
+95. nah i liked the gradient better, revert to that. and i also want to add google analytics to view traffic
+96. is ther perhaps any other way of measuring traffic? does it have to be google analytics?
+97. here it is: [GoatCounter script]
+98. could you export a plaintext document with all the questions i asked you?
